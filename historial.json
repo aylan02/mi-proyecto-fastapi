@@ -1,0 +1,26 @@
+[
+    {
+        "producto_id": 1,
+        "nombre_producto": "Labial Mate",
+        "cantidad": 2,
+        "destinatario": "Aylan alvarez",
+        "direccion": "Zofri iquique",
+        "fecha": "2026-03-27 12:31:40"
+    },
+    {
+        "producto_id": 1,
+        "nombre_producto": "Labial Mate",
+        "cantidad": 10,
+        "destinatario": "Aylan alvarez",
+        "direccion": "Zofri iquique",
+        "fecha": "2026-03-27 12:34:57"
+    },
+    {
+        "producto_id": 2,
+        "nombre_producto": "Base Líquida",
+        "cantidad": 1,
+        "destinatario": "Pedro",
+        "direccion": "rodrigo",
+        "fecha": "2026-03-27 16:00:45"
+    }
+]
