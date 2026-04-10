@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cosméticos</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <div>
+                <p class="eyebrow">Sistema web</p>
+                <h1>Gestión de Cosméticos</h1>
+                <p class="hero-text">Administra productos, stock y envíos desde una sola interfaz.</p>
+            </div>
+
+            <nav class="hero-nav">
+                <a href="#resumen">Resumen</a>
+                <a href="#productos">Productos</a>
+                <a href="#envios">Envíos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="mensaje-global" class="alert hidden"></div>
+
+        <section id="resumen" class="section">
+            <div class="section-head">
+                <h2>Resumen general</h2>
+                <button class="btn btn-light" id="btn-recargar-resumen">Actualizar resumen</button>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span class="stat-label">Total productos</span>
+                    <strong id="stat-total-productos">0</strong>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">Stock bajo</span>
+                    <strong id="stat-stock-bajo">0</strong>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">Total envíos</span>
+                    <strong id="stat-total-envios">0</strong>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">Envíos entregados</span>
+                    <strong id="stat-entregados">0</strong>
+                </article>
+            </div>
+        </section>
+
+        <section id="productos" class="section">
+            <div class="section-head">
+                <h2>Productos</h2>
+                <button class="btn btn-light" id="btn-recargar-productos">Recargar productos</button>
+            </div>
+
+            <div class="grid-2">
+                <article class="panel">
+                    <div class="panel-head">
+                        <h3 id="titulo-form-producto">Agregar producto</h3>
+                        <button type="button" class="btn btn-light" id="btn-nuevo-producto">Nuevo</button>
+                    </div>
+
+                    <form id="form-producto" class="form-grid">
+                        <input type="hidden" id="producto-edit-id">
+
+                        <div class="field">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" placeholder="Ej: Labial Mate" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="marca">Marca</label>
+                            <input type="text" id="marca" placeholder="Ej: Maybelline" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="categoria">Categoría</label>
+                            <input type="text" id="categoria" placeholder="Ej: Maquillaje" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="precio">Precio</label>
+                            <input type="number" id="precio" placeholder="Ej: 5990" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="stock">Stock</label>
+                            <input type="number" id="stock" placeholder="Ej: 10" required>
+                        </div>
+
+                        <div class="field field-full">
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" id="descripcion" placeholder="Descripción del producto" required>
+                        </div>
+
+                        <div class="form-actions field-full">
+                            <button type="submit" class="btn btn-primary" id="btn-guardar-producto">Guardar producto</button>
+                            <button type="reset" class="btn btn-light" id="btn-cancelar-producto">Cancelar</button>
+                        </div>
+                    </form>
+                </article>
+
+                <article class="panel">
+                    <div class="panel-head">
+                        <h3>Filtros</h3>
+                        <button type="button" class="btn btn-light" id="btn-limpiar-filtros">Limpiar</button>
+                    </div>
+
+                    <div class="filters-grid">
+                        <div class="field">
+                            <label for="filtro-nombre">Nombre</label>
+                            <input type="text" id="filtro-nombre" placeholder="Buscar por nombre">
+                        </div>
+
+                        <div class="field">
+                            <label for="filtro-categoria">Categoría</label>
+                            <input type="text" id="filtro-categoria" placeholder="Ej: Maquillaje">
+                        </div>
+
+                        <div class="field">
+                            <label for="filtro-marca">Marca</label>
+                            <input type="text" id="filtro-marca" placeholder="Ej: Nivea">
+                        </div>
+
+                        <div class="field">
+                            <label for="filtro-ordenar">Ordenar precio</label>
+                            <select id="filtro-ordenar">
+                                <option value="">Sin ordenar</option>
+                                <option value="asc">Menor a mayor</option>
+                                <option value="desc">Mayor a menor</option>
+                            </select>
+                        </div>
+
+                        <div class="field checkbox-field">
+                            <label>
+                                <input type="checkbox" id="filtro-stock">
+                                Solo con stock disponible
+                            </label>
+                        </div>
+
+                        <div class="form-actions field-full">
+                            <button type="button" class="btn btn-primary" id="btn-filtrar-productos">Buscar</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <article class="panel mt-24">
+                <div class="panel-head">
+                    <h3>Listado de productos</h3>
+                    <span class="mini-note" id="texto-total-productos">0 resultados</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Marca</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-productos"></tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+
+        <section id="envios" class="section">
+            <div class="section-head">
+                <h2>Envíos</h2>
+                <button class="btn btn-light" id="btn-recargar-envios">Recargar envíos</button>
+            </div>
+
+            <div class="grid-2">
+                <article class="panel">
+                    <div class="panel-head">
+                        <h3 id="titulo-form-envio">Registrar envío</h3>
+                        <button type="button" class="btn btn-light" id="btn-nuevo-envio">Nuevo</button>
+                    </div>
+
+                    <form id="form-envio" class="form-grid">
+                        <input type="hidden" id="envio-edit-id">
+
+                        <div class="field">
+                            <label for="producto_id">ID producto</label>
+                            <input type="number" id="producto_id" placeholder="Ej: 1" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" id="cantidad" placeholder="Ej: 2" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="destinatario">Destinatario</label>
+                            <input type="text" id="destinatario" placeholder="Nombre del destinatario" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" id="direccion" placeholder="Dirección de entrega" required>
+                        </div>
+
+                        <div class="field field-full">
+                            <label for="observacion">Observación</label>
+                            <input type="text" id="observacion" placeholder="Opcional">
+                        </div>
+
+                        <div class="form-actions field-full">
+                            <button type="submit" class="btn btn-primary" id="btn-guardar-envio">Registrar envío</button>
+                            <button type="reset" class="btn btn-light" id="btn-cancelar-envio">Cancelar</button>
+                        </div>
+                    </form>
+                </article>
+
+                <article class="panel">
+                    <div class="panel-head">
+                        <h3>Ayuda rápida</h3>
+                    </div>
+
+                    <ul class="help-list">
+                        <li>Para registrar un envío, usa el <strong>ID del producto</strong>.</li>
+                        <li>Al registrar o editar un envío, el sistema ajusta el <strong>stock</strong> automáticamente.</li>
+                        <li>Puedes cambiar el estado del envío a <strong>registrado</strong>, <strong>en camino</strong> o <strong>entregado</strong>.</li>
+                        <li>Desde la tabla puedes <strong>editar</strong> o <strong>eliminar</strong> productos y envíos.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <article class="panel mt-24">
+                <div class="panel-head">
+                    <h3>Historial de envíos</h3>
+                    <span class="mini-note" id="texto-total-envios">0 envíos</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID envío</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Destinatario</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-envios"></tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
