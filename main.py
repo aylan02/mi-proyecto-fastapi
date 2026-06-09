@@ -5,6 +5,9 @@ from app.routes.health import router as health_router
 from app.routes.productos import router as productos_router
 from app.routes.envios import router as envios_router
 from app.routes.web import router as web_router
+from app.routes.clientes import router as clientes_router
+from app.routes.ventas import router as ventas_router
+
 
 app = FastAPI(
     title="API de Envíos de Cosméticos",
@@ -22,3 +25,5 @@ app.include_router(health_router)
 app.include_router(productos_router)
 app.include_router(envios_router)
 app.include_router(web_router)
+app.include_router(clientes_router)
+app.include_router(ventas_router)

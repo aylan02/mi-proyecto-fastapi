@@ -1,0 +1,20 @@
+[
+    {
+        "id": 2,
+        "rut": "20.909.269-7",
+        "nombre": "Aylan Alvarez",
+        "direccion": "Céspedes y González 2199",
+        "correo": "aylanalvarez02@gmail.com",
+        "telefono": "+56933950640",
+        "estado": "Activo"
+    },
+    {
+        "id": 3,
+        "rut": "13.866.578-k",
+        "nombre": "Pamela Rojas",
+        "direccion": "Pedro prado Bulnes",
+        "correo": "pamelarojas@unap.cl",
+        "telefono": "912345678",
+        "estado": "Activo"
+    }
+]

@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "cliente_id": 1,
+        "cliente_nombre": "Pamela Rojas",
+        "detalles": [
+            {
+                "producto_id": 1,
+                "producto_nombre": "Labial Mate",
+                "precio_unitario": 5990.0,
+                "cantidad": 2,
+                "subtotal": 11980.0
+            },
+            {
+                "producto_id": 2,
+                "producto_nombre": "Base Líquida",
+                "precio_unitario": 10990.0,
+                "cantidad": 1,
+                "subtotal": 10990.0
+            }
+        ],
+        "metodo_pago": "Transferencia",
+        "observacion": "Venta de prueba con varios productos",
+        "fecha": "2026-06-09 13:46:30",
+        "total": 22970.0,
+        "estado": "Anulada"
+    },
+    {
+        "id": 2,
+        "cliente_id": 3,
+        "cliente_nombre": "Pamela Rojas",
+        "detalles": [
+            {
+                "producto_id": 3,
+                "producto_nombre": "Crema Facial",
+                "precio_unitario": 7990.0,
+                "cantidad": 20,
+                "subtotal": 159800.0
+            }
+        ],
+        "metodo_pago": "Transferencia",
+        "observacion": "",
+        "fecha": "2026-06-09 15:09:20",
+        "total": 159800.0,
+        "estado": "Registrada"
+    }
+]

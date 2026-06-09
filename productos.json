@@ -4,8 +4,8 @@
         "nombre": "Labial Mate",
         "marca": "Maybelline",
         "categoria": "Maquillaje",
-        "precio": 5990,
-        "stock": 2,
+        "precio": 5990.0,
+        "stock": 3,
         "descripcion": "Labial de larga duración acabado mate"
     },
     {
@@ -13,8 +13,8 @@
         "nombre": "Base Líquida",
         "marca": "L'Oréal",
         "categoria": "Maquillaje",
-        "precio": 10990,
-        "stock": 9,
+        "precio": 10990.0,
+        "stock": 8,
         "descripcion": "Base líquida de cobertura media"
     },
     {
@@ -23,7 +23,16 @@
         "marca": "Nivea",
         "categoria": "Cuidado Facial",
         "precio": 7990,
-        "stock": 20,
+        "stock": 0,
         "descripcion": "Crema hidratante para uso diario"
+    },
+    {
+        "id": 4,
+        "nombre": "prueba",
+        "marca": "prueba",
+        "categoria": "prueba",
+        "precio": 9999.0,
+        "stock": 99,
+        "descripcion": "prueba"
     }
 ]

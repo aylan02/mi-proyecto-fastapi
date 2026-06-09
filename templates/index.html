@@ -1,270 +1,999 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Cosméticos</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CosmeLogix</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
 </head>
 <body>
-    <header class="hero">
-        <div class="hero-content">
-            <div>
-                <p class="eyebrow">Sistema web</p>
-                <h1>Gestión de Cosméticos</h1>
-                <p class="hero-text">Administra productos, stock y envíos desde una sola interfaz.</p>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="/static/img/logo-cosmelogix.jpg" alt="Logo CosmeLogix" class="brand-logo">
+                <div>
+                    <h1>CosmeLogix</h1>
+                    <p>Gestión integral cosmética</p>
+                </div>
             </div>
 
-            <nav class="hero-nav">
-                <a href="#resumen">Resumen</a>
-                <a href="#productos">Productos</a>
-                <a href="#envios">Envíos</a>
+            <nav class="sidebar-nav">
+                <button type="button" class="nav-link active" data-section="dashboard">Dashboard</button>
+                <button type="button" class="nav-link" data-section="productos">Productos</button>
+                <button type="button" class="nav-link" data-section="inventario">Inventario</button>
+                <button type="button" class="nav-link" data-section="clientes">Clientes</button>
+                <button type="button" class="nav-link" data-section="ventas">Ventas</button>
+                <button type="button" class="nav-link" data-section="envios">Envíos</button>
+                <button type="button" class="nav-link" data-section="rutas">Rutas</button>
+                <button type="button" class="nav-link" data-section="usuarios">Usuarios</button>
+                <button type="button" class="nav-link" data-section="roles">Roles y Permisos</button>
+                <button type="button" class="nav-link" data-section="reportes">Reportes</button>
+                <button type="button" class="nav-link" data-section="seguimiento">Seguimiento</button>
             </nav>
-        </div>
-    </header>
+        </aside>
 
-    <main class="container">
-        <div id="mensaje-global" class="alert hidden"></div>
+        <main class="main-panel">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">Sistema web empresarial</p>
+                    <h2 id="page-title">Dashboard</h2>
+                    <p id="page-subtitle" class="subtitle">Panel general del sistema CosmeLogix.</p>
+                </div>
+                <div class="topbar-actions">
+                    <span class="pill">Belleza • Inventario • Ventas • Logística</span>
+                </div>
+            </header>
 
-        <section id="resumen" class="section">
-            <div class="section-head">
-                <h2>Resumen general</h2>
-                <button class="btn btn-light" id="btn-recargar-resumen">Actualizar resumen</button>
-            </div>
+            <div id="global-alert" class="alert hidden"></div>
 
-            <div class="stats-grid">
-                <article class="stat-card">
-                    <span class="stat-label">Total productos</span>
-                    <strong id="stat-total-productos">0</strong>
-                </article>
-
-                <article class="stat-card">
-                    <span class="stat-label">Stock bajo</span>
-                    <strong id="stat-stock-bajo">0</strong>
-                </article>
-
-                <article class="stat-card">
-                    <span class="stat-label">Total envíos</span>
-                    <strong id="stat-total-envios">0</strong>
-                </article>
-
-                <article class="stat-card">
-                    <span class="stat-label">Envíos entregados</span>
-                    <strong id="stat-entregados">0</strong>
-                </article>
-            </div>
-        </section>
-
-        <section id="productos" class="section">
-            <div class="section-head">
-                <h2>Productos</h2>
-                <button class="btn btn-light" id="btn-recargar-productos">Recargar productos</button>
-            </div>
-
-            <div class="grid-2">
-                <article class="panel">
-                    <div class="panel-head">
-                        <h3 id="titulo-form-producto">Agregar producto</h3>
-                        <button type="button" class="btn btn-light" id="btn-nuevo-producto">Nuevo</button>
-                    </div>
-
-                    <form id="form-producto" class="form-grid">
-                        <input type="hidden" id="producto-edit-id">
-
-                        <div class="field">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" id="nombre" placeholder="Ej: Labial Mate" required>
-                        </div>
-
-                        <div class="field">
-                            <label for="marca">Marca</label>
-                            <input type="text" id="marca" placeholder="Ej: Maybelline" required>
-                        </div>
-
-                        <div class="field">
-                            <label for="categoria">Categoría</label>
-                            <input type="text" id="categoria" placeholder="Ej: Maquillaje" required>
-                        </div>
-
-                        <div class="field">
-                            <label for="precio">Precio</label>
-                            <input type="number" id="precio" placeholder="Ej: 5990" required>
-                        </div>
-
-                        <div class="field">
-                            <label for="stock">Stock</label>
-                            <input type="number" id="stock" placeholder="Ej: 10" required>
-                        </div>
-
-                        <div class="field field-full">
-                            <label for="descripcion">Descripción</label>
-                            <input type="text" id="descripcion" placeholder="Descripción del producto" required>
-                        </div>
-
-                        <div class="form-actions field-full">
-                            <button type="submit" class="btn btn-primary" id="btn-guardar-producto">Guardar producto</button>
-                            <button type="reset" class="btn btn-light" id="btn-cancelar-producto">Cancelar</button>
-                        </div>
-                    </form>
-                </article>
-
-                <article class="panel">
-                    <div class="panel-head">
-                        <h3>Filtros</h3>
-                        <button type="button" class="btn btn-light" id="btn-limpiar-filtros">Limpiar</button>
-                    </div>
-
-                    <div class="filters-grid">
-                        <div class="field">
-                            <label for="filtro-nombre">Nombre</label>
-                            <input type="text" id="filtro-nombre" placeholder="Buscar por nombre">
-                        </div>
-
-                        <div class="field">
-                            <label for="filtro-categoria">Categoría</label>
-                            <input type="text" id="filtro-categoria" placeholder="Ej: Maquillaje">
-                        </div>
-
-                        <div class="field">
-                            <label for="filtro-marca">Marca</label>
-                            <input type="text" id="filtro-marca" placeholder="Ej: Nivea">
-                        </div>
-
-                        <div class="field">
-                            <label for="filtro-ordenar">Ordenar precio</label>
-                            <select id="filtro-ordenar">
-                                <option value="">Sin ordenar</option>
-                                <option value="asc">Menor a mayor</option>
-                                <option value="desc">Mayor a menor</option>
-                            </select>
-                        </div>
-
-                        <div class="field checkbox-field">
-                            <label>
-                                <input type="checkbox" id="filtro-stock">
-                                Solo con stock disponible
-                            </label>
-                        </div>
-
-                        <div class="form-actions field-full">
-                            <button type="button" class="btn btn-primary" id="btn-filtrar-productos">Buscar</button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <article class="panel mt-24">
-                <div class="panel-head">
-                    <h3>Listado de productos</h3>
-                    <span class="mini-note" id="texto-total-productos">0 resultados</span>
+            <section class="page-section active" id="section-dashboard">
+                <div class="section-head">
+                    <h3>Resumen general</h3>
+                    <button class="btn btn-light" id="btn-refresh-dashboard">Actualizar resumen</button>
                 </div>
 
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Marca</th>
-                                <th>Categoría</th>
-                                <th>Precio</th>
-                                <th>Stock</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody-productos"></tbody>
-                    </table>
+                <div class="cards-grid cards-grid-5">
+                    <article class="summary-card">
+                        <span>Total productos</span>
+                        <strong id="card-total-productos">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Stock bajo</span>
+                        <strong id="card-stock-bajo">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Total clientes</span>
+                        <strong id="card-total-clientes">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Total ventas</span>
+                        <strong id="card-total-ventas">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Total envíos</span>
+                        <strong id="card-total-envios">0</strong>
+                    </article>
                 </div>
-            </article>
-        </section>
 
-        <section id="envios" class="section">
-            <div class="section-head">
-                <h2>Envíos</h2>
-                <button class="btn btn-light" id="btn-recargar-envios">Recargar envíos</button>
-            </div>
+                <div class="cards-grid cards-grid-3 mt-24">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Últimos productos</h3>
+                        </div>
+                        <div id="dashboard-productos" class="list-stack"></div>
+                    </article>
 
-            <div class="grid-2">
-                <article class="panel">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Últimas ventas</h3>
+                        </div>
+                        <div id="dashboard-ventas" class="list-stack"></div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Últimos envíos</h3>
+                        </div>
+                        <div id="dashboard-envios" class="list-stack"></div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="page-section" id="section-productos">
+                <div class="section-head">
+                    <h3>Gestión de productos</h3>
+                    <button class="btn btn-light" id="btn-refresh-productos">Recargar</button>
+                </div>
+
+                <div class="grid-2">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3 id="titulo-form-producto">Registrar producto</h3>
+                            <button class="btn btn-light" id="btn-reset-producto">Nuevo</button>
+                        </div>
+
+                        <form id="form-producto" class="form-grid">
+                            <input type="hidden" id="producto-id-edit" />
+
+                            <div class="field">
+                                <label for="producto-codigo">Código</label>
+                                <input type="text" id="producto-codigo" placeholder="Ej: COSM-001" />
+                            </div>
+
+                            <div class="field">
+                                <label for="producto-nombre">Nombre</label>
+                                <input type="text" id="producto-nombre" placeholder="Ej: Labial Mate" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="producto-marca">Marca</label>
+                                <input type="text" id="producto-marca" placeholder="Ej: Maybelline" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="producto-categoria">Categoría</label>
+                                <input type="text" id="producto-categoria" placeholder="Ej: Maquillaje" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="producto-precio">Precio</label>
+                                <input type="number" id="producto-precio" placeholder="Ej: 5990" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="producto-stock">Cantidad disponible</label>
+                                <input type="number" id="producto-stock" placeholder="Ej: 15" required />
+                            </div>
+
+                            <div class="field field-full">
+                                <label for="producto-descripcion">Descripción</label>
+                                <input type="text" id="producto-descripcion" placeholder="Descripción del producto" required />
+                            </div>
+
+                            <div class="field field-full inline-actions">
+                                <button type="submit" class="btn btn-primary" id="btn-save-producto">Guardar producto</button>
+                                <button type="button" class="btn btn-light" id="btn-cancel-producto">Cancelar</button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Filtros de productos</h3>
+                            <button class="btn btn-light" id="btn-limpiar-filtros-producto">Limpiar</button>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="filtro-producto-nombre">Nombre</label>
+                                <input type="text" id="filtro-producto-nombre" placeholder="Buscar por nombre" />
+                            </div>
+
+                            <div class="field">
+                                <label for="filtro-producto-marca">Marca</label>
+                                <input type="text" id="filtro-producto-marca" placeholder="Buscar por marca" />
+                            </div>
+
+                            <div class="field">
+                                <label for="filtro-producto-categoria">Categoría</label>
+                                <input type="text" id="filtro-producto-categoria" placeholder="Buscar por categoría" />
+                            </div>
+
+                            <div class="field">
+                                <label for="filtro-producto-orden">Ordenar precio</label>
+                                <select id="filtro-producto-orden">
+                                    <option value="">Sin ordenar</option>
+                                    <option value="asc">Menor a mayor</option>
+                                    <option value="desc">Mayor a menor</option>
+                                </select>
+                            </div>
+
+                            <div class="field field-full checkbox-wrap">
+                                <label>
+                                    <input type="checkbox" id="filtro-stock-disponible" />
+                                    Solo con stock disponible
+                                </label>
+                            </div>
+
+                            <div class="field field-full inline-actions">
+                                <button type="button" class="btn btn-primary" id="btn-buscar-productos">Buscar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="panel mt-24">
                     <div class="panel-head">
-                        <h3 id="titulo-form-envio">Registrar envío</h3>
-                        <button type="button" class="btn btn-light" id="btn-nuevo-envio">Nuevo</button>
+                        <h3>Listado de productos</h3>
+                        <span class="mini-note" id="texto-total-productos">0 resultados</span>
                     </div>
 
-                    <form id="form-envio" class="form-grid">
-                        <input type="hidden" id="envio-edit-id">
-
-                        <div class="field">
-                            <label for="producto_id">ID producto</label>
-                            <input type="number" id="producto_id" placeholder="Ej: 1" required>
-                        </div>
-
-                        <div class="field">
-                            <label for="cantidad">Cantidad</label>
-                            <input type="number" id="cantidad" placeholder="Ej: 2" required>
-                        </div>
-
-                        <div class="field">
-                            <label for="destinatario">Destinatario</label>
-                            <input type="text" id="destinatario" placeholder="Nombre del destinatario" required>
-                        </div>
-
-                        <div class="field">
-                            <label for="direccion">Dirección</label>
-                            <input type="text" id="direccion" placeholder="Dirección de entrega" required>
-                        </div>
-
-                        <div class="field field-full">
-                            <label for="observacion">Observación</label>
-                            <input type="text" id="observacion" placeholder="Opcional">
-                        </div>
-
-                        <div class="form-actions field-full">
-                            <button type="submit" class="btn btn-primary" id="btn-guardar-envio">Registrar envío</button>
-                            <button type="reset" class="btn btn-light" id="btn-cancelar-envio">Cancelar</button>
-                        </div>
-                    </form>
-                </article>
-
-                <article class="panel">
-                    <div class="panel-head">
-                        <h3>Ayuda rápida</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Marca</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-productos"></tbody>
+                        </table>
                     </div>
-
-                    <ul class="help-list">
-                        <li>Para registrar un envío, usa el <strong>ID del producto</strong>.</li>
-                        <li>Al registrar o editar un envío, el sistema ajusta el <strong>stock</strong> automáticamente.</li>
-                        <li>Puedes cambiar el estado del envío a <strong>registrado</strong>, <strong>en camino</strong> o <strong>entregado</strong>.</li>
-                        <li>Desde la tabla puedes <strong>editar</strong> o <strong>eliminar</strong> productos y envíos.</li>
-                    </ul>
                 </article>
-            </div>
+            </section>
 
-            <article class="panel mt-24">
-                <div class="panel-head">
-                    <h3>Historial de envíos</h3>
-                    <span class="mini-note" id="texto-total-envios">0 envíos</span>
+            <section class="page-section" id="section-inventario">
+                <div class="section-head">
+                    <h3>Control de inventario</h3>
+                    <button class="btn btn-light" id="btn-refresh-inventario">Actualizar inventario</button>
                 </div>
 
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID envío</th>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Destinatario</th>
-                                <th>Estado</th>
-                                <th>Fecha</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody-envios"></tbody>
-                    </table>
+                <div class="cards-grid cards-grid-4">
+                    <article class="summary-card">
+                        <span>Total SKU</span>
+                        <strong id="inv-total-sku">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Stock total</span>
+                        <strong id="inv-stock-total">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Productos críticos</span>
+                        <strong id="inv-stock-critico">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Última actualización</span>
+                        <strong id="inv-last-update">--</strong>
+                    </article>
                 </div>
-            </article>
-        </section>
-    </main>
+
+                <div class="grid-3 mt-24">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Ingreso de inventario</h3>
+                        </div>
+                        <form id="form-ingreso" class="form-grid one-col">
+                            <div class="field">
+                                <label for="ingreso-producto">Producto</label>
+                                <select id="ingreso-producto"></select>
+                            </div>
+                            <div class="field">
+                                <label for="ingreso-cantidad">Cantidad</label>
+                                <input type="number" id="ingreso-cantidad" min="1" placeholder="Ej: 10" required />
+                            </div>
+                            <div class="field">
+                                <label for="ingreso-documento">Documento de respaldo</label>
+                                <input type="text" id="ingreso-documento" placeholder="Factura / guía" />
+                            </div>
+                            <div class="field">
+                                <label for="ingreso-proveedor">Proveedor</label>
+                                <input type="text" id="ingreso-proveedor" placeholder="Nombre proveedor" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Registrar ingreso</button>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Salida de inventario</h3>
+                        </div>
+                        <form id="form-salida" class="form-grid one-col">
+                            <div class="field">
+                                <label for="salida-producto">Producto</label>
+                                <select id="salida-producto"></select>
+                            </div>
+                            <div class="field">
+                                <label for="salida-cantidad">Cantidad</label>
+                                <input type="number" id="salida-cantidad" min="1" placeholder="Ej: 2" required />
+                            </div>
+                            <div class="field">
+                                <label for="salida-motivo">Motivo</label>
+                                <select id="salida-motivo">
+                                    <option value="Merma">Merma</option>
+                                    <option value="Daño">Daño</option>
+                                    <option value="Muestra">Muestra</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="salida-observacion">Observación</label>
+                                <input type="text" id="salida-observacion" placeholder="Detalle de la salida" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Registrar salida</button>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Ajuste de inventario</h3>
+                        </div>
+                        <form id="form-ajuste" class="form-grid one-col">
+                            <div class="field">
+                                <label for="ajuste-producto">Producto</label>
+                                <select id="ajuste-producto"></select>
+                            </div>
+                            <div class="field">
+                                <label for="ajuste-real">Stock real auditado</label>
+                                <input type="number" id="ajuste-real" min="0" placeholder="Ej: 12" required />
+                            </div>
+                            <div class="field">
+                                <label for="ajuste-justificacion">Justificación</label>
+                                <input type="text" id="ajuste-justificacion" placeholder="Motivo del ajuste" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar ajuste</button>
+                        </form>
+                    </article>
+                </div>
+
+                <div class="grid-2 mt-24">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Existencias actuales</h3>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Producto</th>
+                                        <th>Stock</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-inventario"></tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Stock crítico / bajo</h3>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Stock</th>
+                                        <th>Alerta</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-stock-bajo"></tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="panel mt-24">
+                    <div class="panel-head">
+                        <h3>Movimientos de inventario</h3>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-movimientos"></tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+
+            <section class="page-section" id="section-clientes">
+                <div class="section-head">
+                    <h3>Gestión de clientes</h3>
+                    <button class="btn btn-light" id="btn-refresh-clientes">Actualizar clientes</button>
+                </div>
+
+                <div class="grid-2">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3 id="titulo-form-cliente">Registrar cliente</h3>
+                            <button class="btn btn-light" id="btn-reset-cliente">Nuevo</button>
+                        </div>
+
+                        <form id="form-cliente" class="form-grid">
+                            <input type="hidden" id="cliente-id-edit" />
+
+                            <div class="field">
+                                <label for="cliente-rut">RUT / ID</label>
+                                <input type="text" id="cliente-rut" placeholder="Ej: 12.345.678-9" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="cliente-nombre">Nombre completo</label>
+                                <input type="text" id="cliente-nombre" placeholder="Nombre cliente" required />
+                            </div>
+
+                            <div class="field field-full">
+                                <label for="cliente-direccion">Dirección</label>
+                                <input type="text" id="cliente-direccion" placeholder="Dirección de despacho" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="cliente-correo">Correo</label>
+                                <input type="email" id="cliente-correo" placeholder="correo@cliente.cl" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="cliente-telefono">Teléfono</label>
+                                <input type="text" id="cliente-telefono" placeholder="+56 9 1234 5678" required />
+                            </div>
+
+                            <div class="field field-full inline-actions">
+                                <button type="submit" class="btn btn-primary">Guardar cliente</button>
+                                <button type="button" class="btn btn-light" id="btn-cancel-cliente">Cancelar</button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Perfil comercial</h3>
+                        </div>
+                        <div id="cliente-perfil" class="empty-state">
+                            Selecciona un cliente desde la tabla para ver su historial y detalle.
+                        </div>
+                    </article>
+                </div>
+
+                <article class="panel mt-24">
+                    <div class="panel-head">
+                        <h3>Listado de clientes</h3>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>RUT / ID</th>
+                                    <th>Nombre</th>
+                                    <th>Dirección</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-clientes"></tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+
+            <section class="page-section" id="section-ventas">
+                <div class="section-head">
+                    <h3>Registro de ventas</h3>
+                    <button class="btn btn-light" id="btn-refresh-ventas">Actualizar ventas</button>
+                </div>
+
+                <div class="grid-2">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3 id="titulo-form-venta">Registrar venta</h3>
+                        </div>
+
+                        <form id="form-venta" class="form-grid">
+                            <div class="field">
+                                <label for="venta-cliente">Cliente</label>
+                                <select id="venta-cliente" required></select>
+                            </div>
+
+                            <div class="field">
+                                <label for="venta-producto">Producto</label>
+                                <select id="venta-producto" required></select>
+                            </div>
+
+                            <div class="field">
+                                <label for="venta-cantidad">Cantidad</label>
+                                <input type="number" id="venta-cantidad" min="1" placeholder="Ej: 2" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="venta-pago">Método de pago</label>
+                                <select id="venta-pago">
+                                    <option value="Transferencia">Transferencia</option>
+                                    <option value="Tarjeta">Tarjeta</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                </select>
+                            </div>
+
+                            <div class="field field-full">
+                                <label for="venta-observacion">Observaciones</label>
+                                <input type="text" id="venta-observacion" placeholder="Notas comerciales" />
+                            </div>
+
+                            <div class="field field-full inline-actions">
+                                <button type="submit" class="btn btn-primary">Registrar venta</button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Resumen de venta</h3>
+                        </div>
+                        <div id="venta-resumen" class="resumen-box">
+                            Completa cliente, producto y cantidad para visualizar el resumen.
+                        </div>
+                    </article>
+                </div>
+
+                <article class="panel mt-24">
+                    <div class="panel-head">
+                        <h3>Historial de ventas</h3>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Venta</th>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Método Pago</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-ventas"></tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+
+            <section class="page-section" id="section-envios">
+                <div class="section-head">
+                    <h3>Gestión de envíos</h3>
+                    <button class="btn btn-light" id="btn-refresh-envios">Actualizar envíos</button>
+                </div>
+
+                <div class="grid-2">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Registrar envío</h3>
+                        </div>
+
+                        <form id="form-envio" class="form-grid">
+                            <div class="field">
+                                <label for="envio-venta">Venta asociada</label>
+                                <select id="envio-venta" required></select>
+                            </div>
+
+                            <div class="field">
+                                <label for="envio-fecha">Fecha programada</label>
+                                <input type="date" id="envio-fecha" required />
+                            </div>
+
+                            <div class="field field-full">
+                                <label for="envio-direccion">Dirección de entrega</label>
+                                <input type="text" id="envio-direccion" placeholder="Dirección de despacho" required />
+                            </div>
+
+                            <div class="field">
+                                <label for="envio-ruta">Ruta</label>
+                                <select id="envio-ruta"></select>
+                            </div>
+
+                            <div class="field">
+                                <label for="envio-vehiculo">Vehículo</label>
+                                <input type="text" id="envio-vehiculo" placeholder="Ej: CC-PL-21" />
+                            </div>
+
+                            <div class="field field-full">
+                                <label for="envio-observacion">Observaciones</label>
+                                <input type="text" id="envio-observacion" placeholder="Detalle logístico" />
+                            </div>
+
+                            <div class="field field-full inline-actions">
+                                <button type="submit" class="btn btn-primary">Registrar envío</button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Estados logísticos</h3>
+                        </div>
+                        <div class="status-guide">
+                            <span class="badge badge-pendiente">Pendiente</span>
+                            <span class="badge badge-preparacion">En preparación</span>
+                            <span class="badge badge-despachado">Despachado</span>
+                            <span class="badge badge-transito">En tránsito</span>
+                            <span class="badge badge-entregado">Entregado</span>
+                            <span class="badge badge-cancelado">Cancelado</span>
+                        </div>
+                        <p class="mini-note mt-24">
+                            El envío se registra desde una venta y luego puede cambiar de estado según el avance del despacho.
+                        </p>
+                    </article>
+                </div>
+
+                <article class="panel mt-24">
+                    <div class="panel-head">
+                        <h3>Historial de envíos</h3>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Envío</th>
+                                    <th>Venta</th>
+                                    <th>Cliente</th>
+                                    <th>Dirección</th>
+                                    <th>Ruta</th>
+                                    <th>Vehículo</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-envios"></tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+
+            <section class="page-section" id="section-rutas">
+                <div class="section-head">
+                    <h3>Gestión de rutas</h3>
+                </div>
+
+                <div class="grid-2">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Registrar ruta</h3>
+                        </div>
+
+                        <form id="form-ruta" class="form-grid">
+                            <input type="hidden" id="ruta-id-edit" />
+                            <div class="field">
+                                <label for="ruta-origen">Origen</label>
+                                <input type="text" id="ruta-origen" placeholder="Ej: Bodega central" required />
+                            </div>
+                            <div class="field">
+                                <label for="ruta-destino">Destino</label>
+                                <input type="text" id="ruta-destino" placeholder="Ej: Iquique centro" required />
+                            </div>
+                            <div class="field">
+                                <label for="ruta-distancia">Distancia</label>
+                                <input type="text" id="ruta-distancia" placeholder="Ej: 12 km" required />
+                            </div>
+                            <div class="field">
+                                <label for="ruta-estado">Estado</label>
+                                <select id="ruta-estado">
+                                    <option value="Activa">Activa</option>
+                                    <option value="Inactiva">Inactiva</option>
+                                </select>
+                            </div>
+
+                            <div class="field field-full inline-actions">
+                                <button type="submit" class="btn btn-primary">Guardar ruta</button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Listado de rutas</h3>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Origen</th>
+                                        <th>Destino</th>
+                                        <th>Distancia</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-rutas"></tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="page-section" id="section-usuarios">
+                <div class="section-head">
+                    <h3>Administración de usuarios</h3>
+                </div>
+
+                <div class="grid-2">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Registrar usuario</h3>
+                        </div>
+
+                        <form id="form-usuario" class="form-grid">
+                            <input type="hidden" id="usuario-id-edit" />
+                            <div class="field">
+                                <label for="usuario-username">Usuario</label>
+                                <input type="text" id="usuario-username" placeholder="Ej: fflores" required />
+                            </div>
+                            <div class="field">
+                                <label for="usuario-nombre">Nombre completo</label>
+                                <input type="text" id="usuario-nombre" placeholder="Nombre usuario" required />
+                            </div>
+                            <div class="field">
+                                <label for="usuario-correo">Correo</label>
+                                <input type="email" id="usuario-correo" placeholder="correo@cosmelogix.cl" required />
+                            </div>
+                            <div class="field">
+                                <label for="usuario-password">Contraseña</label>
+                                <input type="password" id="usuario-password" placeholder="********" required />
+                            </div>
+                            <div class="field">
+                                <label for="usuario-rol">Rol</label>
+                                <select id="usuario-rol"></select>
+                            </div>
+                            <div class="field">
+                                <label for="usuario-estado">Estado</label>
+                                <select id="usuario-estado">
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                            </div>
+
+                            <div class="field field-full inline-actions">
+                                <button type="submit" class="btn btn-primary">Guardar usuario</button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Listado de usuarios</h3>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Usuario</th>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Rol</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-usuarios"></tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="page-section" id="section-roles">
+                <div class="section-head">
+                    <h3>Roles y permisos</h3>
+                </div>
+
+                <div class="grid-2">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Registrar rol</h3>
+                        </div>
+
+                        <form id="form-rol" class="form-grid">
+                            <input type="hidden" id="rol-id-edit" />
+                            <div class="field">
+                                <label for="rol-nombre">Nombre del rol</label>
+                                <input type="text" id="rol-nombre" placeholder="Ej: Administrador" required />
+                            </div>
+                            <div class="field">
+                                <label for="rol-estado">Estado</label>
+                                <select id="rol-estado">
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                            </div>
+                            <div class="field field-full">
+                                <label for="rol-descripcion">Descripción</label>
+                                <input type="text" id="rol-descripcion" placeholder="Descripción del rol" required />
+                            </div>
+                            <div class="field field-full inline-actions">
+                                <button type="submit" class="btn btn-primary">Guardar rol</button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Matriz de permisos</h3>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Rol</th>
+                                        <th>Productos</th>
+                                        <th>Inventario</th>
+                                        <th>Clientes</th>
+                                        <th>Ventas</th>
+                                        <th>Envíos</th>
+                                        <th>Reportes</th>
+                                        <th>Usuarios</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-permisos"></tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="panel mt-24">
+                    <div class="panel-head">
+                        <h3>Listado de roles</h3>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Rol</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-roles"></tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+
+            <section class="page-section" id="section-reportes">
+                <div class="section-head">
+                    <h3>Reportes administrativos</h3>
+                    <button class="btn btn-light" id="btn-refresh-reportes">Actualizar reportes</button>
+                </div>
+
+                <div class="cards-grid cards-grid-4">
+                    <article class="summary-card">
+                        <span>Inventario</span>
+                        <strong id="rep-inventario-total">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Ventas acumuladas</span>
+                        <strong id="rep-ventas-total">$0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Clientes activos</span>
+                        <strong id="rep-clientes-activos">0</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Envíos entregados</span>
+                        <strong id="rep-envios-entregados">0</strong>
+                    </article>
+                </div>
+
+                <div class="grid-2 mt-24">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Reporte de inventario</h3>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Stock</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-reporte-inventario"></tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Reporte de ventas</h3>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Venta</th>
+                                        <th>Cliente</th>
+                                        <th>Total</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-reporte-ventas"></tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Reporte de clientes</h3>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Correo</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-reporte-clientes"></tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Reporte logístico</h3>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Envío</th>
+                                        <th>Cliente</th>
+                                        <th>Estado</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-reporte-logistico"></tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="page-section" id="section-seguimiento">
+                <div class="section-head">
+                    <h3>Seguimiento de pedido</h3>
+                </div>
+
+                <div class="grid-2">
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Consultar estado</h3>
+                        </div>
+
+                        <form id="form-tracking" class="form-grid one-col">
+                            <div class="field">
+                                <label for="tracking-id">ID del envío</label>
+                                <input type="number" id="tracking-id" placeholder="Ej: 1" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Consultar</button>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-head">
+                            <h3>Resultado de seguimiento</h3>
+                        </div>
+                        <div id="tracking-result" class="empty-state">
+                            Ingresa un ID de envío para visualizar el estado actual y su información de seguimiento.
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="/static/js/script.js"></script>
 </body>
