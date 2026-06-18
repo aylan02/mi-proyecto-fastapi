@@ -1,3 +1,4 @@
+let currentUser = null;
 const API = window.location.origin;
 
 const STORAGE_KEYS = {
@@ -18,18 +19,28 @@ const state = {
     rutas: [],
     usuarios: [],
     roles: [],
-    movimientos: [],
+    movimientos: [],    
     enviosMeta: []
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const ok = await loadSessionUser();
+    if (!ok) return;
+
     bindNavigation();
-    showSection("dashboard");
+    bindAuthControls();
+
+    const firstSection = currentUser.permisos.includes("dashboard")
+        ? "dashboard"
+        : currentUser.permisos[0];
+
+    showSection(firstSection);
 
     try {
         initLocalData();
         initEvents();
         await loadRemoteData();
+        applyPermissions();
         renderAll();
     } catch (error) {
         console.error("Error al iniciar la aplicación:", error);
@@ -64,6 +75,10 @@ function bindNavigation() {
 }
 
 function showSection(name) {
+    if (currentUser && !currentUser.permisos.includes(name)) {
+        return;
+    }
+
     document.querySelectorAll(".nav-link").forEach(n => n.classList.remove("active"));
     document.querySelector(`.nav-link[data-section="${name}"]`)?.classList.add("active");
 
@@ -1446,4 +1461,64 @@ function nextId(collection) {
 
 function activateSection(name) {
     showSection(name);
+}
+
+async function loadSessionUser() {
+    try {
+        const res = await fetch(`${API}/auth/me`);
+        const data = await res.json();
+
+        if (!res.ok) {
+            window.location.href = "/login";
+            return false;
+        }
+
+        currentUser = data.user;
+        return true;
+    } catch (error) {
+        window.location.href = "/login";
+        return false;
+    }
+}
+
+function bindAuthControls() {
+    const userBox = document.getElementById("usuario-actual");
+    const logoutBtn = document.getElementById("btn-logout");
+
+    if (userBox && currentUser) {
+        userBox.textContent = `${currentUser.nombre} • ${currentUser.rol}`;
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", async () => {
+            await fetch(`${API}/auth/logout`, { method: "POST" });
+            window.location.href = "/login";
+        });
+    }
+}
+
+function applyPermissions() {
+    if (!currentUser) return;
+
+    const allowed = new Set(currentUser.permisos);
+
+    document.querySelectorAll(".nav-link").forEach(button => {
+        const section = button.dataset.section;
+
+        if (!allowed.has(section)) {
+            button.style.display = "none";
+        } else {
+            button.style.display = "";
+        }
+    });
+
+    document.querySelectorAll(".page-section").forEach(section => {
+        const name = section.id.replace("section-", "");
+
+        if (!allowed.has(name)) {
+            section.style.display = "none";
+        } else {
+            section.style.display = "";
+        }
+    });
 }

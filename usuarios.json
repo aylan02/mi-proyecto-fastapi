@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "username": "admin",
+        "password": "1234",
+        "nombre": "Administrador General",
+        "rol": "Administrador"
+    },
+    {
+        "id": 2,
+        "username": "ejecutivo",
+        "password": "1234",
+        "nombre": "Fernanda Flores",
+        "rol": "Ejecutivo Comercial"
+    },
+    {
+        "id": 3,
+        "username": "inventario",
+        "password": "1234",
+        "nombre": "Julio Moraga",
+        "rol": "Encargado de Inventario"
+    },
+    {
+        "id": 4,
+        "username": "logistica",
+        "password": "1234",
+        "nombre": "Aylan Alvarez",
+        "rol": "Coordinador Logístico"
+    }
+]
