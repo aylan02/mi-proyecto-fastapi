@@ -1,38 +1,68 @@
 [
     {
         "id": 1,
+        "codigo": "PROD001",
         "nombre": "Labial Mate",
         "marca": "Maybelline",
         "categoria": "Maquillaje",
         "precio": 5990.0,
         "stock": 3,
-        "descripcion": "Labial de larga duración acabado mate"
+        "descripcion": "Labial de larga duración acabado mate",
+        "estado": "Activo"
     },
     {
         "id": 2,
+        "codigo": "PROD002",
         "nombre": "Base Líquida",
         "marca": "L'Oréal",
         "categoria": "Maquillaje",
         "precio": 10990.0,
         "stock": 8,
-        "descripcion": "Base líquida de cobertura media"
+        "descripcion": "Base líquida de cobertura media",
+        "estado": "Activo"
     },
     {
         "id": 3,
+        "codigo": "PROD003",
         "nombre": "Crema Facial",
         "marca": "Nivea",
         "categoria": "Cuidado Facial",
-        "precio": 7990,
+        "precio": 7990.0,
         "stock": 0,
-        "descripcion": "Crema hidratante para uso diario"
+        "descripcion": "Crema hidratante para uso diario",
+        "estado": "Activo"
     },
     {
         "id": 4,
-        "nombre": "prueba",
-        "marca": "prueba",
-        "categoria": "prueba",
+        "codigo": "PROD004",
+        "nombre": "Prueba",
+        "marca": "Prueba",
+        "categoria": "Prueba",
         "precio": 9999.0,
         "stock": 99,
-        "descripcion": "prueba"
+        "descripcion": "Producto de prueba",
+        "estado": "Activo"
+    },
+    {
+        "id": 5,
+        "codigo": "string",
+        "nombre": "string",
+        "marca": "string",
+        "categoria": "string",
+        "precio": 1.0,
+        "stock": 0,
+        "descripcion": "string",
+        "estado": "Activo"
+    },
+    {
+        "id": 6,
+        "codigo": "PROD005",
+        "nombre": "Shampoo Reparador",
+        "marca": "Pantene",
+        "categoria": "Cuidado Capilar",
+        "precio": 7990.0,
+        "stock": 20,
+        "descripcion": "Shampoo para cabello dañado",
+        "estado": "Activo"
     }
 ]
