@@ -1,24 +1,9 @@
 import json
 from pathlib import Path
 
+from app.services.rol_service import leer_roles
 BASE_DIR = Path(__file__).resolve().parents[2]
 ARCHIVO_USUARIOS = BASE_DIR / "usuarios.json"
-
-PERMISOS_POR_ROL = {
-    "Administrador": [
-        "dashboard", "productos", "inventario", "clientes", "ventas",
-        "envios", "rutas", "usuarios", "roles", "reportes", "seguimiento"
-    ],
-    "Ejecutivo Comercial": [
-        "dashboard", "clientes", "ventas", "reportes"
-    ],
-    "Encargado de Inventario": [
-        "dashboard", "productos", "inventario", "reportes"
-    ],
-    "Coordinador Logístico": [
-        "dashboard", "envios", "rutas", "seguimiento", "reportes"
-    ]
-}
 
 
 def leer_usuarios():
@@ -30,19 +15,28 @@ def leer_usuarios():
         if not contenido:
             return []
         return json.loads(contenido)
-
+  
 
 def autenticar_usuario(username: str, password: str):
     usuarios = leer_usuarios()
 
     for usuario in usuarios:
         if usuario["username"] == username and usuario["password"] == password:
+
+            roles = leer_roles()
+            permisos = []
+
+            for rol in roles:
+                if rol["nombre"] == usuario["rol"] and rol.get("estado") == "Activo":
+                    permisos = rol.get("permisos", [])
+                    break
+
             return {
                 "id": usuario["id"],
                 "username": usuario["username"],
                 "nombre": usuario["nombre"],
                 "rol": usuario["rol"],
-                "permisos": PERMISOS_POR_ROL.get(usuario["rol"], [])
+                "permisos": permisos
             }
 
     return None

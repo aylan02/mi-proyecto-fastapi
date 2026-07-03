@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "nombre": "Administrador",
+        "estado": "Activo",
+        "permisos": [
+            "dashboard",
+            "productos",
+            "inventario",
+            "clientes",
+            "ventas",
+            "envios",
+            "rutas",
+            "usuarios",
+            "roles",
+            "reportes",
+            "seguimiento"
+        ]
+    },
+    {
+        "id": 2,
+        "nombre": "Ejecutivo Comercial",
+        "estado": "Activo",
+        "permisos": [
+            "dashboard",
+            "clientes",
+            "ventas",
+            "reportes"
+        ]
+    },
+    {
+        "id": 3,
+        "nombre": "Encargado de Inventario",
+        "estado": "Activo",
+        "permisos": [
+            "dashboard",
+            "productos",
+            "inventario",
+            "reportes"
+        ]
+    },
+    {
+        "id": 4,
+        "nombre": "Coordinador Logístico",
+        "estado": "Activo",
+        "permisos": [
+            "dashboard",
+            "envios",
+            "rutas",
+            "seguimiento",
+            "reportes"
+        ]
+    }
+]
