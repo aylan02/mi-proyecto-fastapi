@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CosmeLogix</title>
     <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
     <div class="app-shell">
@@ -18,17 +19,39 @@
             </div>
 
             <nav class="sidebar-nav">
-                <button type="button" class="nav-link active" data-section="dashboard">Dashboard</button>
-                <button type="button" class="nav-link" data-section="productos">Productos</button>
-                <button type="button" class="nav-link" data-section="inventario">Inventario</button>
-                <button type="button" class="nav-link" data-section="clientes">Clientes</button>
-                <button type="button" class="nav-link" data-section="ventas">Ventas</button>
-                <button type="button" class="nav-link" data-section="envios">Envíos</button>
-                <button type="button" class="nav-link" data-section="rutas">Rutas</button>
-                <button type="button" class="nav-link" data-section="usuarios">Usuarios</button>
-                <button type="button" class="nav-link" data-section="roles">Roles y Permisos</button>
-                <button type="button" class="nav-link" data-section="reportes">Reportes</button>
-                <button type="button" class="nav-link" data-section="seguimiento">Seguimiento</button>
+                <button type="button" class="nav-link active" data-section="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </button>
+                <button type="button" class="nav-link" data-section="productos">
+                    <i class="fa-solid fa-spray-can-sparkles"></i> Productos
+                </button>
+                <button type="button" class="nav-link" data-section="inventario">
+                    <i class="fa-solid fa-boxes-stacked"></i> Inventario
+                </button>
+                <button type="button" class="nav-link" data-section="clientes">
+                    <i class="fa-solid fa-users"></i> Clientes
+                </button>
+                <button type="button" class="nav-link" data-section="ventas">
+                    <i class="fa-solid fa-cart-shopping"></i> Ventas
+                </button>
+                <button type="button" class="nav-link" data-section="envios">
+                    <i class="fa-solid fa-truck-fast"></i> Envíos
+                </button>
+                <button type="button" class="nav-link" data-section="rutas">
+                    <i class="fa-solid fa-route"></i> Rutas
+                </button>
+                <button type="button" class="nav-link" data-section="usuarios">
+                    <i class="fa-solid fa-user-shield"></i> Usuarios
+                </button>
+                <button type="button" class="nav-link" data-section="roles">
+                    <i class="fa-solid fa-user-lock"></i> Roles y Permisos
+                </button>
+                <button type="button" class="nav-link" data-section="reportes">
+                    <i class="fa-solid fa-file-invoice"></i> Reportes
+                </button>
+                <button type="button" class="nav-link" data-section="seguimiento">
+                    <i class="fa-solid fa-location-crosshairs"></i> Seguimiento
+                </button>
             </nav>
         </aside>
 
@@ -42,7 +65,9 @@
                 <div class="topbar-actions">
                     <span class="pill">Belleza • Inventario • Ventas • Logística</span>
                     <span id="usuario-actual" class="pill"></span>
-                    <button class="btn btn-light" id="btn-logout" type="button">Cerrar sesión</button>
+                    <button class="btn btn-light" id="btn-logout" type="button">
+                        <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                    </button>
                 </div>
             </header>
 
