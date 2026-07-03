@@ -32,29 +32,7 @@
         "descripcion": "Crema hidratante para uso diario",
         "estado": "Activo"
     },
-    {
-        "id": 4,
-        "codigo": "PROD004",
-        "nombre": "Prueba",
-        "marca": "Prueba",
-        "categoria": "Prueba",
-        "precio": 9999.0,
-        "stock": 99,
-        "descripcion": "Producto de prueba",
-        "estado": "Activo"
-    },
-    {
-        "id": 5,
-        "codigo": "string",
-        "nombre": "string",
-        "marca": "string",
-        "categoria": "string",
-        "precio": 1.0,
-        "stock": 0,
-        "descripcion": "string",
-        "estado": "Activo"
-    },
-    {
+  {
         "id": 6,
         "codigo": "PROD005",
         "nombre": "Shampoo Reparador",
