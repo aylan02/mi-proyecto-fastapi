@@ -43,5 +43,24 @@
         "fecha": "2026-06-09 15:09:20",
         "total": 159800.0,
         "estado": "Registrada"
+    },
+    {
+        "id": 3,
+        "cliente_id": 2,
+        "cliente_nombre": "Aylan Alvarez",
+        "detalles": [
+            {
+                "producto_id": 1,
+                "producto_nombre": "Labial Mate",
+                "precio_unitario": 5990.0,
+                "cantidad": 2,
+                "subtotal": 11980.0
+            }
+        ],
+        "metodo_pago": "Efectivo",
+        "observacion": "Prueba integración",
+        "fecha": "2026-07-03 03:47:39",
+        "total": 11980.0,
+        "estado": "Registrada"
     }
 ]

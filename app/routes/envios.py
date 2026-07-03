@@ -14,7 +14,7 @@ router = APIRouter(tags=["Envíos"])
 @router.post(
     "/envios",
     summary="Registrar un envío",
-    description="Registra un nuevo envío y descuenta automáticamente el stock del producto.",
+    description="Registra un nuevo envío para un producto previamente vendido.",
     status_code=status.HTTP_201_CREATED,
     response_description="Envío registrado correctamente"
 )
@@ -85,7 +85,7 @@ def cambiar_estado_envio(id_envio: int, estado: EstadoEnvioActualizar):
 @router.delete(
     "/envios/{id_envio}",
     summary="Eliminar un envío",
-    description="Elimina un envío y devuelve el stock descontado al producto correspondiente."
+    description="Elimina un envío registrado del historial.",
 )
 def borrar_envio(id_envio: int):
     envio_eliminado = eliminar_envio(id_envio)

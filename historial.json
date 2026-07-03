@@ -22,5 +22,16 @@
         "destinatario": "Pedro",
         "direccion": "rodrigo",
         "fecha": "2026-03-27 16:00:45"
+    },
+    {
+        "id_envio": 1,
+        "producto_id": 1,
+        "nombre_producto": "Labial Mate",
+        "cantidad": 1,
+        "destinatario": "Fernanda Flores",
+        "direccion": "Av. Ejemplo 123, Santiago",
+        "observacion": "Entrega durante la tarde",
+        "estado": "registrado",
+        "fecha_envio": "2026-07-03 04:34:48"
     }
 ]

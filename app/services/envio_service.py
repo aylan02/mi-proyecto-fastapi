@@ -35,12 +35,6 @@ def registrar_envio(envio):
     if not producto:
         return {"ok": False, "error": "Producto no encontrado"}
 
-    if producto["stock"] < envio.cantidad:
-        return {"ok": False, "error": "Stock insuficiente para realizar el envío"}
-
-    producto["stock"] -= envio.cantidad
-    guardar_datos(ARCHIVO_PRODUCTOS, productos)
-
     nuevo_envio = {
         "id_envio": obtener_nuevo_id_envio(),
         "producto_id": envio.producto_id,
@@ -61,7 +55,6 @@ def registrar_envio(envio):
         "data": {
             "mensaje": "Envío registrado correctamente",
             "envio": nuevo_envio,
-            "stock_restante": producto["stock"]
         }
     }
 
@@ -81,23 +74,10 @@ def actualizar_envio(id_envio: int, datos_envio):
     if not envio:
         return {"ok": False, "error": "Envío no encontrado"}
 
-    producto_anterior = buscar_producto_por_id(envio["producto_id"])
-    if producto_anterior:
-        producto_anterior["stock"] += envio["cantidad"]
-
     nuevo_producto = buscar_producto_por_id(datos_envio.producto_id)
 
     if not nuevo_producto:
-        if producto_anterior:
-            producto_anterior["stock"] -= envio["cantidad"]
         return {"ok": False, "error": "Producto no encontrado"}
-
-    if nuevo_producto["stock"] < datos_envio.cantidad:
-        if producto_anterior:
-            producto_anterior["stock"] -= envio["cantidad"]
-        return {"ok": False, "error": "Stock insuficiente para actualizar el envío"}
-
-    nuevo_producto["stock"] -= datos_envio.cantidad
 
     envio["producto_id"] = datos_envio.producto_id
     envio["nombre_producto"] = nuevo_producto["nombre"]
@@ -106,7 +86,6 @@ def actualizar_envio(id_envio: int, datos_envio):
     envio["direccion"] = datos_envio.direccion
     envio["observacion"] = datos_envio.observacion
 
-    guardar_datos(ARCHIVO_PRODUCTOS, productos)
     guardar_datos(ARCHIVO_HISTORIAL, historial_envios)
 
     return {
@@ -123,13 +102,8 @@ def eliminar_envio(id_envio: int):
     if not envio:
         return None
 
-    producto = buscar_producto_por_id(envio["producto_id"])
-    if producto:
-        producto["stock"] += envio["cantidad"]
-
     historial_envios.remove(envio)
 
-    guardar_datos(ARCHIVO_PRODUCTOS, productos)
     guardar_datos(ARCHIVO_HISTORIAL, historial_envios)
 
     return envio
