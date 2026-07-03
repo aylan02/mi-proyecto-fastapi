@@ -10,6 +10,7 @@ from app.routes.ventas import router as ventas_router
 from app.routes.inventario import router as inventario_router
 from starlette.middleware.sessions import SessionMiddleware
 from app.routes.auth import router as auth_router
+from app.routes.usuarios import router as usuarios_router
 
 app = FastAPI(
     title="API de Envíos de Cosméticos",
@@ -32,3 +33,4 @@ app.include_router(clientes_router)
 app.include_router(ventas_router)
 app.include_router(auth_router)
 app.include_router(inventario_router)
+app.include_router(usuarios_router)
