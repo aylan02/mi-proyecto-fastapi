@@ -72,10 +72,16 @@ def put_cliente(cliente_id: int, cliente: ClienteActualizar):
 def delete_cliente(cliente_id: int):
     cliente_eliminado = eliminar_cliente(cliente_id)
 
-    if not cliente_eliminado:
+    if cliente_eliminado is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Cliente no encontrado"
         )
 
-    return {"mensaje": "Cliente eliminado correctamente"}
+    if cliente_eliminado == "INACTIVO":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="El cliente ya se encuentra desactivado"
+        )
+
+    return {"mensaje": "Cliente desactivado correctamente"}

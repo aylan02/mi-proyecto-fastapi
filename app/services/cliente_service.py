@@ -81,8 +81,14 @@ def eliminar_cliente(cliente_id: int):
 
     for cliente in clientes:
         if cliente["id"] == cliente_id:
-            clientes_filtrados = [c for c in clientes if c["id"] != cliente_id]
-            guardar_clientes(clientes_filtrados)
+
+            if cliente.get("estado") == "Inactivo":
+                return "INACTIVO"
+
+            cliente["estado"] = "Inactivo"
+
+            guardar_clientes(clientes)
+
             return cliente
 
     return None
