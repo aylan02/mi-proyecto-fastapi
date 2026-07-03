@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "producto_id": 1,
+        "tipo": "Ingreso",
+        "cantidad": 5,
+        "motivo": "Compra al proveedor",
+        "usuario": "Fernanda",
+        "fecha": "2026-07-03T03:01:23.040559"
+    },
+    {
+        "id": 2,
+        "producto_id": 1,
+        "tipo": "Salida",
+        "cantidad": 2,
+        "motivo": "Venta realizada",
+        "usuario": "Sistema",
+        "fecha": "2026-07-03T03:47:39.034873"
+    }
+]

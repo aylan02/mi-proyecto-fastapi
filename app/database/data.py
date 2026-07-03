@@ -3,6 +3,7 @@ import os
 
 ARCHIVO_PRODUCTOS = "productos.json"
 ARCHIVO_HISTORIAL = "historial.json"
+ARCHIVO_MOVIMIENTOS = "movimientos_inventario.json"
 
 productos_iniciales = [
     {
@@ -46,3 +47,7 @@ def guardar_datos(ruta, datos):
 
 productos = cargar_datos(ARCHIVO_PRODUCTOS, productos_iniciales)
 historial_envios = cargar_datos(ARCHIVO_HISTORIAL, [])
+movimientos_inventario = cargar_datos(
+    ARCHIVO_MOVIMIENTOS,
+    []
+)

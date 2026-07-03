@@ -1,7 +1,8 @@
 import json
 from datetime import datetime
 from pathlib import Path
-
+from app.services.inventario_service import registrar_movimiento
+from types import SimpleNamespace
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 
@@ -95,6 +96,7 @@ def crear_venta(data: dict):
         raise ValueError("La venta debe contener al menos un producto")
 
     acumulado_por_producto = {}
+
     for detalle in detalles_recibidos:
         producto_id = detalle["producto_id"]
         cantidad = detalle["cantidad"]
@@ -102,25 +104,40 @@ def crear_venta(data: dict):
         if cantidad <= 0:
             raise ValueError("La cantidad debe ser mayor a 0")
 
-        acumulado_por_producto[producto_id] = acumulado_por_producto.get(producto_id, 0) + cantidad
+        acumulado_por_producto[producto_id] = (
+            acumulado_por_producto.get(producto_id, 0) + cantidad
+        )
 
-    mapa_productos = {producto["id"]: producto for producto in productos}
+    mapa_productos = {
+        producto["id"]: producto
+        for producto in productos
+    }
 
     for producto_id, cantidad_total in acumulado_por_producto.items():
+
         producto = mapa_productos.get(producto_id)
 
         if not producto:
-            raise ValueError(f"Producto con ID {producto_id} no encontrado")
+            raise ValueError(
+                f"Producto con ID {producto_id} no encontrado"
+            )
 
         if cantidad_total > producto["stock"]:
-            raise ValueError(f"Stock insuficiente para el producto '{producto['nombre']}'")
+            raise ValueError(
+                f"Stock insuficiente para el producto '{producto['nombre']}'"
+            )
 
     detalles_guardados = []
     total_venta = 0.0
 
     for detalle in detalles_recibidos:
+
         producto = mapa_productos[detalle["producto_id"]]
-        subtotal = float(producto["precio"]) * detalle["cantidad"]
+
+        subtotal = (
+            float(producto["precio"])
+            * detalle["cantidad"]
+        )
 
         detalles_guardados.append({
             "producto_id": producto["id"],
@@ -133,11 +150,30 @@ def crear_venta(data: dict):
         total_venta += subtotal
 
     for producto_id, cantidad_total in acumulado_por_producto.items():
+
         mapa_productos[producto_id]["stock"] -= cantidad_total
 
-    guardar_productos(list(mapa_productos.values()))
+        movimiento = SimpleNamespace(
+            producto_id=producto_id,
+            tipo=SimpleNamespace(value="Salida"),
+            cantidad=cantidad_total,
+            motivo="Venta realizada",
+            usuario="Sistema"
+        )
 
-    nuevo_id = max([venta["id"] for venta in ventas], default=0) + 1
+        registrar_movimiento(
+            movimiento,
+            actualizar_stock=False
+        )
+
+    guardar_productos(
+        list(mapa_productos.values())
+    )
+
+    nuevo_id = max(
+        [venta["id"] for venta in ventas],
+        default=0
+    ) + 1
 
     nueva_venta = {
         "id": nuevo_id,
@@ -152,17 +188,21 @@ def crear_venta(data: dict):
     }
 
     ventas.append(nueva_venta)
+
     guardar_ventas(ventas)
 
     return nueva_venta
 
 
 def anular_venta(venta_id: int):
+
     ventas = leer_ventas()
     productos = leer_productos()
 
     venta_encontrada = None
+
     for venta in ventas:
+
         if venta["id"] == venta_id:
             venta_encontrada = venta
             break
@@ -173,16 +213,40 @@ def anular_venta(venta_id: int):
     if venta_encontrada["estado"] == "Anulada":
         raise ValueError("La venta ya fue anulada")
 
-    mapa_productos = {producto["id"]: producto for producto in productos}
+    mapa_productos = {
+        producto["id"]: producto
+        for producto in productos
+    }
 
     for detalle in venta_encontrada["detalles"]:
-        producto = mapa_productos.get(detalle["producto_id"])
+
+        producto = mapa_productos.get(
+            detalle["producto_id"]
+        )
+
         if producto:
+
             producto["stock"] += detalle["cantidad"]
+
+            movimiento = SimpleNamespace(
+                producto_id=detalle["producto_id"],
+                tipo=SimpleNamespace(value="Ingreso"),
+                cantidad=detalle["cantidad"],
+                motivo="Anulación de venta",
+                usuario="Sistema"
+            )
+
+            registrar_movimiento(
+                movimiento,
+                actualizar_stock=False
+            )
 
     venta_encontrada["estado"] = "Anulada"
 
-    guardar_productos(list(mapa_productos.values()))
+    guardar_productos(
+        list(mapa_productos.values())
+    )
+
     guardar_ventas(ventas)
 
     return venta_encontrada
