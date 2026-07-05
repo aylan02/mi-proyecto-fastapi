@@ -4,8 +4,118 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CosmeLogix</title>
-    <link rel="stylesheet" href="/static/css/styles.css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <link rel="stylesheet" href="/static/css/styles.css" />
+
+    <style>
+        :root {
+            --bg-body: #F3F4F6;       
+            --surface: #FFFFFF;       
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background-color: var(--bg-body);
+        }
+
+        /* Topbar: Fondo oscuro elegante para que resalte tu texto original */
+        .topbar {
+            background: #1F2937 !important; 
+            color: #FFFFFF !important; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Efectos hover para los botones del menú lateral */
+        .nav-link {
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .nav-link i {
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Tarjetas y paneles estilo premium */
+        .summary-card, .panel {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 24px;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .summary-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Estilizado moderno de inputs y selects */
+        .field input, .field select {
+            border-radius: var(--radius-md);
+            border: 1px solid #E5E7EB;
+            background: #F9FAFB;
+            transition: var(--transition);
+            padding: 10px 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .field input:focus, .field select:focus {
+            outline: none;
+            border-color: #333;
+            box-shadow: 0 0 0 3px rgba(51,51,51,0.1);
+            background: white;
+        }
+        
+        /* Botones estilizados */
+        .btn {
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+    </style>
 </head>
 <body>
     <div class="app-shell">
@@ -63,11 +173,9 @@
                     <p id="page-subtitle" class="subtitle">Panel general del sistema CosmeLogix.</p>
                 </div>
                 <div class="topbar-actions">
-                    <span class="pill">Belleza • Inventario • Ventas • Logística</span>
-                    <span id="usuario-actual" class="pill"></span>
-                    <button class="btn btn-light" id="btn-logout" type="button">
-                        <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
-                    </button>
+                    <span class="pill" style="background: rgba(255,255,255,0.1); border:none; color:white;">Belleza • Inventario • Ventas • Logística</span>
+                    <span id="usuario-actual" class="pill" style="background: rgba(255,255,255,0.1); border:none; color:white;"></span>
+                    <button class="btn btn-light" id="btn-logout" type="button" style="color: #333;">Cerrar sesión</button>
                 </div>
             </header>
 
