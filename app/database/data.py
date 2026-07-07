@@ -4,6 +4,7 @@ import os
 ARCHIVO_PRODUCTOS = "productos.json"
 ARCHIVO_HISTORIAL = "historial.json"
 ARCHIVO_MOVIMIENTOS = "movimientos_inventario.json"
+ARCHIVO_CARRITO = "carrito.json"
 
 productos_iniciales = [
     {
@@ -49,5 +50,10 @@ productos = cargar_datos(ARCHIVO_PRODUCTOS, productos_iniciales)
 historial_envios = cargar_datos(ARCHIVO_HISTORIAL, [])
 movimientos_inventario = cargar_datos(
     ARCHIVO_MOVIMIENTOS,
+    []
+)
+
+carrito = cargar_datos(
+    ARCHIVO_CARRITO,
     []
 )

@@ -14,6 +14,8 @@ from app.routes.usuarios import router as usuarios_router
 from app.routes.roles import router as roles_router
 from app.routes.reportes import router as reportes_router
 from app.routes.pedidos import router as pedidos_router
+from app.routes.carritos import router as carrito_router
+from app.routes import rutas
 
 app = FastAPI(
     title="API de Envíos de Cosméticos",
@@ -24,9 +26,6 @@ app = FastAPI(
 app.add_middleware(SessionMiddleware, secret_key="cosmelogix_secreto_2026")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get("/")
-def inicio():
-    return {"mensaje": "Bienvenido a la API de Envíos de Cosméticos"}
 
 app.include_router(health_router)
 app.include_router(productos_router)
@@ -40,3 +39,5 @@ app.include_router(usuarios_router)
 app.include_router(roles_router)
 app.include_router(reportes_router)
 app.include_router(pedidos_router)
+app.include_router(carrito_router)
+app.include_router(rutas.router)

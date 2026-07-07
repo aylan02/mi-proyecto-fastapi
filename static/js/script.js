@@ -1,16 +1,6 @@
 let currentUser = null;
 const API = window.location.origin;
 
-const STORAGE_KEYS = {
-    clientes: "cosmelogix_clientes",
-    ventas: "cosmelogix_ventas",
-    rutas: "cosmelogix_rutas",
-    usuarios: "cosmelogix_usuarios",
-    roles: "cosmelogix_roles",
-    movimientos: "cosmelogix_movimientos",
-    envios_meta: "cosmelogix_envios_meta"
-};
-
 const state = {
     productos: [],
     envios: [],
@@ -19,8 +9,7 @@ const state = {
     rutas: [],
     usuarios: [],
     roles: [],
-    movimientos: [],    
-    enviosMeta: []
+    movimientos: []
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -88,80 +77,20 @@ function showSection(name) {
 
 function initLocalData() {
     state.clientes = [];
-
-    state.ventas = [];
-    state.rutas = readStorage(STORAGE_KEYS.rutas, [
-        { id: 1, origen: "Bodega Central", destino: "Iquique Centro", distancia: "12 km", estado: "Activa" },
-        { id: 2, origen: "Bodega Central", destino: "Alto Hospicio", distancia: "18 km", estado: "Activa" }
-    ]);
-
-    state.roles = readStorage(STORAGE_KEYS.roles, [
-        {
-            id: 1,
-            nombre: "Administrador",
-            descripcion: "Control total del sistema",
-            estado: "Activo",
-            permisos: ["productos", "inventario", "clientes", "ventas", "envios", "reportes", "usuarios"]
-        },
-        {
-            id: 2,
-            nombre: "Ejecutivo Comercial",
-            descripcion: "Ventas y clientes",
-            estado: "Activo",
-            permisos: ["clientes", "ventas", "reportes"]
-        },
-        {
-            id: 3,
-            nombre: "Encargado de Inventario",
-            descripcion: "Control de stock",
-            estado: "Activo",
-            permisos: ["productos", "inventario"]
-        },
-        {
-            id: 4,
-            nombre: "Coordinador Logístico",
-            descripcion: "Despachos y seguimiento",
-            estado: "Activo",
-            permisos: ["envios", "reportes"]
-        }
-    ]);
-
-    state.usuarios = readStorage(STORAGE_KEYS.usuarios, [
-        {
-            id: 1,
-            username: "admin",
-            nombre: "Administrador General",
-            correo: "admin@cosmelogix.cl",
-            password: "1234",
-            rol: "Administrador",
-            estado: "Activo"
-        },
-        {
-            id: 2,
-            username: "ejecutivo",
-            nombre: "Ejecutivo Comercial",
-            correo: "ventas@cosmelogix.cl",
-            password: "1234",
-            rol: "Ejecutivo Comercial",
-            estado: "Activo"
-        }
-    ]);
-
-    state.movimientos = readStorage(STORAGE_KEYS.movimientos, []);
-    state.enviosMeta = readStorage(STORAGE_KEYS.envios_meta, []);
-}
-
-function readStorage(key, fallback) {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-}
-
-function saveStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    state.ventas = []
 }
 
 async function loadRemoteData() {
-    await Promise.all([loadProductos(), loadEnvios(), loadClientes(), loadVentas()]);
+ await Promise.all([
+    loadProductos(),
+    loadEnvios(),
+    loadClientes(),
+    loadVentas(),
+    loadUsuarios(),
+    loadRoles(),
+    loadRutas(),
+    loadMovimientos()
+]);
 }
 
 async function loadProductos() {
@@ -207,6 +136,57 @@ async function loadVentas() {
         showAlert("No se pudieron cargar las ventas desde la API.", "error");
     }
 }
+
+async function loadUsuarios() {
+    try {
+        const res = await fetch(`${API}/usuarios`);
+        const data = await res.json();
+        state.usuarios = Array.isArray(data) ? data : [];
+    } catch (error) {
+        state.usuarios = [];
+        showAlert("No se pudieron cargar los usuarios desde la API.", "error");
+    }
+}
+
+async function loadRoles() {
+    try {
+        const res = await fetch(`${API}/roles`);
+        const data = await res.json();
+        state.roles = Array.isArray(data) ? data : [];
+    } catch (error) {
+        state.roles = [];
+        showAlert("No se pudieron cargar los roles desde la API.", "error");
+    }
+}
+
+async function loadRutas() {
+    try {
+        const res = await fetch(`${API}/rutas`);
+        const data = await res.json();
+        state.rutas = Array.isArray(data) ? data : [];
+    } catch (error) {
+        state.rutas = [];
+        showAlert("No se pudieron cargar las rutas desde la API.", "error");
+    }
+}
+
+async function registrarMovimiento(datos) {
+    const res = await fetch(`${API}/inventario`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(datos)
+    });
+
+    if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.detail || "No se pudo registrar el movimiento.");
+    }
+
+    return await res.json();
+}
+
 
 function initEvents() {
     document.getElementById("btn-refresh-dashboard").addEventListener("click", async () => {
@@ -547,14 +527,18 @@ async function submitIngresoInventario(event) {
 
     await updateProductStock(producto, producto.stock + cantidad);
 
-    state.movimientos.unshift({
-        fecha: new Date().toLocaleString(),
+    try {
+    await registrarMovimiento({
+        producto_id: producto.id,
         tipo: "Ingreso",
-        producto: producto.nombre,
-        cantidad: `+${cantidad}`,
-        detalle: `${documento || "Sin documento"} • ${proveedor || "Sin proveedor"}`
-    });
-    saveStorage(STORAGE_KEYS.movimientos, state.movimientos);
+        cantidad: cantidad,
+        motivo: `${documento || "Sin documento"} • ${proveedor || "Sin proveedor"}`,
+        usuario: currentUser?.nombre || "Sistema"
+        });
+    } catch (error) {
+        showAlert(error.message, "error");
+        return;
+    }
 
     event.target.reset();
     await loadProductos();
@@ -586,14 +570,18 @@ async function submitSalidaInventario(event) {
 
     await updateProductStock(producto, producto.stock - cantidad);
 
-    state.movimientos.unshift({
-        fecha: new Date().toLocaleString(),
+    try {
+    await registrarMovimiento({
+        producto_id: producto.id,
         tipo: "Salida",
-        producto: producto.nombre,
-        cantidad: `-${cantidad}`,
-        detalle: `${motivo} • ${observacion || "Sin observación"}`
-    });
-    saveStorage(STORAGE_KEYS.movimientos, state.movimientos);
+        cantidad: cantidad,
+        motivo: `${motivo} • ${observacion || "Sin observación"}`,
+        usuario: currentUser?.nombre || "Sistema"
+        });
+    } catch (error) {
+        showAlert(error.message, "error");
+        return;
+    }
 
     event.target.reset();
     await loadProductos();
@@ -620,14 +608,18 @@ async function submitAjusteInventario(event) {
     const variacion = stockReal - producto.stock;
     await updateProductStock(producto, stockReal);
 
-    state.movimientos.unshift({
-        fecha: new Date().toLocaleString(),
+    try {
+    await registrarMovimiento({
+        producto_id: producto.id,
         tipo: "Ajuste",
-        producto: producto.nombre,
-        cantidad: variacion >= 0 ? `+${variacion}` : `${variacion}`,
-        detalle: justificacion || "Ajuste manual"
-    });
-    saveStorage(STORAGE_KEYS.movimientos, state.movimientos);
+        cantidad: Math.abs(variacion),
+        motivo: justificacion || "Ajuste manual",
+        usuario: currentUser?.nombre || "Sistema"
+        });
+    } catch (error) {
+        showAlert(error.message, "error");
+        return;
+    }
 
     event.target.reset();
     await loadProductos();
@@ -687,15 +679,19 @@ function renderInventario() {
         </tr>
     `).join("") || `<tr><td colspan="3" class="mini-note">No hay productos con stock bajo.</td></tr>`;
 
-    document.getElementById("tbody-movimientos").innerHTML = state.movimientos.map(m => `
-        <tr>
-            <td>${m.fecha}</td>
-            <td>${m.tipo}</td>
-            <td>${m.producto}</td>
-            <td>${m.cantidad}</td>
-            <td>${m.detalle}</td>
-        </tr>
-    `).join("") || `<tr><td colspan="5" class="mini-note">No hay movimientos de inventario registrados.</td></tr>`;
+    document.getElementById("tbody-movimientos").innerHTML = state.movimientos.map(m => {
+        const producto = state.productos.find(p => Number(p.id) === Number(m.producto_id));
+
+        return `
+            <tr>
+                <td>${new Date(m.fecha).toLocaleString()}</td>
+                <td>${m.tipo}</td>
+                <td>${producto ? producto.nombre : "Producto eliminado"}</td>
+                <td>${m.cantidad}</td>
+                <td>${m.motivo}</td>
+            </tr>
+        `;
+    }).join("") || `<tr><td colspan="5" class="mini-note">No hay movimientos de inventario registrados.</td></tr>`;
 }
 
 async function submitCliente(event) {
@@ -985,11 +981,15 @@ async function submitEnvio(event) {
     }
 
     const payload = {
+        venta_id: venta.id,
         producto_id: venta.producto_id,
         cantidad: venta.cantidad,
         destinatario: venta.cliente_nombre,
         direccion,
-        observacion: `Venta #${venta.id} | Ruta: ${ruta ? ruta.origen + " → " + ruta.destino : "Sin ruta"} | Vehículo: ${vehiculo || "Sin vehículo"} | Fecha: ${fecha} | ${observacion}`.trim()
+        observacion: `Venta #${venta.id} | ${observacion}`.trim(),
+        ruta: ruta ? `${ruta.origen} → ${ruta.destino}` : "",
+        vehiculo: vehiculo || "",
+        fecha_programada: fecha || ""
     };
 
     try {
@@ -1009,18 +1009,10 @@ async function submitEnvio(event) {
         const createdId = data.id_envio || data.id || null;
 
         if (createdId) {
-            state.enviosMeta.push({
-                id_envio: createdId,
-                venta_id: venta.id,
-                ruta: ruta ? `${ruta.origen} → ${ruta.destino}` : "",
-                vehiculo: vehiculo || "",
-                fecha_programada: fecha || ""
-            });
-            saveStorage(STORAGE_KEYS.envios_meta, state.enviosMeta);
+            
         }
 
         venta.envio_creado = true;
-        saveStorage(STORAGE_KEYS.ventas, state.ventas);
 
         event.target.reset();
         await loadEnvios();
@@ -1038,7 +1030,6 @@ function renderEnvios() {
     populateRutasSelect();
 
     document.getElementById("tbody-envios").innerHTML = state.envios.map(e => {
-        const meta = state.enviosMeta.find(m => Number(m.id_envio) === Number(e.id_envio));
         const statusSelect = e.id_envio ? `
             <select id="estado-envio-${e.id_envio}">
                 ${["Pendiente", "En preparación", "Despachado", "En tránsito", "Entregado", "Cancelado"].map(estado => `
@@ -1050,16 +1041,16 @@ function renderEnvios() {
         return `
             <tr>
                 <td>${e.id_envio ?? "-"}</td>
-                <td>${meta?.venta_id ? "#" + meta.venta_id : "-"}</td>
+                <td>${e.venta_id ? "#" + e.venta_id : "-"}</td>
                 <td>${e.destinatario ?? "-"}</td>
                 <td>${e.direccion ?? "-"}</td>
-                <td>${meta?.ruta || "-"}</td>
-                <td>${meta?.vehiculo || "-"}</td>
+                <td>${e.ruta || "-"}</td>
+                <td>${e.vehiculo || "-"}</td>
                 <td>
                     <div class="mini-note">${badgeEstadoHTML(e.estado || "Pendiente")}</div>
                     ${statusSelect}
                 </td>
-                <td>${extractFechaFromEnvio(e, meta)}</td>
+                <td>${e.fecha_programada || e.fecha_envio || "-"}</td>
                 <td>
                     <div class="actions">
                         ${e.id_envio ? `<button class="btn btn-light btn-sm" onclick="changeEnvioStatus(${e.id_envio})">Actualizar</button>` : ""}
@@ -1116,9 +1107,6 @@ async function deleteEnvio(id) {
             return;
         }
 
-        state.enviosMeta = state.enviosMeta.filter(m => Number(m.id_envio) !== Number(id));
-        saveStorage(STORAGE_KEYS.envios_meta, state.enviosMeta);
-
         await loadEnvios();
         renderEnvios();
         renderDashboard();
@@ -1129,36 +1117,61 @@ async function deleteEnvio(id) {
     }
 }
 
-function extractFechaFromEnvio(envio, meta) {
-    return envio.fecha_envio || envio.fecha || meta?.fecha_programada || "--";
-}
-
-function submitRuta(event) {
+async function submitRuta(event) {
     event.preventDefault();
 
-    const editId = Number(document.getElementById("ruta-id-edit").value);
-    const ruta = {
-        id: editId || nextId(state.rutas),
+    const editId = document.getElementById("ruta-id-edit").value;
+
+    const payload = {
         origen: document.getElementById("ruta-origen").value.trim(),
         destino: document.getElementById("ruta-destino").value.trim(),
         distancia: document.getElementById("ruta-distancia").value.trim(),
         estado: document.getElementById("ruta-estado").value
     };
 
-    if (editId) {
-        const idx = state.rutas.findIndex(r => r.id === editId);
-        state.rutas[idx] = ruta;
-        showAlert("Ruta actualizada correctamente.");
-    } else {
-        state.rutas.unshift(ruta);
-        showAlert("Ruta registrada correctamente.");
-    }
+    try {
+        const url = editId ? `${API}/rutas/${editId}` : `${API}/rutas`;
+        const method = editId ? "PUT" : "POST";
 
-    saveStorage(STORAGE_KEYS.rutas, state.rutas);
-    document.getElementById("form-ruta").reset();
-    document.getElementById("ruta-id-edit").value = "";
-    renderRutas();
-    renderEnvios();
+        const res = await fetch(url, {
+            method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            showAlert(data.detail || "No se pudo guardar la ruta.", "error");
+            return;
+        }
+
+        document.getElementById("form-ruta").reset();
+        document.getElementById("ruta-id-edit").value = "";
+
+        await loadRutas();
+
+        renderRutas();
+        renderEnvios();
+
+        showAlert(editId ? "Ruta actualizada correctamente." : "Ruta registrada correctamente.");
+
+    } catch (error) {
+        showAlert("Error de conexión con la API.", "error");
+    }
+}
+
+async function loadMovimientos() {
+    try {
+        const res = await fetch(`${API}/inventario`);
+        const data = await res.json();
+        state.movimientos = Array.isArray(data) ? data : [];
+    } catch (error) {
+        state.movimientos = [];
+        showAlert("No se pudieron cargar los movimientos.", "error");
+    }
 }
 
 function renderRutas() {
@@ -1183,20 +1196,44 @@ function renderRutas() {
 
 function editRuta(id) {
     const ruta = state.rutas.find(r => r.id === id);
+
+    if (!ruta) return;
+
     document.getElementById("ruta-id-edit").value = ruta.id;
     document.getElementById("ruta-origen").value = ruta.origen;
     document.getElementById("ruta-destino").value = ruta.destino;
     document.getElementById("ruta-distancia").value = ruta.distancia;
     document.getElementById("ruta-estado").value = ruta.estado;
+
     activateSection("rutas");
 }
 
-function toggleRuta(id) {
-    const ruta = state.rutas.find(r => r.id === id);
-    ruta.estado = ruta.estado === "Activa" ? "Inactiva" : "Activa";
-    saveStorage(STORAGE_KEYS.rutas, state.rutas);
-    renderRutas();
-    renderEnvios();
+async function toggleRuta(id) {
+
+    try {
+
+        const res = await fetch(`${API}/rutas/${id}`, {
+            method: "DELETE"
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            showAlert(data.detail || "No se pudo desactivar la ruta.", "error");
+            return;
+        }
+
+        await loadRutas();
+
+        renderRutas();
+        renderEnvios();
+
+        showAlert("Ruta desactivada correctamente.");
+
+    } catch (error) {
+        showAlert("Error de conexión con la API.", "error");
+    }
+
 }
 
 function populateRutasSelect() {
@@ -1209,12 +1246,12 @@ function populateRutasSelect() {
     if (current) select.value = current;
 }
 
-function submitUsuario(event) {
+async function submitUsuario(event) {
     event.preventDefault();
 
-    const editId = Number(document.getElementById("usuario-id-edit").value);
-    const usuario = {
-        id: editId || nextId(state.usuarios),
+    const editId = document.getElementById("usuario-id-edit").value;
+
+    const payload = {
         username: document.getElementById("usuario-username").value.trim(),
         nombre: document.getElementById("usuario-nombre").value.trim(),
         correo: document.getElementById("usuario-correo").value.trim(),
@@ -1223,21 +1260,41 @@ function submitUsuario(event) {
         estado: document.getElementById("usuario-estado").value
     };
 
-    if (editId) {
-        const idx = state.usuarios.findIndex(u => u.id === editId);
-        state.usuarios[idx] = usuario;
-        showAlert("Usuario actualizado correctamente.");
-    } else {
-        state.usuarios.unshift(usuario);
-        showAlert("Usuario registrado correctamente.");
-    }
+    try {
+        const url = editId
+            ? `${API}/usuarios/${editId}`
+            : `${API}/usuarios`;
 
-    saveStorage(STORAGE_KEYS.usuarios, state.usuarios);
-    document.getElementById("form-usuario").reset();
-    document.getElementById("usuario-id-edit").value = "";
-    renderUsuarios();
-    renderRoles();
-    renderPermisos();
+        const method = editId ? "PUT" : "POST";
+
+        const res = await fetch(url, {
+            method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            showAlert(data.detail || "No se pudo guardar el usuario.", "error");
+            return;
+        }
+
+        showAlert(editId
+            ? "Usuario actualizado correctamente."
+            : "Usuario registrado correctamente.");
+
+        document.getElementById("form-usuario").reset();
+        document.getElementById("usuario-id-edit").value = "";
+
+        await loadUsuarios();
+        renderUsuarios();
+
+    } catch (error) {
+        showAlert("Error de conexión con la API.", "error");
+    }
 }
 
 function renderUsuarios() {
@@ -1271,52 +1328,105 @@ function populateRolesForUsers() {
     if (current) select.value = current;
 }
 
-function editUsuario(id) {
-    const u = state.usuarios.find(x => x.id === id);
-    document.getElementById("usuario-id-edit").value = u.id;
-    document.getElementById("usuario-username").value = u.username;
-    document.getElementById("usuario-nombre").value = u.nombre;
-    document.getElementById("usuario-correo").value = u.correo;
-    document.getElementById("usuario-password").value = u.password;
-    document.getElementById("usuario-rol").value = u.rol;
-    document.getElementById("usuario-estado").value = u.estado;
-    activateSection("usuarios");
+async function editUsuario(id) {
+    try {
+        const res = await fetch(`${API}/usuarios/${id}`);
+        const u = await res.json();
+
+        if (!res.ok) {
+            showAlert(u.detail || "No se pudo obtener el usuario.", "error");
+            return;
+        }
+
+        document.getElementById("usuario-id-edit").value = u.id;
+        document.getElementById("usuario-username").value = u.username;
+        document.getElementById("usuario-nombre").value = u.nombre;
+        document.getElementById("usuario-correo").value = u.correo;
+        document.getElementById("usuario-password").value = "";
+        document.getElementById("usuario-rol").value = u.rol;
+        document.getElementById("usuario-estado").value = u.estado;
+
+        activateSection("usuarios");
+
+    } catch (error) {
+        showAlert("Error al cargar el usuario.", "error");
+    }
 }
 
-function toggleUsuario(id) {
-    const usuario = state.usuarios.find(u => u.id === id);
-    usuario.estado = usuario.estado === "Activo" ? "Inactivo" : "Activo";
-    saveStorage(STORAGE_KEYS.usuarios, state.usuarios);
-    renderUsuarios();
+async function toggleUsuario(id) {
+    const confirmar = confirm("¿Deseas desactivar este usuario?");
+
+    if (!confirmar) return;
+
+    try {
+        const res = await fetch(`${API}/usuarios/${id}`, {
+            method: "DELETE"
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            showAlert(data.detail || "No se pudo desactivar el usuario.", "error");
+            return;
+        }
+
+        showAlert("Usuario desactivado correctamente.");
+
+        await loadUsuarios();
+        renderUsuarios();
+
+    } catch (error) {
+        showAlert("Error de conexión con la API.", "error");
+    }
 }
 
-function submitRol(event) {
+async function submitRol(event) {
     event.preventDefault();
 
-    const editId = Number(document.getElementById("rol-id-edit").value);
-    const rol = {
-        id: editId || nextId(state.roles),
+    const editId = document.getElementById("rol-id-edit").value;
+
+    const payload = {
         nombre: document.getElementById("rol-nombre").value.trim(),
         descripcion: document.getElementById("rol-descripcion").value.trim(),
         estado: document.getElementById("rol-estado").value,
-        permisos: editId ? (state.roles.find(r => r.id === editId)?.permisos || []) : []
+        permisos: []
     };
 
-    if (editId) {
-        const idx = state.roles.findIndex(r => r.id === editId);
-        state.roles[idx] = rol;
-        showAlert("Rol actualizado correctamente.");
-    } else {
-        state.roles.unshift(rol);
-        showAlert("Rol registrado correctamente.");
-    }
+    try {
+        const url = editId ? `${API}/roles/${editId}` : `${API}/roles`;
+        const method = editId ? "PUT" : "POST";
 
-    saveStorage(STORAGE_KEYS.roles, state.roles);
-    document.getElementById("form-rol").reset();
-    document.getElementById("rol-id-edit").value = "";
-    renderRoles();
-    renderPermisos();
-    renderUsuarios();
+        const res = await fetch(url, {
+            method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        console.log(data);
+
+        if (!res.ok) {
+            showAlert(JSON.stringify(data), "error");
+            return;
+        }
+
+        document.getElementById("form-rol").reset();
+        document.getElementById("rol-id-edit").value = "";
+
+        await loadRoles();
+
+        renderRoles();
+        renderPermisos();
+        renderUsuarios();
+
+        showAlert(editId ? "Rol actualizado correctamente." : "Rol registrado correctamente.");
+
+    } catch (error) {
+        showAlert("Error de conexión con la API.", "error");
+    }
 }
 
 function renderRoles() {
@@ -1353,32 +1463,107 @@ function renderPermisos() {
     `).join("") || `<tr><td colspan="8" class="mini-note">No hay roles configurados.</td></tr>`;
 }
 
-function togglePermiso(roleId, module, checked) {
+async function togglePermiso(roleId, module, checked) {
+
     const rol = state.roles.find(r => r.id === roleId);
+
     if (!rol) return;
 
-    if (checked && !rol.permisos.includes(module)) rol.permisos.push(module);
-    if (!checked) rol.permisos = rol.permisos.filter(p => p !== module);
+    let permisos = [...rol.permisos];
 
-    saveStorage(STORAGE_KEYS.roles, state.roles);
-    renderPermisos();
+    if (checked && !permisos.includes(module)) {
+        permisos.push(module);
+    }
+
+    if (!checked) {
+        permisos = permisos.filter(p => p !== module);
+    }
+
+    const payload = {
+        nombre: rol.nombre,
+        descripcion: rol.descripcion,
+        estado: rol.estado,
+        permisos: permisos
+    };
+
+    try {
+
+        const res = await fetch(`${API}/roles/${roleId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            showAlert(data.detail || "No se pudo actualizar el permiso.", "error");
+            return;
+        }
+
+        await loadRoles();
+
+        renderRoles();
+        renderPermisos();
+
+        showAlert("Permisos actualizados correctamente.");
+
+    } catch (error) {
+        showAlert("Error de conexión con la API.", "error");
+    }
+
 }
 
-function editRol(id) {
-    const r = state.roles.find(x => x.id === id);
-    document.getElementById("rol-id-edit").value = r.id;
-    document.getElementById("rol-nombre").value = r.nombre;
-    document.getElementById("rol-descripcion").value = r.descripcion;
-    document.getElementById("rol-estado").value = r.estado;
-    activateSection("roles");
+async function editRol(id) {
+    try {
+        const res = await fetch(`${API}/roles/${id}`);
+        const r = await res.json();
+
+        if (!res.ok) {
+            showAlert(r.detail || "No se pudo obtener el rol.", "error");
+            return;
+        }
+
+        document.getElementById("rol-id-edit").value = r.id;
+        document.getElementById("rol-nombre").value = r.nombre;
+        document.getElementById("rol-descripcion").value = r.descripcion;
+        document.getElementById("rol-estado").value = r.estado;
+
+        activateSection("roles");
+
+    } catch (error) {
+        showAlert("Error al cargar el rol.", "error");
+    }
 }
 
-function toggleRol(id) {
-    const rol = state.roles.find(r => r.id === id);
-    rol.estado = rol.estado === "Activo" ? "Inactivo" : "Activo";
-    saveStorage(STORAGE_KEYS.roles, state.roles);
-    renderRoles();
-    renderUsuarios();
+async function toggleRol(id) {
+    const confirmar = confirm("¿Deseas desactivar este rol?");
+
+    if (!confirmar) return;
+
+    try {
+        const res = await fetch(`${API}/roles/${id}`, {
+            method: "DELETE"
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            showAlert(data.detail || "No se pudo desactivar el rol.", "error");
+            return;
+        }
+
+        showAlert("Rol desactivado correctamente.");
+
+        await loadRoles();
+        renderRoles();
+        renderUsuarios();
+
+    } catch (error) {
+        showAlert("Error de conexión con la API.", "error");
+    }
 }
 
 function renderReportes() {
@@ -1421,7 +1606,7 @@ function renderReportes() {
             <td>#${e.id_envio ?? "-"}</td>
             <td>${e.destinatario ?? "-"}</td>
             <td>${badgeEstadoHTML(e.estado ?? "Pendiente")}</td>
-            <td>${extractFechaFromEnvio(e)}</td>
+            <td>${e.fecha_programada || e.fecha_envio || "-"}</td>
         </tr>
     `).join("") || `<tr><td colspan="4" class="mini-note">Sin envíos registrados.</td></tr>`;
 }
@@ -1441,22 +1626,16 @@ async function submitTracking(event) {
         return;
     }
 
-    const meta = state.enviosMeta.find(m => Number(m.id_envio) === id);
-
     document.getElementById("tracking-result").innerHTML = `
         <p><strong>Envío #${envio.id_envio}</strong></p>
         <p><strong>Destinatario:</strong> ${envio.destinatario ?? "-"}</p>
         <p><strong>Producto:</strong> ${envio.nombre_producto ?? "-"}</p>
         <p><strong>Dirección:</strong> ${envio.direccion ?? "-"}</p>
-        <p><strong>Ruta:</strong> ${meta?.ruta || "-"}</p>
-        <p><strong>Vehículo:</strong> ${meta?.vehiculo || "-"}</p>
-        <p><strong>Fecha:</strong> ${extractFechaFromEnvio(envio, meta)}</p>
+        <p><strong>Ruta:</strong> ${envio.ruta || "-"}</p>
+        <p><strong>Vehículo:</strong> ${envio.vehiculo || "-"}</p>
+        <p><strong>Fecha:</strong> ${envio.fecha_programada || envio.fecha_envio || "-"}</p>
         <p><strong>Estado actual:</strong> ${badgeEstadoHTML(envio.estado ?? "Pendiente")}</p>
     `;
-}
-
-function nextId(collection) {
-    return collection.length ? Math.max(...collection.map(item => Number(item.id))) + 1 : 1;
 }
 
 function activateSection(name) {
@@ -1469,14 +1648,14 @@ async function loadSessionUser() {
         const data = await res.json();
 
         if (!res.ok) {
-            window.location.href = "/login";
+            window.location.href = "/admin/login";
             return false;
         }
 
         currentUser = data.user;
         return true;
     } catch (error) {
-        window.location.href = "/login";
+        window.location.href = "/admin/login";
         return false;
     }
 }
@@ -1492,7 +1671,7 @@ function bindAuthControls() {
     if (logoutBtn) {
         logoutBtn.addEventListener("click", async () => {
             await fetch(`${API}/auth/logout`, { method: "POST" });
-            window.location.href = "/login";
+            window.location.href = "/admin/login";
         });
     }
 }

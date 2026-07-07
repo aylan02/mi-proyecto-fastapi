@@ -16,5 +16,50 @@
         "motivo": "Venta realizada",
         "usuario": "Sistema",
         "fecha": "2026-07-03T03:47:39.034873"
+    },
+    {
+        "id": 3,
+        "producto_id": 1,
+        "tipo": "Ingreso",
+        "cantidad": 1,
+        "motivo": "factura • fer",
+        "usuario": "Administrador General",
+        "fecha": "2026-07-04T18:56:45.450796"
+    },
+    {
+        "id": 4,
+        "producto_id": 1,
+        "tipo": "Ingreso",
+        "cantidad": 2,
+        "motivo": "factura • fer",
+        "usuario": "Administrador General",
+        "fecha": "2026-07-04T19:00:17.778291"
+    },
+    {
+        "id": 5,
+        "producto_id": 1,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Merma • tarde",
+        "usuario": "Administrador General",
+        "fecha": "2026-07-04T19:31:15.511974"
+    },
+    {
+        "id": 6,
+        "producto_id": 2,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Merma • tarde",
+        "usuario": "Administrador General",
+        "fecha": "2026-07-04T19:32:07.496689"
+    },
+    {
+        "id": 7,
+        "producto_id": 1,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Merma • tarde",
+        "usuario": "Administrador General",
+        "fecha": "2026-07-04T19:33:32.252182"
     }
 ]

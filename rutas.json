@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "origen": "Bodega Central",
+        "destino": "Iquique Centro",
+        "distancia": "12 km",
+        "estado": "Activa"
+    },
+    {
+        "id": 2,
+        "origen": "Bodega Central",
+        "destino": "Alto Hospicio",
+        "distancia": "18 km",
+        "estado": "Activa"
+    }
+]
