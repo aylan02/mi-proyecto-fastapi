@@ -17,6 +17,7 @@ from app.routes.pedidos import router as pedidos_router
 from app.routes.carritos import router as carrito_router
 from app.routes import rutas
 
+
 app = FastAPI(
     title="API de Envíos de Cosméticos",
     description="API para gestionar productos, stock y envíos",
@@ -41,3 +42,4 @@ app.include_router(reportes_router)
 app.include_router(pedidos_router)
 app.include_router(carrito_router)
 app.include_router(rutas.router)
+

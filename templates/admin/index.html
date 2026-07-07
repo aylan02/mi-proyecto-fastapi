@@ -3,11 +3,363 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CosmeLogix</title>
+    <title>CosmeLogix </title>
+    
+    <!-- Fuentes y Iconos Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
     <link rel="stylesheet" href="/static/css/styles.css" />
+
+    <style>
+        /* ==========================================================================
+           1. VARIABLES ORIGINALES + MEJORAS PREMIUM (EL PUM 💥 AZUL)
+           ========================================================================== */
+        :root {
+            /* Tus colores originales */
+            --bg-body: #F3F4F6;       
+            --surface: #FFFFFF;       
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 15px 35px rgba(0, 68, 255, 0.15); /* Sombra con tinte azul */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* El PUM 💥 Azul Fuerte y Celeste Suave */
+            --primary: #0044ff;
+            --primary-hover: #0033cc;
+            --primary-light: #e0f2fe;
+            --primary-glow: rgba(0, 68, 255, 0.3);
+            
+            /* El celeste degradado para la barra lateral */
+            --celeste-gradient: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+
+            /* Textos */
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            overflow: hidden;
+        }
+
+        /* Estructura Base */
+        .app-shell {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* ==========================================================================
+           2. SIDEBAR Y NAVEGACIÓN
+           ========================================================================== */
+        .sidebar {
+            width: 280px;
+            /* Aquí aplicamos el color celeste degradado a la barra lateral */
+            background: var(--celeste-gradient);
+            padding: 24px;
+            box-shadow: 4px 0 25px rgba(0,0,0,0.05);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            border-right: 1px solid #bae6fd;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .brand h1 { font-size: 1.3rem; color: var(--primary); font-weight: 700; }
+        .brand p { font-size: 0.75rem; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;}
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+        }
+
+        .nav-link {
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            border: none;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569; /* Texto un poco más oscuro para que lea bien sobre celeste */
+            cursor: pointer;
+        }
+        
+        .nav-link i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover {
+            transform: translateX(5px);
+            /* Fondo blanco semitransparente para que resalte sobre el celeste */
+            background: rgba(255, 255, 255, 0.6); 
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: #FFFFFF;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .nav-link.active i { animation: bounce 0.5s ease; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* ==========================================================================
+           3. MAIN PANEL Y TOPBAR ORIGINAL
+           ========================================================================== */
+        .main-panel {
+            flex: 1;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Topbar: Fondo oscuro elegante para que resalte tu texto original */
+        .topbar {
+            background: #1F2937 !important; 
+            color: #FFFFFF !important; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 2px; }
+        .topbar .eyebrow { font-size: 0.75rem; text-transform: uppercase; color: #9CA3AF; letter-spacing: 1px; }
+        .topbar .subtitle { font-size: 0.85rem; color: #D1D5DB; }
+
+        .topbar-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* ==========================================================================
+           4. ANIMACIONES Y LAYOUT DE SECCIONES
+           ========================================================================== */
+        .page-section {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-section.active { display: block; }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .section-head h3 { font-size: 1.4rem; color: var(--text-main); }
+        .panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .panel-head h3 { font-size: 1.1rem; color: var(--text-main); }
+
+        .cards-grid { display: grid; gap: 24px; margin-bottom: 30px; }
+        .cards-grid-5 { grid-template-columns: repeat(5, 1fr); }
+        .cards-grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .cards-grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .mt-24 { margin-top: 24px; }
+
+        /* ==========================================================================
+           5. TARJETAS Y PANELES (TU CÓDIGO + ICONOS)
+           ========================================================================== */
+        .summary-card, .panel {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 24px;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .summary-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card span { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+        .summary-card strong { font-size: 2.2rem; color: var(--text-main); font-weight: 700; }
+
+        .summary-card i.bg-icon {
+            position: absolute;
+            right: -10px;
+            bottom: -15px;
+            font-size: 5rem;
+            color: var(--primary-light);
+            opacity: 0.4;
+            transform: rotate(-15deg);
+            transition: var(--transition);
+        }
+        .summary-card:hover i.bg-icon { transform: rotate(0) scale(1.1); color: var(--primary); opacity: 0.1; }
+
+        /* ==========================================================================
+           6. FORMULARIOS
+           ========================================================================== */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-grid.one-col { grid-template-columns: 1fr; }
+        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field-full { grid-column: 1 / -1; }
+        .field label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+
+        .field input, .field select {
+            border-radius: var(--radius-md);
+            border: 1px solid #E5E7EB;
+            background: #F9FAFB;
+            transition: var(--transition);
+            padding: 10px 15px;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .field input:focus, .field select:focus {
+            outline: none;
+            border-color: var(--primary); 
+            box-shadow: 0 0 0 3px var(--primary-glow);
+            background: white;
+        }
+
+        .inline-actions { display: flex; gap: 12px; margin-top: 10px; }
+        .checkbox-wrap label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+
+        /* ==========================================================================
+           7. BOTONES (EL PUM 💥)
+           ========================================================================== */
+        .btn {
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+        
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        .btn-light {
+            background: #FFFFFF;
+            color: var(--text-main);
+            border: 1px solid #E5E7EB;
+        }
+        .btn-light:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* ==========================================================================
+           8. TABLAS PREMIUM
+           ========================================================================== */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid #E5E7EB;
+        }
+
+        table { width: 100%; border-collapse: collapse; background: var(--surface); text-align: left; }
+        
+        thead th {
+            background: #F9FAFB;
+            padding: 14px 16px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 2px solid #E5E7EB;
+        }
+
+        tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #F3F4F6;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover td { background: var(--primary-light); }
+
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: inline-block; }
+        .badge-pendiente { background: #fef08a; color: #854d0e; }
+        .badge-preparacion { background: #fed7aa; color: #9a3412; }
+        .badge-despachado { background: #e9d5ff; color: #6b21a8; }
+        .badge-transito { background: #bfdbfe; color: #1e40af; }
+        .badge-entregado { background: #bbf7d0; color: #166534; }
+        .badge-cancelado { background: #fecaca; color: #991b1b; }
+
+        .status-guide { display: flex; gap: 10px; flex-wrap: wrap; }
+        .mini-note { font-size: 0.8rem; color: var(--text-muted); }
+        .empty-state, .resumen-box { padding: 30px; text-align: center; color: var(--text-muted); border: 1px dashed #cbd5e1; border-radius: var(--radius-md); background: #F9FAFB; }
+        
+        .alert { padding: 15px 20px; border-radius: var(--radius-md); margin-bottom: 20px; background: #dbeafe; color: #1e40af; border-left: 4px solid var(--primary); }
+        .alert.hidden { display: none; }
+    </style>
 </head>
 <body>
     <div class="app-shell">
+        <!-- SIDEBAR CON FONDO CELESTE -->
         <aside class="sidebar">
             <div class="brand">
                 <img src="/static/img/logo-cosmelogix.jpg" alt="Logo CosmeLogix" class="brand-logo">
@@ -18,20 +370,43 @@
             </div>
 
             <nav class="sidebar-nav">
-                <button type="button" class="nav-link active" data-section="dashboard">Dashboard</button>
-                <button type="button" class="nav-link" data-section="productos">Productos</button>
-                <button type="button" class="nav-link" data-section="inventario">Inventario</button>
-                <button type="button" class="nav-link" data-section="clientes">Clientes</button>
-                <button type="button" class="nav-link" data-section="ventas">Ventas</button>
-                <button type="button" class="nav-link" data-section="envios">Envíos</button>
-                <button type="button" class="nav-link" data-section="rutas">Rutas</button>
-                <button type="button" class="nav-link" data-section="usuarios">Usuarios</button>
-                <button type="button" class="nav-link" data-section="roles">Roles y Permisos</button>
-                <button type="button" class="nav-link" data-section="reportes">Reportes</button>
-                <button type="button" class="nav-link" data-section="seguimiento">Seguimiento</button>
+                <button type="button" class="nav-link active" data-section="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </button>
+                <button type="button" class="nav-link" data-section="productos">
+                    <i class="fa-solid fa-spray-can-sparkles"></i> Productos
+                </button>
+                <button type="button" class="nav-link" data-section="inventario">
+                    <i class="fa-solid fa-boxes-stacked"></i> Inventario
+                </button>
+                <button type="button" class="nav-link" data-section="clientes">
+                    <i class="fa-solid fa-users"></i> Clientes
+                </button>
+                <button type="button" class="nav-link" data-section="ventas">
+                    <i class="fa-solid fa-cart-shopping"></i> Ventas
+                </button>
+                <button type="button" class="nav-link" data-section="envios">
+                    <i class="fa-solid fa-truck-fast"></i> Envíos
+                </button>
+                <button type="button" class="nav-link" data-section="rutas">
+                    <i class="fa-solid fa-route"></i> Rutas
+                </button>
+                <button type="button" class="nav-link" data-section="usuarios">
+                    <i class="fa-solid fa-user-shield"></i> Usuarios
+                </button>
+                <button type="button" class="nav-link" data-section="roles">
+                    <i class="fa-solid fa-user-lock"></i> Roles y Permisos
+                </button>
+                <button type="button" class="nav-link" data-section="reportes">
+                    <i class="fa-solid fa-file-invoice"></i> Reportes
+                </button>
+                <button type="button" class="nav-link" data-section="seguimiento">
+                    <i class="fa-solid fa-location-crosshairs"></i> Seguimiento
+                </button>
             </nav>
         </aside>
 
+        <!-- PANEL PRINCIPAL -->
         <main class="main-panel">
             <header class="topbar">
                 <div>
@@ -40,38 +415,46 @@
                     <p id="page-subtitle" class="subtitle">Panel general del sistema CosmeLogix.</p>
                 </div>
                 <div class="topbar-actions">
-                    <span class="pill">Belleza • Inventario • Ventas • Logística</span>
-                    <span id="usuario-actual" class="pill"></span>
-                    <button class="btn btn-light" id="btn-logout" type="button">Cerrar sesión</button>
+                    <span class="pill" style="background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size:0.85rem;">Belleza • Inventario • Ventas • Logística</span>
+                    <span id="usuario-actual" class="pill" style="background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size:0.85rem;"></span>
+                    <button class="btn btn-primary" id="btn-logout" type="button">
+                        <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                    </button>
                 </div>
             </header>
 
             <div id="global-alert" class="alert hidden"></div>
 
+            <!-- 1. DASHBOARD -->
             <section class="page-section active" id="section-dashboard">
                 <div class="section-head">
                     <h3>Resumen general</h3>
-                    <button class="btn btn-light" id="btn-refresh-dashboard">Actualizar resumen</button>
+                    <button class="btn btn-light" id="btn-refresh-dashboard"><i class="fa-solid fa-rotate"></i> Actualizar resumen</button>
                 </div>
 
                 <div class="cards-grid cards-grid-5">
                     <article class="summary-card">
+                        <i class="fa-solid fa-spray-can-sparkles bg-icon"></i>
                         <span>Total productos</span>
                         <strong id="card-total-productos">0</strong>
                     </article>
                     <article class="summary-card">
+                        <i class="fa-solid fa-triangle-exclamation bg-icon" style="color: #fee2e2;"></i>
                         <span>Stock bajo</span>
                         <strong id="card-stock-bajo">0</strong>
                     </article>
                     <article class="summary-card">
+                        <i class="fa-solid fa-users bg-icon"></i>
                         <span>Total clientes</span>
                         <strong id="card-total-clientes">0</strong>
                     </article>
                     <article class="summary-card">
+                        <i class="fa-solid fa-cart-arrow-down bg-icon"></i>
                         <span>Total ventas</span>
                         <strong id="card-total-ventas">0</strong>
                     </article>
                     <article class="summary-card">
+                        <i class="fa-solid fa-truck-fast bg-icon"></i>
                         <span>Total envíos</span>
                         <strong id="card-total-envios">0</strong>
                     </article>
@@ -80,38 +463,39 @@
                 <div class="cards-grid cards-grid-3 mt-24">
                     <article class="panel">
                         <div class="panel-head">
-                            <h3>Últimos productos</h3>
+                            <h3><i class="fa-solid fa-box-open" style="color: var(--primary); margin-right: 8px;"></i> Últimos productos</h3>
                         </div>
-                        <div id="dashboard-productos" class="list-stack"></div>
+                        <div id="dashboard-productos" class="empty-state">No hay datos recientes</div>
                     </article>
 
                     <article class="panel">
                         <div class="panel-head">
-                            <h3>Últimas ventas</h3>
+                            <h3><i class="fa-solid fa-bag-shopping" style="color: var(--primary); margin-right: 8px;"></i> Últimas ventas</h3>
                         </div>
-                        <div id="dashboard-ventas" class="list-stack"></div>
+                        <div id="dashboard-ventas" class="empty-state">No hay datos recientes</div>
                     </article>
 
                     <article class="panel">
                         <div class="panel-head">
-                            <h3>Últimos envíos</h3>
+                            <h3><i class="fa-solid fa-route" style="color: var(--primary); margin-right: 8px;"></i> Últimos envíos</h3>
                         </div>
-                        <div id="dashboard-envios" class="list-stack"></div>
+                        <div id="dashboard-envios" class="empty-state">No hay datos recientes</div>
                     </article>
                 </div>
             </section>
 
+            <!-- 2. PRODUCTOS -->
             <section class="page-section" id="section-productos">
                 <div class="section-head">
                     <h3>Gestión de productos</h3>
-                    <button class="btn btn-light" id="btn-refresh-productos">Recargar</button>
+                    <button class="btn btn-light" id="btn-refresh-productos"><i class="fa-solid fa-rotate"></i> Recargar</button>
                 </div>
 
                 <div class="grid-2">
                     <article class="panel">
                         <div class="panel-head">
                             <h3 id="titulo-form-producto">Registrar producto</h3>
-                            <button class="btn btn-light" id="btn-reset-producto">Nuevo</button>
+                            <button class="btn btn-light" id="btn-reset-producto"><i class="fa-solid fa-plus"></i> Nuevo</button>
                         </div>
 
                         <form id="form-producto" class="form-grid">
@@ -153,7 +537,7 @@
                             </div>
 
                             <div class="field field-full inline-actions">
-                                <button type="submit" class="btn btn-primary" id="btn-save-producto">Guardar producto</button>
+                                <button type="submit" class="btn btn-primary" id="btn-save-producto"><i class="fa-solid fa-floppy-disk"></i> Guardar producto</button>
                                 <button type="button" class="btn btn-light" id="btn-cancel-producto">Cancelar</button>
                             </div>
                         </form>
@@ -162,7 +546,7 @@
                     <article class="panel">
                         <div class="panel-head">
                             <h3>Filtros de productos</h3>
-                            <button class="btn btn-light" id="btn-limpiar-filtros-producto">Limpiar</button>
+                            <button class="btn btn-light" id="btn-limpiar-filtros-producto"><i class="fa-solid fa-eraser"></i> Limpiar</button>
                         </div>
 
                         <div class="form-grid">
@@ -198,7 +582,7 @@
                             </div>
 
                             <div class="field field-full inline-actions">
-                                <button type="button" class="btn btn-primary" id="btn-buscar-productos">Buscar</button>
+                                <button type="button" class="btn btn-primary" id="btn-buscar-productos" style="width: 100%;"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
                             </div>
                         </div>
                     </article>
@@ -231,10 +615,11 @@
                 </article>
             </section>
 
+            <!-- 3. INVENTARIO -->
             <section class="page-section" id="section-inventario">
                 <div class="section-head">
                     <h3>Control de inventario</h3>
-                    <button class="btn btn-light" id="btn-refresh-inventario">Actualizar inventario</button>
+                    <button class="btn btn-light" id="btn-refresh-inventario"><i class="fa-solid fa-rotate"></i> Actualizar inventario</button>
                 </div>
 
                 <div class="cards-grid cards-grid-4">
@@ -252,7 +637,7 @@
                     </article>
                     <article class="summary-card">
                         <span>Última actualización</span>
-                        <strong id="inv-last-update">--</strong>
+                        <strong id="inv-last-update" style="font-size: 1.5rem; margin-top:5px;">--</strong>
                     </article>
                 </div>
 
@@ -278,7 +663,7 @@
                                 <label for="ingreso-proveedor">Proveedor</label>
                                 <input type="text" id="ingreso-proveedor" placeholder="Nombre proveedor" />
                             </div>
-                            <button type="submit" class="btn btn-primary">Registrar ingreso</button>
+                            <button type="submit" class="btn btn-primary mt-24"><i class="fa-solid fa-arrow-turn-down"></i> Registrar ingreso</button>
                         </form>
                     </article>
 
@@ -307,7 +692,7 @@
                                 <label for="salida-observacion">Observación</label>
                                 <input type="text" id="salida-observacion" placeholder="Detalle de la salida" />
                             </div>
-                            <button type="submit" class="btn btn-primary">Registrar salida</button>
+                            <button type="submit" class="btn btn-primary mt-24"><i class="fa-solid fa-arrow-turn-up"></i> Registrar salida</button>
                         </form>
                     </article>
 
@@ -328,7 +713,7 @@
                                 <label for="ajuste-justificacion">Justificación</label>
                                 <input type="text" id="ajuste-justificacion" placeholder="Motivo del ajuste" />
                             </div>
-                            <button type="submit" class="btn btn-primary">Guardar ajuste</button>
+                            <button type="submit" class="btn btn-primary mt-24"><i class="fa-solid fa-scale-balanced"></i> Guardar ajuste</button>
                         </form>
                     </article>
                 </div>
@@ -393,17 +778,18 @@
                 </article>
             </section>
 
+            <!-- 4. CLIENTES -->
             <section class="page-section" id="section-clientes">
                 <div class="section-head">
                     <h3>Gestión de clientes</h3>
-                    <button class="btn btn-light" id="btn-refresh-clientes">Actualizar clientes</button>
+                    <button class="btn btn-light" id="btn-refresh-clientes"><i class="fa-solid fa-rotate"></i> Actualizar clientes</button>
                 </div>
 
                 <div class="grid-2">
                     <article class="panel">
                         <div class="panel-head">
                             <h3 id="titulo-form-cliente">Registrar cliente</h3>
-                            <button class="btn btn-light" id="btn-reset-cliente">Nuevo</button>
+                            <button class="btn btn-light" id="btn-reset-cliente"><i class="fa-solid fa-plus"></i> Nuevo</button>
                         </div>
 
                         <form id="form-cliente" class="form-grid">
@@ -435,7 +821,7 @@
                             </div>
 
                             <div class="field field-full inline-actions">
-                                <button type="submit" class="btn btn-primary">Guardar cliente</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar cliente</button>
                                 <button type="button" class="btn btn-light" id="btn-cancel-cliente">Cancelar</button>
                             </div>
                         </form>
@@ -445,7 +831,8 @@
                         <div class="panel-head">
                             <h3>Perfil comercial</h3>
                         </div>
-                        <div id="cliente-perfil" class="empty-state">
+                        <div id="cliente-perfil" class="empty-state" style="height: 65%; display:flex; flex-direction:column; justify-content:center;">
+                            <i class="fa-regular fa-id-card" style="font-size: 3rem; color: var(--primary); opacity:0.3; margin-bottom: 15px;"></i>
                             Selecciona un cliente desde la tabla para ver su historial y detalle.
                         </div>
                     </article>
@@ -475,10 +862,11 @@
                 </article>
             </section>
 
+            <!-- 5. VENTAS -->
             <section class="page-section" id="section-ventas">
                 <div class="section-head">
                     <h3>Registro de ventas</h3>
-                    <button class="btn btn-light" id="btn-refresh-ventas">Actualizar ventas</button>
+                    <button class="btn btn-light" id="btn-refresh-ventas"><i class="fa-solid fa-rotate"></i> Actualizar ventas</button>
                 </div>
 
                 <div class="grid-2">
@@ -518,7 +906,7 @@
                             </div>
 
                             <div class="field field-full inline-actions">
-                                <button type="submit" class="btn btn-primary">Registrar venta</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Registrar venta</button>
                             </div>
                         </form>
                     </article>
@@ -527,7 +915,7 @@
                         <div class="panel-head">
                             <h3>Resumen de venta</h3>
                         </div>
-                        <div id="venta-resumen" class="resumen-box">
+                        <div id="venta-resumen" class="resumen-box" style="height: 65%; display:flex; align-items:center; justify-content:center;">
                             Completa cliente, producto y cantidad para visualizar el resumen.
                         </div>
                     </article>
@@ -557,10 +945,11 @@
                 </article>
             </section>
 
+            <!-- 6. ENVÍOS -->
             <section class="page-section" id="section-envios">
                 <div class="section-head">
                     <h3>Gestión de envíos</h3>
-                    <button class="btn btn-light" id="btn-refresh-envios">Actualizar envíos</button>
+                    <button class="btn btn-light" id="btn-refresh-envios"><i class="fa-solid fa-rotate"></i> Actualizar envíos</button>
                 </div>
 
                 <div class="grid-2">
@@ -601,7 +990,7 @@
                             </div>
 
                             <div class="field field-full inline-actions">
-                                <button type="submit" class="btn btn-primary">Registrar envío</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-truck"></i> Registrar envío</button>
                             </div>
                         </form>
                     </article>
@@ -649,6 +1038,7 @@
                 </article>
             </section>
 
+            <!-- 7. RUTAS -->
             <section class="page-section" id="section-rutas">
                 <div class="section-head">
                     <h3>Gestión de rutas</h3>
@@ -683,7 +1073,7 @@
                             </div>
 
                             <div class="field field-full inline-actions">
-                                <button type="submit" class="btn btn-primary">Guardar ruta</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-map-location-dot"></i> Guardar ruta</button>
                             </div>
                         </form>
                     </article>
@@ -711,6 +1101,7 @@
                 </div>
             </section>
 
+            <!-- 8. USUARIOS -->
             <section class="page-section" id="section-usuarios">
                 <div class="section-head">
                     <h3>Administración de usuarios</h3>
@@ -753,7 +1144,7 @@
                             </div>
 
                             <div class="field field-full inline-actions">
-                                <button type="submit" class="btn btn-primary">Guardar usuario</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Guardar usuario</button>
                             </div>
                         </form>
                     </article>
@@ -782,6 +1173,7 @@
                 </div>
             </section>
 
+            <!-- 9. ROLES Y PERMISOS -->
             <section class="page-section" id="section-roles">
                 <div class="section-head">
                     <h3>Roles y permisos</h3>
@@ -811,7 +1203,7 @@
                                 <input type="text" id="rol-descripcion" placeholder="Descripción del rol" required />
                             </div>
                             <div class="field field-full inline-actions">
-                                <button type="submit" class="btn btn-primary">Guardar rol</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-shield-halved"></i> Guardar rol</button>
                             </div>
                         </form>
                     </article>
@@ -862,10 +1254,11 @@
                 </article>
             </section>
 
+            <!-- 10. REPORTES -->
             <section class="page-section" id="section-reportes">
                 <div class="section-head">
                     <h3>Reportes administrativos</h3>
-                    <button class="btn btn-light" id="btn-refresh-reportes">Actualizar reportes</button>
+                    <button class="btn btn-light" id="btn-refresh-reportes"><i class="fa-solid fa-rotate"></i> Actualizar reportes</button>
                 </div>
 
                 <div class="cards-grid cards-grid-4">
@@ -964,6 +1357,7 @@
                 </div>
             </section>
 
+            <!-- 11. SEGUIMIENTO -->
             <section class="page-section" id="section-seguimiento">
                 <div class="section-head">
                     <h3>Seguimiento de pedido</h3>
@@ -980,7 +1374,7 @@
                                 <label for="tracking-id">ID del envío</label>
                                 <input type="number" id="tracking-id" placeholder="Ej: 1" required />
                             </div>
-                            <button type="submit" class="btn btn-primary">Consultar</button>
+                            <button type="submit" class="btn btn-primary mt-24"><i class="fa-solid fa-satellite-dish"></i> Consultar</button>
                         </form>
                     </article>
 
@@ -988,7 +1382,8 @@
                         <div class="panel-head">
                             <h3>Resultado de seguimiento</h3>
                         </div>
-                        <div id="tracking-result" class="empty-state">
+                        <div id="tracking-result" class="empty-state" style="height: 50%; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                            <i class="fa-solid fa-box-open" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px; opacity: 0.5;"></i>
                             Ingresa un ID de envío para visualizar el estado actual y su información de seguimiento.
                         </div>
                     </article>
