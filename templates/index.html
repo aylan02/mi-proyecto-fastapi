@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CosmeLogix </title>
+    <title>CosmeLogix - Premium</title>
     
-    <!-- Fuentes y Iconos Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,28 +14,24 @@
 
     <style>
         /* ==========================================================================
-           1. VARIABLES ORIGINALES + MEJORAS PREMIUM (EL PUM 💥 AZUL)
+           1. VARIABLES ORIGINALES + MEJORAS PREMIUM
            ========================================================================== */
         :root {
-            /* Tus colores originales */
             --bg-body: #F3F4F6;       
             --surface: #FFFFFF;       
             --radius-lg: 20px;
             --radius-md: 12px;
             --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 15px 35px rgba(0, 68, 255, 0.15); /* Sombra con tinte azul */
+            --shadow-hover: 0 15px 35px rgba(0, 68, 255, 0.15); 
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-            /* El PUM 💥 Azul Fuerte y Celeste Suave */
             --primary: #0044ff;
             --primary-hover: #0033cc;
             --primary-light: #e0f2fe;
             --primary-glow: rgba(0, 68, 255, 0.3);
             
-            /* El celeste degradado para la barra lateral */
             --celeste-gradient: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
 
-            /* Textos */
             --text-main: #1F2937;
             --text-muted: #6B7280;
         }
@@ -51,30 +46,37 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            overflow: hidden;
+            overflow: hidden; 
         }
 
-        /* Estructura Base */
         .app-shell {
             display: flex;
             height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
         }
 
         /* ==========================================================================
-           2. SIDEBAR Y NAVEGACIÓN
+           2. SIDEBAR Y NAVEGACIÓN (SIN BARRA DE SCROLL HORIZONTAL)
            ========================================================================== */
         .sidebar {
             width: 280px;
-            /* Aquí aplicamos el color celeste degradado a la barra lateral */
+            min-width: 280px;
             background: var(--celeste-gradient);
             padding: 24px;
             box-shadow: 4px 0 25px rgba(0,0,0,0.05);
-            z-index: 10;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             gap: 30px;
             border-right: 1px solid #bae6fd;
+            overflow-x: hidden !important; 
+            overflow-y: auto;
         }
+
+        .sidebar::-webkit-scrollbar, .sidebar-nav::-webkit-scrollbar { display: none; }
+        .sidebar, .sidebar-nav { -ms-overflow-style: none; scrollbar-width: none; }
 
         .brand {
             display: flex;
@@ -97,7 +99,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            overflow-y: auto;
+            overflow-x: hidden !important;
         }
 
         .nav-link {
@@ -112,8 +114,9 @@
             text-align: left;
             font-size: 0.95rem;
             font-weight: 500;
-            color: #475569; /* Texto un poco más oscuro para que lea bien sobre celeste */
+            color: #475569;
             cursor: pointer;
+            width: 100%;
         }
         
         .nav-link i {
@@ -125,7 +128,6 @@
 
         .nav-link:hover {
             transform: translateX(5px);
-            /* Fondo blanco semitransparente para que resalte sobre el celeste */
             background: rgba(255, 255, 255, 0.6); 
             color: var(--primary);
         }
@@ -144,32 +146,37 @@
         }
 
         /* ==========================================================================
-           3. MAIN PANEL Y TOPBAR ORIGINAL
+           3. MAIN PANEL Y TOPBAR (PUENTE SELLADO)
            ========================================================================== */
         .main-panel {
             flex: 1;
             overflow-y: auto;
+            overflow-x: hidden;
             position: relative;
+            background-color: var(--bg-body);
+            padding: 0 !important; 
+            margin: 0 !important;
         }
 
-        /* Topbar: Fondo oscuro elegante para que resalte tu texto original */
         .topbar {
-            background: #1F2937 !important; 
-            color: #FFFFFF !important; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 5;
-            padding: 20px 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: var(--celeste-gradient) !important; 
+            color: var(--text-main) !important; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+            position: sticky !important;
+            top: 0 !important; 
+            z-index: 9999 !important; 
+            padding: 20px 40px !important;
+            border-bottom: 2px solid rgba(255,255,255,0.8) !important;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin: 0 !important;
+            width: 100%;
         }
 
-        .topbar h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 2px; }
-        .topbar .eyebrow { font-size: 0.75rem; text-transform: uppercase; color: #9CA3AF; letter-spacing: 1px; }
-        .topbar .subtitle { font-size: 0.85rem; color: #D1D5DB; }
+        .topbar h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 2px; color: var(--primary); }
+        .topbar .eyebrow { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 600; }
+        .topbar .subtitle { font-size: 0.85rem; color: var(--text-main); }
 
         .topbar-actions { display: flex; align-items: center; gap: 15px; }
 
@@ -178,7 +185,7 @@
            ========================================================================== */
         .page-section {
             display: none;
-            padding: 40px;
+            padding: 40px; 
             animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -203,7 +210,7 @@
         .mt-24 { margin-top: 24px; }
 
         /* ==========================================================================
-           5. TARJETAS Y PANELES (TU CÓDIGO + ICONOS)
+           5. TARJETAS Y PANELES
            ========================================================================== */
         .summary-card, .panel {
             background: var(--surface);
@@ -245,6 +252,33 @@
         .summary-card:hover i.bg-icon { transform: rotate(0) scale(1.1); color: var(--primary); opacity: 0.1; }
 
         /* ==========================================================================
+           GRID DE REPORTES COMPACTOS (2 COLUMNAS PARA EVITAR SCROLL)
+           ========================================================================== */
+        .grid-reportes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr) !important; /* 2 columnas en vez de 4 */
+            gap: 20px !important;
+            margin-top: 24px;
+        }
+        .grid-reportes .panel {
+            padding: 20px !important; 
+        }
+        .grid-reportes .panel-head {
+            margin-bottom: 15px !important;
+        }
+        .grid-reportes .panel-head h3 {
+            font-size: 1.1rem !important; 
+        }
+        .grid-reportes th {
+            padding: 12px 10px !important;
+            font-size: 0.8rem !important;
+        }
+        .grid-reportes td {
+            padding: 12px 10px !important;
+            font-size: 0.85rem !important;
+        }
+
+        /* ==========================================================================
            6. FORMULARIOS
            ========================================================================== */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -275,7 +309,7 @@
         .checkbox-wrap label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
 
         /* ==========================================================================
-           7. BOTONES (EL PUM 💥)
+           7. BOTONES
            ========================================================================== */
         .btn {
             border-radius: var(--radius-md);
@@ -359,7 +393,6 @@
 </head>
 <body>
     <div class="app-shell">
-        <!-- SIDEBAR CON FONDO CELESTE -->
         <aside class="sidebar">
             <div class="brand">
                 <img src="/static/img/logo-cosmelogix.jpg" alt="Logo CosmeLogix" class="brand-logo">
@@ -406,7 +439,6 @@
             </nav>
         </aside>
 
-        <!-- PANEL PRINCIPAL -->
         <main class="main-panel">
             <header class="topbar">
                 <div>
@@ -415,8 +447,8 @@
                     <p id="page-subtitle" class="subtitle">Panel general del sistema CosmeLogix.</p>
                 </div>
                 <div class="topbar-actions">
-                    <span class="pill" style="background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size:0.85rem;">Belleza • Inventario • Ventas • Logística</span>
-                    <span id="usuario-actual" class="pill" style="background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size:0.85rem;"></span>
+                    <span class="pill" style="background: rgba(255,255,255,0.4); padding: 8px 16px; border-radius: 20px; font-size:0.85rem; font-weight:600; color: var(--primary);">Belleza • Inventario • Ventas • Logística</span>
+                    <span id="usuario-actual" class="pill" style="background: rgba(255,255,255,0.4); padding: 8px 16px; border-radius: 20px; font-size:0.85rem; font-weight:600; color: var(--primary);"></span>
                     <button class="btn btn-primary" id="btn-logout" type="button">
                         <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
                     </button>
@@ -425,7 +457,6 @@
 
             <div id="global-alert" class="alert hidden"></div>
 
-            <!-- 1. DASHBOARD -->
             <section class="page-section active" id="section-dashboard">
                 <div class="section-head">
                     <h3>Resumen general</h3>
@@ -484,7 +515,6 @@
                 </div>
             </section>
 
-            <!-- 2. PRODUCTOS -->
             <section class="page-section" id="section-productos">
                 <div class="section-head">
                     <h3>Gestión de productos</h3>
@@ -615,7 +645,6 @@
                 </article>
             </section>
 
-            <!-- 3. INVENTARIO -->
             <section class="page-section" id="section-inventario">
                 <div class="section-head">
                     <h3>Control de inventario</h3>
@@ -778,7 +807,6 @@
                 </article>
             </section>
 
-            <!-- 4. CLIENTES -->
             <section class="page-section" id="section-clientes">
                 <div class="section-head">
                     <h3>Gestión de clientes</h3>
@@ -862,7 +890,6 @@
                 </article>
             </section>
 
-            <!-- 5. VENTAS -->
             <section class="page-section" id="section-ventas">
                 <div class="section-head">
                     <h3>Registro de ventas</h3>
@@ -945,7 +972,6 @@
                 </article>
             </section>
 
-            <!-- 6. ENVÍOS -->
             <section class="page-section" id="section-envios">
                 <div class="section-head">
                     <h3>Gestión de envíos</h3>
@@ -1038,7 +1064,6 @@
                 </article>
             </section>
 
-            <!-- 7. RUTAS -->
             <section class="page-section" id="section-rutas">
                 <div class="section-head">
                     <h3>Gestión de rutas</h3>
@@ -1101,7 +1126,6 @@
                 </div>
             </section>
 
-            <!-- 8. USUARIOS -->
             <section class="page-section" id="section-usuarios">
                 <div class="section-head">
                     <h3>Administración de usuarios</h3>
@@ -1173,7 +1197,6 @@
                 </div>
             </section>
 
-            <!-- 9. ROLES Y PERMISOS -->
             <section class="page-section" id="section-roles">
                 <div class="section-head">
                     <h3>Roles y permisos</h3>
@@ -1254,7 +1277,6 @@
                 </article>
             </section>
 
-            <!-- 10. REPORTES -->
             <section class="page-section" id="section-reportes">
                 <div class="section-head">
                     <h3>Reportes administrativos</h3>
@@ -1280,8 +1302,8 @@
                     </article>
                 </div>
 
-                <div class="grid-2 mt-24">
-                    <article class="panel">
+                <div class="grid-reportes">
+                    <article class="panel" style="margin-bottom: 0;">
                         <div class="panel-head">
                             <h3>Reporte de inventario</h3>
                         </div>
@@ -1299,7 +1321,7 @@
                         </div>
                     </article>
 
-                    <article class="panel">
+                    <article class="panel" style="margin-bottom: 0;">
                         <div class="panel-head">
                             <h3>Reporte de ventas</h3>
                         </div>
@@ -1318,7 +1340,7 @@
                         </div>
                     </article>
 
-                    <article class="panel">
+                    <article class="panel" style="margin-bottom: 0;">
                         <div class="panel-head">
                             <h3>Reporte de clientes</h3>
                         </div>
@@ -1336,7 +1358,7 @@
                         </div>
                     </article>
 
-                    <article class="panel">
+                    <article class="panel" style="margin-bottom: 0;">
                         <div class="panel-head">
                             <h3>Reporte logístico</h3>
                         </div>
@@ -1357,7 +1379,6 @@
                 </div>
             </section>
 
-            <!-- 11. SEGUIMIENTO -->
             <section class="page-section" id="section-seguimiento">
                 <div class="section-head">
                     <h3>Seguimiento de pedido</h3>
