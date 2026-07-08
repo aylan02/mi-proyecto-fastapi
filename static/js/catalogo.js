@@ -58,7 +58,7 @@ async function cargarCatalogo(nombre = "", categoriaSeleccionada = "") {
 
                         </button>
 
-                        <button class="btn-carrito">
+                        <button class="btn-agregar-carrito">
 
                             Agregar
 
