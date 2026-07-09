@@ -4,27 +4,35 @@
         "username": "admin",
         "password": "1234",
         "nombre": "Administrador General",
-        "rol": "Administrador"
+        "correo": "admin@cosmelogix.cl",
+        "rol": "Administrador",
+        "estado": "Activo"
     },
     {
         "id": 2,
         "username": "ejecutivo",
         "password": "1234",
         "nombre": "Fernanda Flores",
-        "rol": "Ejecutivo Comercial"
+        "correo": "ventas@cosmelogix.cl",
+        "rol": "Ejecutivo Comercial",
+        "estado": "Activo"
     },
     {
         "id": 3,
         "username": "inventario",
         "password": "1234",
         "nombre": "Julio Moraga",
-        "rol": "Encargado de Inventario"
+        "correo": "inventario@cosmelogix.cl",
+        "rol": "Encargado de Inventario",
+        "estado": "Activo"
     },
     {
         "id": 4,
         "username": "logistica",
         "password": "1234",
         "nombre": "Aylan Alvarez",
-        "rol": "Coordinador Logístico"
+        "correo": "logistica@cosmelogix.cl",
+        "rol": "Coordinador Logístico",
+        "estado": "Activo"
     }
 ]

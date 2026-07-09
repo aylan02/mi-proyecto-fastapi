@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catálogo | CosmeLogix</title>
+
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/css/catalogo.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <img src="/static/img/logo-cosmelogix.jpg" alt="CosmeLogix">
+
+        <span>CosmeLogix</span>
+
+    </div>
+
+    <nav>
+
+        <a href="/">Inicio</a>
+
+        <a href="/cliente/catalogo">Catálogo</a>
+
+        <a href="#">Contacto</a>
+
+    </nav>
+
+    <div class="acciones">
+
+        <button class="btn-login">
+
+            Iniciar sesión
+
+        </button>
+
+    </div>
+
+</header>
+
+<section class="catalogo">
+
+    <div class="catalogo-header">
+
+        <h1>Catálogo de Productos</h1>
+
+        <p>
+            Explora todos nuestros productos de belleza y cuidado personal.
+        </p>
+
+    </div>
+
+    <div class="catalogo-filtros">
+
+        <input
+            type="text"
+            id="buscar"
+            placeholder="Buscar productos..."
+        >
+
+        <select id="categoria">
+
+            <option value="">Todas las categorías</option>
+
+            <option>Maquillaje</option>
+
+            <option>Cuidado Facial</option>
+
+            <option>Cuidado Capilar</option>
+
+            <option>Fragancias</option>
+
+        </select>
+
+    </div>
+
+    <div
+        id="catalogo-productos"
+        class="productos-grid">
+
+    </div>
+
+</section>
+
+<script src="/static/js/catalogo.js"></script>
+
+</body>
+
+</html>

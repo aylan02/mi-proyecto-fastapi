@@ -38,6 +38,17 @@ class ProductoBase(BaseModel):
         max_length=250
     )
 
+    imagen: str = Field(
+        default="sin-imagen.jpg",
+        description="Nombre del archivo de imagen del producto"
+    )
+
+    destacado: bool = False
+
+    nuevo: bool = False
+
+    oferta: bool = False
+
 
 class ProductoCrear(ProductoBase):
     pass
@@ -51,7 +62,10 @@ class ProductoActualizar(BaseModel):
     precio: Optional[float] = Field(None, gt=0)
     stock: Optional[int] = Field(None, ge=0)
     descripcion: Optional[str] = Field(None, min_length=3, max_length=250)
-
+    imagen: Optional[str] = None
+    destacado: Optional[bool] = None
+    nuevo: Optional[bool] = None
+    oferta: Optional[bool] = None
 
 class Producto(ProductoBase):
     id: int
@@ -62,3 +76,5 @@ class Producto(ProductoBase):
 
     class Config:
         from_attributes = True
+
+    

@@ -1,5 +1,14 @@
 [
     {
+        "id": 1,
+        "rut": "18.765.432-1",
+        "nombre": "Fernanda Flores",
+        "direccion": "Av. Arturo Prat 1450, Iquique",
+        "correo": "fernanda.flores@cosmelogix.cl",
+        "telefono": "+56987654321",
+        "estado": "Activo"
+    },
+    {
         "id": 2,
         "rut": "20.909.269-7",
         "nombre": "Aylan Alvarez",

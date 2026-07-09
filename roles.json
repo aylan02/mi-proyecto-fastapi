@@ -2,6 +2,7 @@
     {
         "id": 1,
         "nombre": "Administrador",
+        "descripcion": "Acceso total al sistema",
         "estado": "Activo",
         "permisos": [
             "dashboard",
@@ -20,17 +21,20 @@
     {
         "id": 2,
         "nombre": "Ejecutivo Comercial",
+        "descripcion": "Gestiona clientes y ventas",
         "estado": "Activo",
         "permisos": [
             "dashboard",
             "clientes",
             "ventas",
-            "reportes"
+            "reportes",
+            "envios"
         ]
     },
     {
         "id": 3,
         "nombre": "Encargado de Inventario",
+        "descripcion": "Controla productos e inventario",
         "estado": "Activo",
         "permisos": [
             "dashboard",
@@ -42,10 +46,10 @@
     {
         "id": 4,
         "nombre": "Coordinador Logístico",
+        "descripcion": "Gestiona envíos y rutas",
         "estado": "Activo",
         "permisos": [
             "dashboard",
-            "envios",
             "rutas",
             "seguimiento",
             "reportes"

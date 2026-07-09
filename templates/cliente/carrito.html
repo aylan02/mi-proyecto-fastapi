@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito | CosmeLogix</title>
+
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/css/carrito.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="navbar">
+
+        <a href="/" class="logo">
+
+            <img src="/static/img/logo-cosmelogix.jpg" alt="CosmeLogix">
+
+            <span>CosmeLogix</span>
+
+        </a>
+
+        <nav>
+
+            <a href="/">Inicio</a>
+
+            <a href="/cliente/catalogo">
+                Catálogo
+            </a>
+
+            <a href="/cliente/carrito">
+                Carrito
+            </a>
+
+        </nav>
+
+        <div class="acciones">
+
+            <a href="/cliente/login" class="btn-login">
+                Iniciar sesión
+            </a>
+
+        </div>
+
+    </header>
+    
+
+
+    <!-- CONTENIDO -->
+
+    <main class="contenedor-carrito">
+
+        <section class="carrito-productos">
+
+            <h1>Mi Carrito</h1>
+
+            <a href="/cliente/catalogo" class="btn-volver">
+                ← Seguir comprando
+            </a>
+
+            <div id="lista-carrito">
+
+                <!-- carrito.js insertará aquí los productos -->
+
+            </div>
+
+        </section>
+
+
+
+        <aside class="resumen-compra">
+
+            <h2>Resumen</h2>
+
+            <div class="fila-resumen">
+                <span>Productos</span>
+                <span id="cantidad-productos">0</span>
+            </div>
+
+            <div class="fila-resumen">
+                <span>Subtotal</span>
+                <span id="subtotal">$0</span>
+            </div>
+
+            <div class="fila-resumen">
+                <span>Envío</span>
+                <span>Gratis</span>
+            </div>
+
+            <hr>
+
+            <div class="fila-total">
+
+                <strong>Total</strong>
+
+                <strong id="total">
+                    $0
+                </strong>
+
+            </div>
+            
+            <button id="btn-vaciar" class="btn-secundario">
+
+                Vaciar carrito
+
+            </button>
+
+            <button id="btn-checkout" class="btn-principal">
+
+                Continuar compra
+
+            </button>
+
+
+        </aside>
+
+    </main>
+
+
+    <script src="/static/js/carrito.js"></script>
+
+</body>
+
+</html>

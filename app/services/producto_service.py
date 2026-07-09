@@ -100,6 +100,10 @@ def crear_producto(datos):
         "precio": datos.precio,
         "stock": datos.stock,
         "descripcion": datos.descripcion,
+        "imagen": datos.imagen,
+        "destacado": datos.destacado,
+        "nuevo": datos.nuevo,
+        "oferta": datos.oferta,
         "estado": "Activo"
     }
 

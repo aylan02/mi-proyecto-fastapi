@@ -44,7 +44,11 @@ def registrar_envio(envio):
         "direccion": envio.direccion,
         "observacion": envio.observacion,
         "estado": "registrado",
-        "fecha_envio": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        "fecha_envio": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "ruta": envio.ruta,
+        "vehiculo": envio.vehiculo,
+        "fecha_programada": envio.fecha_programada,
+        "venta_id": envio.venta_id
     }
 
     historial_envios.append(nuevo_envio)
@@ -79,12 +83,16 @@ def actualizar_envio(id_envio: int, datos_envio):
     if not nuevo_producto:
         return {"ok": False, "error": "Producto no encontrado"}
 
+    envio["venta_id"] = datos_envio.venta_id
     envio["producto_id"] = datos_envio.producto_id
     envio["nombre_producto"] = nuevo_producto["nombre"]
     envio["cantidad"] = datos_envio.cantidad
     envio["destinatario"] = datos_envio.destinatario
     envio["direccion"] = datos_envio.direccion
     envio["observacion"] = datos_envio.observacion
+    envio["ruta"] = datos_envio.ruta
+    envio["vehiculo"] = datos_envio.vehiculo
+    envio["fecha_programada"] = datos_envio.fecha_programada
 
     guardar_datos(ARCHIVO_HISTORIAL, historial_envios)
 
