@@ -16,37 +16,7 @@
 
 <body>
 
-<header class="navbar">
-
-    <div class="logo">
-
-        <img src="/static/img/logo-cosmelogix.jpg" alt="CosmeLogix">
-
-        <span>CosmeLogix</span>
-
-    </div>
-
-    <nav>
-
-        <a href="/">Inicio</a>
-
-        <a href="/cliente/catalogo">Catálogo</a>
-
-        <a href="#">Contacto</a>
-
-    </nav>
-
-    <div class="acciones">
-
-        <button class="btn-login">
-
-            Iniciar sesión
-
-        </button>
-
-    </div>
-
-</header>
+  {% include "components/header_cliente.html" %}
 
 <section class="catalogo">
 
@@ -91,7 +61,7 @@
     </div>
 
 </section>
-
+<script src="/static/js/header_cliente.js"></script>
 <script src="/static/js/catalogo.js"></script>
 
 </body>

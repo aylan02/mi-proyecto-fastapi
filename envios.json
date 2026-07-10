@@ -1,0 +1,194 @@
+[
+    {
+        "id_envio": 1,
+        "venta_id": 1,
+        "destinatario": "Pamela Rojas",
+        "direccion": "Av. Arturo Prat 123, Iquique",
+        "observacion": "Entregar en conserjería",
+        "estado": "Entregado",
+        "fecha_envio": "2026-06-09 14:10:00",
+        "ruta": "Ruta Norte",
+        "vehiculo": "Camión 01",
+        "fecha_programada": "2026-06-10",
+        "productos": [
+            {
+                "producto_id": 1,
+                "cantidad": 2
+            },
+            {
+                "producto_id": 2,
+                "cantidad": 1
+            }
+        ]
+    },
+    {
+        "id_envio": 2,
+        "venta_id": 2,
+        "destinatario": "Pamela Rojas",
+        "direccion": "Av. Los Héroes 456, Iquique",
+        "observacion": "",
+        "estado": "Preparando",
+        "fecha_envio": "2026-06-09 15:20:00",
+        "ruta": "Ruta Centro",
+        "vehiculo": "Furgón 02",
+        "fecha_programada": "2026-06-10",
+        "productos": [
+            {
+                "producto_id": 3,
+                "cantidad": 20
+            }
+        ]
+    },
+    {
+        "id_envio": 3,
+        "venta_id": 3,
+        "destinatario": "Aylan Alvarez",
+        "direccion": "Pasaje Central 55, Arica",
+        "observacion": "Llamar antes de entregar",
+        "estado": "En Ruta",
+        "fecha_envio": "2026-07-03 08:45:00",
+        "ruta": "Ruta Norte",
+        "vehiculo": "Camión 03",
+        "fecha_programada": "2026-07-04",
+        "productos": [
+            {
+                "producto_id": 1,
+                "cantidad": 2
+            }
+        ]
+    },
+    {
+        "id_envio": 4,
+        "venta_id": 4,
+        "destinatario": "Fernanda Flores",
+        "direccion": "Iquique",
+        "observacion": "",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-09 20:55:00",
+        "ruta": "Ruta Sur",
+        "vehiculo": "Camión 04",
+        "fecha_programada": "2026-07-10",
+        "productos": [
+            {
+                "producto_id": 2,
+                "cantidad": 1
+            }
+        ]
+    },
+    {
+        "id_envio": 5,
+        "venta_id": 5,
+        "destinatario": "Fernanda Flores",
+        "direccion": "Iquique",
+        "observacion": "Dejar en la puerta",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-09 21:15:00",
+        "ruta": "Ruta Sur",
+        "vehiculo": "Camión 04",
+        "fecha_programada": "2026-07-10",
+        "productos": [
+            {
+                "producto_id": 4,
+                "cantidad": 1
+            }
+        ]
+    },
+    {
+        "id_envio": 6,
+        "venta_id": 6,
+        "destinatario": "Fernanda Flores",
+        "direccion": "Iquique",
+        "observacion": "Entregar después de las 18:00",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-10 09:30:00",
+        "ruta": "Ruta Sur",
+        "vehiculo": "Furgón 05",
+        "fecha_programada": "2026-07-11",
+        "productos": [
+            {
+                "producto_id": 1,
+                "cantidad": 2
+            },
+            {
+                "producto_id": 2,
+                "cantidad": 1
+            },
+            {
+                "producto_id": 4,
+                "cantidad": 3
+            }
+        ]
+    },
+    {
+        "id_envio": 7,
+        "productos": [
+            {
+                "producto_id": 7,
+                "cantidad": 1
+            }
+        ],
+        "destinatario": "Fernanda",
+        "direccion": "Arturo Perez canto 1358",
+        "observacion": "en la puerta",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-10 14:37:29",
+        "ruta": "",
+        "vehiculo": "",
+        "fecha_programada": null,
+        "venta_id": 7
+    },
+    {
+        "id_envio": 8,
+        "productos": [
+            {
+                "producto_id": 4,
+                "cantidad": 1
+            }
+        ],
+        "destinatario": "Fernanda",
+        "direccion": "Arturo Perez canto 1358",
+        "observacion": "en la puerta ",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-10 14:39:08",
+        "ruta": "",
+        "vehiculo": "",
+        "fecha_programada": null,
+        "venta_id": 8
+    },
+    {
+        "id_envio": 9,
+        "productos": [
+            {
+                "producto_id": 7,
+                "cantidad": 1
+            }
+        ],
+        "destinatario": "Fernanda",
+        "direccion": "Arturo Perez canto 1358",
+        "observacion": "en la ",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-10 14:44:20",
+        "ruta": "",
+        "vehiculo": "",
+        "fecha_programada": null,
+        "venta_id": 9
+    },
+    {
+        "id_envio": 10,
+        "productos": [
+            {
+                "producto_id": 7,
+                "cantidad": 1
+            }
+        ],
+        "destinatario": "Fernanda",
+        "direccion": "Arturo Perez canto 1358",
+        "observacion": "en la puerta",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-10 14:48:10",
+        "ruta": "",
+        "vehiculo": "",
+        "fecha_programada": null,
+        "venta_id": 10
+    }
+]

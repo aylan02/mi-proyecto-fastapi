@@ -100,5 +100,100 @@
         "fecha": "2026-07-09 21:12:46",
         "total": 6990.0,
         "estado": "Registrada"
+    },
+    {
+        "id": 6,
+        "cliente_id": 9,
+        "cliente_nombre": "Fernanda",
+        "detalles": [
+            {
+                "producto_id": 7,
+                "producto_nombre": "Delineador Líquido",
+                "precio_unitario": 5490.0,
+                "cantidad": 1,
+                "subtotal": 5490.0
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "en la puerta",
+        "fecha": "2026-07-10 14:27:04",
+        "total": 5490.0,
+        "estado": "Registrada"
+    },
+    {
+        "id": 7,
+        "cliente_id": 9,
+        "cliente_nombre": "Fernanda",
+        "detalles": [
+            {
+                "producto_id": 7,
+                "producto_nombre": "Delineador Líquido",
+                "precio_unitario": 5490.0,
+                "cantidad": 1,
+                "subtotal": 5490.0
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "en la puerta",
+        "fecha": "2026-07-10 14:37:29",
+        "total": 5490.0,
+        "estado": "Registrada"
+    },
+    {
+        "id": 8,
+        "cliente_id": 9,
+        "cliente_nombre": "Fernanda",
+        "detalles": [
+            {
+                "producto_id": 4,
+                "producto_nombre": "Corrector HD",
+                "precio_unitario": 6990.0,
+                "cantidad": 1,
+                "subtotal": 6990.0
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "en la puerta ",
+        "fecha": "2026-07-10 14:39:08",
+        "total": 6990.0,
+        "estado": "Registrada"
+    },
+    {
+        "id": 9,
+        "cliente_id": 9,
+        "cliente_nombre": "Fernanda",
+        "detalles": [
+            {
+                "producto_id": 7,
+                "producto_nombre": "Delineador Líquido",
+                "precio_unitario": 5490.0,
+                "cantidad": 1,
+                "subtotal": 5490.0
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "en la ",
+        "fecha": "2026-07-10 14:44:20",
+        "total": 5490.0,
+        "estado": "Registrada"
+    },
+    {
+        "id": 10,
+        "cliente_id": 9,
+        "cliente_nombre": "Fernanda",
+        "detalles": [
+            {
+                "producto_id": 7,
+                "producto_nombre": "Delineador Líquido",
+                "precio_unitario": 5490.0,
+                "cantidad": 1,
+                "subtotal": 5490.0
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "en la puerta",
+        "fecha": "2026-07-10 14:48:10",
+        "total": 5490.0,
+        "estado": "Registrada"
     }
 ]

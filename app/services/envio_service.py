@@ -1,49 +1,43 @@
 from datetime import datetime
 from app.database.data import (
     productos,
-    historial_envios,
+    envios,
     guardar_datos,
     ARCHIVO_PRODUCTOS,
-    ARCHIVO_HISTORIAL
+    ARCHIVO_ENVIOS
 )
 
-def buscar_producto_por_id(producto_id: int):
-    for producto in productos:
-        if producto["id"] == producto_id:
-            return producto
-    return None
-
 def obtener_nuevo_id_envio():
-    if not historial_envios:
+    if not envios:
         return 1
 
-    ids = [envio.get("id_envio", 0) for envio in historial_envios]
+    ids = [envio.get("id_envio", 0) for envio in envios]
     return max(ids) + 1
 
 def obtener_historial():
-    return historial_envios
+    return envios
 
 def obtener_envio_por_id(id_envio: int):
-    for envio in historial_envios:
+    for envio in envios:
         if envio.get("id_envio") == id_envio:
             return envio
     return None
 
 def registrar_envio(envio):
-    producto = buscar_producto_por_id(envio.producto_id)
-
-    if not producto:
-        return {"ok": False, "error": "Producto no encontrado"}
 
     nuevo_envio = {
         "id_envio": obtener_nuevo_id_envio(),
-        "producto_id": envio.producto_id,
-        "nombre_producto": producto["nombre"],
-        "cantidad": envio.cantidad,
+        "productos": [
+            {
+                "producto_id": producto.producto_id,
+                "cantidad": producto.cantidad
+            }
+            for producto in envio.productos
+        ],
         "destinatario": envio.destinatario,
         "direccion": envio.direccion,
         "observacion": envio.observacion,
-        "estado": "registrado",
+        "estado": "Preparando",
         "fecha_envio": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "ruta": envio.ruta,
         "vehiculo": envio.vehiculo,
@@ -51,8 +45,20 @@ def registrar_envio(envio):
         "venta_id": envio.venta_id
     }
 
-    historial_envios.append(nuevo_envio)
-    guardar_datos(ARCHIVO_HISTORIAL, historial_envios)
+    envios.append(nuevo_envio)
+
+    guardar_datos(ARCHIVO_ENVIOS, envios)
+
+    return {
+        "ok": True,
+        "data": {
+            "mensaje": "Envío registrado correctamente",
+            "envio": nuevo_envio
+        }
+    }
+
+    envios.append(nuevo_envio)
+    guardar_datos(ARCHIVO_ENVIOS, envios)
 
     return {
         "ok": True,
@@ -69,24 +75,27 @@ def actualizar_estado_envio(id_envio: int, datos_estado):
         return None
 
     envio["estado"] = datos_estado.estado
-    guardar_datos(ARCHIVO_HISTORIAL, historial_envios)
+    guardar_datos(ARCHIVO_ENVIOS, envios)
     return envio
 
 def actualizar_envio(id_envio: int, datos_envio):
+
     envio = obtener_envio_por_id(id_envio)
 
     if not envio:
-        return {"ok": False, "error": "Envío no encontrado"}
-
-    nuevo_producto = buscar_producto_por_id(datos_envio.producto_id)
-
-    if not nuevo_producto:
-        return {"ok": False, "error": "Producto no encontrado"}
+        return {
+            "ok": False,
+            "error": "Envío no encontrado"
+        }
 
     envio["venta_id"] = datos_envio.venta_id
-    envio["producto_id"] = datos_envio.producto_id
-    envio["nombre_producto"] = nuevo_producto["nombre"]
-    envio["cantidad"] = datos_envio.cantidad
+    envio["productos"] = [
+        {
+            "producto_id": producto.producto_id,
+            "cantidad": producto.cantidad
+        }
+        for producto in datos_envio.productos
+    ]
     envio["destinatario"] = datos_envio.destinatario
     envio["direccion"] = datos_envio.direccion
     envio["observacion"] = datos_envio.observacion
@@ -94,7 +103,7 @@ def actualizar_envio(id_envio: int, datos_envio):
     envio["vehiculo"] = datos_envio.vehiculo
     envio["fecha_programada"] = datos_envio.fecha_programada
 
-    guardar_datos(ARCHIVO_HISTORIAL, historial_envios)
+    guardar_datos(ARCHIVO_ENVIOS, envios)
 
     return {
         "ok": True,
@@ -110,8 +119,15 @@ def eliminar_envio(id_envio: int):
     if not envio:
         return None
 
-    historial_envios.remove(envio)
+    envios.remove(envio)
 
-    guardar_datos(ARCHIVO_HISTORIAL, historial_envios)
+    guardar_datos(ARCHIVO_ENVIOS, envios)
 
     return envio
+
+def obtener_envio_por_venta(venta_id: int):
+    for envio in envios:
+        if envio["venta_id"] == venta_id:
+            return envio
+
+    return None

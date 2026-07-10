@@ -86,6 +86,54 @@ def detalle_pedido(request: Request, venta_id: int):
         }
     )
 
+@router.get("/cliente/seguimiento/{venta_id}", response_class=HTMLResponse)
+def seguimiento(
+    request: Request,
+    venta_id: int
+):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/seguimiento.html",
+        context={
+            "venta_id": venta_id
+        }
+    )
+
+@router.get("/cliente/login", response_class=HTMLResponse)
+def login_cliente(request: Request):
+
+    if request.session.get("user"):
+
+        return RedirectResponse(
+            url="/cliente/catalogo",
+            status_code=303
+        )
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/login_cliente.html",
+        context={}
+    )
+
+@router.get("/cliente/registro", response_class=HTMLResponse)
+def registro_cliente(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/registro.html",
+        context={}
+    )
+
+@router.get("/cliente/perfil", response_class=HTMLResponse)
+def perfil_cliente(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/perfil.html",
+        context={}
+    )
+
 # ===========================
 # PANEL ADMINISTRATIVO
 # ===========================

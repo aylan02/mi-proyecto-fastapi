@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 ARCHIVO_PRODUCTOS = BASE_DIR / "productos.json"
 ARCHIVO_VENTAS = BASE_DIR / "ventas.json"
 ARCHIVO_CLIENTES = BASE_DIR / "clientes.json"
-ARCHIVO_HISTORIAL = BASE_DIR / "historial.json"
+ARCHIVO_ENVIOS = BASE_DIR / "envios.json"
 ARCHIVO_MOVIMIENTOS = BASE_DIR / "movimientos_inventario.json"
 
 
@@ -124,25 +124,31 @@ def reporte_clientes():
         "clientes": clientes
     }
 
-
 def reporte_logistico():
-    historial = leer_json(ARCHIVO_HISTORIAL)
 
-    entregados = [
-        h for h in historial
-        if h.get("estado", "").lower() == "entregado"
+    envios = leer_json(ARCHIVO_ENVIOS)
+
+    preparados = [
+        e for e in envios
+        if e.get("estado", "").lower() == "preparando"
     ]
 
-    registrados = [
-        h for h in historial
-        if h.get("estado", "").lower() == "registrado"
+    en_ruta = [
+        e for e in envios
+        if e.get("estado", "").lower() == "en ruta"
+    ]
+
+    entregados = [
+        e for e in envios
+        if e.get("estado", "").lower() == "entregado"
     ]
 
     return {
         "resumen": {
-            "total_registros": len(historial),
-            "envios_registrados": len(registrados),
-            "envios_entregados": len(entregados)
+            "total_envios": len(envios),
+            "preparando": len(preparados),
+            "en_ruta": len(en_ruta),
+            "entregados": len(entregados)
         },
-        "historial": historial
+        "envios": envios
     }

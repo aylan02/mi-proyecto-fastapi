@@ -683,3 +683,11 @@ nav a:hover {
     gap:30px;
 
 }
+
+/* ==========================
+   MENÚ USUARIO
+========================== */
+
+.oculto{
+    display:none;
+}

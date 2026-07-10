@@ -54,6 +54,15 @@ def leer_clientes():
 def listar_ventas():
     return leer_ventas()
 
+def obtener_ventas_cliente(cliente_id: int):
+
+    ventas = leer_ventas()
+
+    return [
+        venta
+        for venta in ventas
+        if venta["cliente_id"] == cliente_id
+    ]
 
 def obtener_venta(venta_id: int):
     ventas = leer_ventas()

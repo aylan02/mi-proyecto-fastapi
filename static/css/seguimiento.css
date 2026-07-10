@@ -1,0 +1,264 @@
+/* ===========================
+    VARIABLES
+=========================== */
+
+:root{
+
+    --color-primario:#1f6fd5;
+    --color-primario-hover:#1657aa;
+
+    --color-fondo:#f5f7fb;
+    --color-blanco:#ffffff;
+
+    --color-texto:#333;
+    --color-secundario:#666;
+
+    --color-exito:#4CAF50;
+    --color-pendiente:#d8dee9;
+
+    --sombra-suave:0 12px 35px rgba(0,0,0,.08);
+
+}
+
+/* ===========================
+    CONTENEDOR
+=========================== */
+
+.contenedor-seguimiento{
+
+    max-width:1000px;
+    margin:50px auto;
+    padding:0 20px;
+
+}
+
+.contenedor-seguimiento h1{
+
+    color:var(--color-primario);
+    margin-bottom:35px;
+
+}
+
+/* ===========================
+    TARJETA
+=========================== */
+
+.card-seguimiento{
+
+    background:var(--color-blanco);
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:var(--sombra-suave);
+
+}
+
+/* ===========================
+    ESTADO
+=========================== */
+
+.estado-actual{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+}
+
+.estado-actual h3{
+
+    color:var(--color-secundario);
+    margin-bottom:10px;
+
+}
+
+.estado-actual h2{
+
+    color:var(--color-primario);
+    font-size:2rem;
+
+}
+
+/* ===========================
+    TIMELINE
+=========================== */
+
+.timeline{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    position:relative;
+
+    margin-top:40px;
+
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50px;
+    right:50px;
+
+    top:20px;
+
+    height:4px;
+
+    background:#e4e7ec;
+
+    z-index:0;
+
+}
+
+/* ===========================
+    PASOS
+=========================== */
+
+.paso{
+
+    width:180px;
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+.circulo{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:#d9d9d9;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    margin:auto;
+
+    font-size:1.2rem;
+    font-weight:bold;
+
+}
+
+.paso.completado .circulo{
+
+    background:var(--color-exito);
+
+}
+
+.paso p{
+
+    margin-top:15px;
+
+    color:var(--color-texto);
+
+    font-weight:600;
+
+}
+
+/* ===========================
+    RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.timeline{
+
+    flex-direction:column;
+
+    gap:35px;
+
+}
+
+.timeline::before{
+
+    display:none;
+
+}
+
+.paso{
+
+    width:100%;
+
+}
+
+}
+
+/* ===========================
+    INFORMACIÓN PEDIDO
+=========================== */
+
+.info-pedido{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+    margin-bottom:45px;
+
+}
+
+.info-pedido .titulo{
+
+    display:block;
+
+    color:var(--color-secundario);
+
+    font-size:.85rem;
+
+    margin-bottom:6px;
+
+}
+
+.info-pedido p{
+
+    font-weight:700;
+
+    color:var(--color-primario);
+
+}
+
+/* ===========================
+    DESCRIPCIÓN PASOS
+=========================== */
+
+.paso small{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:var(--color-secundario);
+
+    font-size:.82rem;
+
+    line-height:1.4;
+
+}
+
+.mensaje-estado{
+
+    margin-top:15px;
+
+    color:var(--color-secundario);
+
+    font-size:1rem;
+
+}

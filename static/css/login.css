@@ -1,0 +1,433 @@
+:root{
+
+    --color-primario:#2563EB;
+    --color-primario-hover:#1D4ED8;
+
+    --color-fondo:#F4F7FB;
+
+    --color-card:#FFFFFF;
+
+    --color-texto:#111827;
+    --color-secundario:#6B7280;
+
+    --color-borde:#D1D5DB;
+
+    --sombra:
+        0 20px 60px rgba(15,23,42,.08);
+
+    --radio:24px;
+
+    --transicion:.25s;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: "Inter", sans-serif;
+
+    background:
+    linear-gradient(
+    180deg,
+    #f8fbff 0%,
+    #eef5ff 100%
+    );
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+}
+
+.login-card {
+
+    width: 100%;
+
+    max-width: 420px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 45px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.08);
+
+    animation: aparecer .5s ease;
+
+}
+
+.logo{
+
+    width:95px;
+
+    display:block;
+
+    margin:auto;
+
+    margin-bottom:2px;
+
+}
+
+h1{
+
+    text-align:center;
+
+    color:var(--color-texto);
+
+    font-size:36px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.subtitulo{
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    margin-bottom:20px;
+
+}
+
+h2{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#111827;
+
+    font-size:24px;
+
+}
+
+.descripcion{
+
+    margin-top:10px;
+
+    margin-bottom:16px;
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:12px;
+
+}
+
+.campo{
+
+    margin-bottom:14px;
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#374151;
+
+    font-weight:600;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:16px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:14px;
+
+    font-size:15px;
+
+    transition:.25s;
+
+    outline:none;
+
+}
+
+input:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37,99,235,.15);
+
+}
+
+button{
+
+    width:100%;
+
+    margin-top:4px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--color-primario);
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+    box-shadow:
+
+        0 10px 25px rgba(37,99,235,.25);
+
+}
+
+button:hover{
+
+    background:var(--color-primario-hover);
+
+    transform:translateY(-2px);
+
+}
+
+button:active{
+
+    transform:scale(.98);
+
+}
+
+#error{
+
+    display:none;
+
+    margin-top:18px;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    text-align:center;
+
+    font-size:14px;
+
+}
+
+footer{
+
+    margin-top:24px;
+
+    text-align:center;
+
+    color:#9ca3af;
+
+    font-size:13px;
+
+}
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .login-card{
+
+        padding:24px 32px;
+
+    }
+
+    h1{
+
+        font-size:28px;
+
+    }
+
+}
+
+@media (max-width:600px){
+
+    .login-actions{
+        flex-direction:column;
+    }
+
+}
+
+.registro{
+
+    margin-top:18px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    color:var(--color-secundario);
+
+}
+
+.registro a{
+
+    color:var(--color-primario);
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    padding:4px 8px;
+
+    border-radius:8px;
+
+    transition:var(--transicion);
+
+}
+
+.registro a:hover{
+
+    background:rgba(37,99,235,.08);
+
+    color:var(--color-primario-hover);
+
+}
+
+.btn-registro{
+
+    display:block;
+
+    width:fit-content;
+
+    margin:12px auto 0;
+
+    padding:10px 18px;
+
+    border:1px solid var(--color-primario);
+
+    border-radius:12px;
+
+    color:var(--color-primario);
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:var(--transicion);
+
+}
+
+.btn-registro:hover{
+
+    background:var(--color-primario);
+
+    color:white;
+
+}
+
+/* Botones del login */
+
+.login-actions{
+    display:flex;
+    gap:14px;
+    margin-top:25px;
+}
+
+.login-actions button,
+.login-actions a{
+    flex:1;
+}
+
+.btn-login{
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+    text-align:center;
+}
+
+.btn-login:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(37,99,235,.25);
+}
+
+.btn-register{
+    padding:15px;
+    border:2px solid #2563eb;
+    border-radius:12px;
+    background:#fff;
+    color:#2563eb;
+    text-decoration:none;
+    text-align:center;
+    font-size:16px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-register:hover{
+    background:#2563eb;
+    color:white;
+    transform:translateY(-2px);
+}
+
+/* ===== Mensaje de error ===== */
+
+.error-message{
+    display: none;
+    margin: 18px 0;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+
