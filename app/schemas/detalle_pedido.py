@@ -7,6 +7,7 @@ class ProductoDetalle(BaseModel):
     precio_unitario: float
     cantidad: int
     subtotal: float
+    imagen: str
 
 
 class DetallePedido(BaseModel):

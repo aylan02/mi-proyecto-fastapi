@@ -378,21 +378,32 @@ function renderResumenPago(carrito) {
 
     let html = "";
 
-    carrito.items.forEach(producto => {
+carrito.items.forEach(producto => {
 
-        html += `
-            <div class="item-pago">
+    html += `
+        <div class="item-pago">
 
-                <span>${producto.nombre}</span>
+            <img
+                src="/static/img/productos/${producto.imagen}"
+                alt="${producto.nombre}"
+            >
 
-                <span>x${producto.cantidad}</span>
+            <div class="info-pago">
 
-                <strong>$${producto.subtotal.toLocaleString()}</strong>
+                <h4>${producto.nombre}</h4>
+
+                <p>Cantidad: ${producto.cantidad}</p>
 
             </div>
-        `;
 
-    });
+            <strong>
+                $${producto.subtotal.toLocaleString()}
+            </strong>
+
+        </div>
+    `;
+
+});
 
     contenedor.innerHTML = html;
 

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | CosmeLogix</title>
+
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/css/contacto.css">
+</head>
+
+<body>
+
+    {% include "components/header_cliente.html" %}
+
+    <main class="contacto">
+
+        <!-- HERO -->
+
+        <section class="hero-contacto">
+
+            <h1>Contáctanos</h1>
+
+            <p>
+                Estamos disponibles para responder tus consultas, ayudarte con tus
+                pedidos y brindarte la mejor atención posible.
+            </p>
+
+        </section>
+
+        <section class="contacto-grid">
+
+            <!-- INFORMACIÓN -->
+
+            <article class="card-contacto">
+
+                <h2>Información de Contacto</h2>
+
+                <div class="item-contacto">
+
+                    <h3>📍 Dirección</h3>
+
+                    <p>
+                        Zona Franca, Iquique, Chile
+                    </p>
+
+                </div>
+
+                <div class="item-contacto">
+
+                    <h3>📞 Teléfono</h3>
+
+                    <p>
+                        +56 9 8765 4321
+                    </p>
+
+                </div>
+
+                <div class="item-contacto">
+
+                    <h3>✉️ Correo</h3>
+
+                    <p>
+                        contacto@cosmelogix.cl
+                    </p>
+
+                </div>
+
+                <div class="item-contacto">
+
+                    <h3>🕒 Horario</h3>
+
+                    <p>
+                        Lunes a Viernes<br>
+                        09:00 a 18:00 hrs
+                    </p>
+
+                </div>
+
+                <h2>Síguenos</h2>
+
+                <div class="redes">
+
+                    <div class="red">
+                        📸<br>
+                        Instagram
+                    </div>
+
+                    <div class="red">
+                        👍<br>
+                        Facebook
+                    </div>
+
+                    <div class="red">
+                        🎵<br>
+                        TikTok
+                    </div>
+
+                    <div class="red">
+                        💬<br>
+                        WhatsApp
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- FORMULARIO -->
+
+            <article class="card-contacto">
+
+                <h2>Envíanos un mensaje</h2>
+
+                <form class="formulario">
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Nombre completo"
+                    >
+
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="Correo electrónico"
+                    >
+
+                    <textarea
+                        id="mensaje"
+                        placeholder="Escribe tu mensaje..."
+                    ></textarea>
+
+                    <button
+                        type="button"
+                        id="btn-enviar"
+                        class="btn-enviar"
+                    >
+                        Enviar mensaje
+                    </button>
+
+                </form>
+
+            </article>
+
+        </section>
+
+    </main>
+    <script src="/static/js/header_cliente.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/contacto.js"></script>
+
+</body>
+
+</html>

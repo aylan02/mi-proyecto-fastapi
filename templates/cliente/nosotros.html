@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | CosmeLogix</title>
+
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/css/nosotros.css">
+</head>
+
+<body>
+
+    {% include "components/header_cliente.html" %}
+
+    <main class="nosotros">
+
+        <!-- HERO -->
+
+        <section class="hero-nosotros">
+
+            <h1>Sobre CosmeLogix</h1>
+
+            <p>
+                En CosmeLogix creemos que la belleza y el cuidado personal deben estar
+                al alcance de todos. Nuestro objetivo es ofrecer productos de calidad
+                junto a una experiencia de compra moderna, rápida y segura.
+            </p>
+
+        </section>
+
+        <!-- HISTORIA -->
+
+        <section class="info-card">
+
+            <h2>Nuestra Historia</h2>
+
+            <p>
+                CosmeLogix nació como un emprendimiento dedicado a la comercialización
+                y distribución de productos cosméticos en la ciudad de Iquique,
+                ofreciendo maquillaje, productos para el cuidado facial, fragancias
+                y artículos de cuidado personal.
+            </p>
+
+            <br>
+
+            <p>
+                Con el crecimiento de clientes y pedidos surgió la necesidad de
+                modernizar los procesos comerciales, dando origen a una plataforma
+                que integra productos, inventario, ventas, pedidos y logística en un
+                solo sistema.
+            </p>
+
+        </section>
+
+        <!-- MISIÓN / VISIÓN -->
+
+        <section class="grid-mv">
+
+            <article class="info-card">
+
+                <h2>🎯 Misión</h2>
+
+                <p>
+                    Brindar soluciones integrales para la comercialización y
+                    distribución de productos cosméticos mediante una gestión
+                    eficiente, ofreciendo un servicio confiable y orientado a la
+                    satisfacción de nuestros clientes.
+                </p>
+
+            </article>
+
+            <article class="info-card">
+
+                <h2>🚀 Visión</h2>
+
+                <p>
+                    Consolidarnos como una empresa referente en la comercialización
+                    de productos cosméticos, destacando por la innovación,
+                    excelencia en el servicio y mejora continua de nuestros procesos.
+                </p>
+
+            </article>
+
+        </section>
+
+       <!-- SERVICIOS -->
+
+        <section class="info-card">
+
+            <h2>¿Qué ofrecemos?</h2>
+
+            <div class="lista-servicios">
+
+                <a href="/cliente/catalogo?categoria=Maquillaje" class="servicio">
+
+                    <span>💄</span>
+
+                    <h3>Maquillaje</h3>
+
+                </a>
+
+                <a href="/cliente/catalogo?categoria=Cuidado Facial" class="servicio">
+
+                    <span>🧴</span>
+
+                    <h3>Skincare</h3>
+
+                </a>
+
+                <a href="/cliente/catalogo?categoria=Fragancias" class="servicio">
+
+                    <span>🌸</span>
+
+                    <h3>Fragancias</h3>
+
+                </a>
+
+                <a href="/cliente/catalogo?categoria=Cuidado Capilar" class="servicio">
+
+                    <span>💇</span>
+
+                    <h3>Cuidado Capilar</h3>
+
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- POR QUÉ ELEGIRNOS -->
+
+        <section class="info-card">
+
+            <h2>¿Por qué elegir CosmeLogix?</h2>
+
+            <p>
+
+                ✔ Productos de calidad seleccionados cuidadosamente.<br><br>
+
+                ✔ Compra segura y proceso simple.<br><br>
+
+                ✔ Seguimiento completo de pedidos.<br><br>
+
+                ✔ Atención personalizada para nuestros clientes.<br><br>
+
+                ✔ Plataforma moderna desarrollada para mejorar la experiencia de compra.
+
+            </p>
+
+        </section>
+
+    </main>
+    <script src="/static/js/header_cliente.js"></script>
+    <script src="/static/js/auth.js"></script>
+
+</body>
+
+</html>

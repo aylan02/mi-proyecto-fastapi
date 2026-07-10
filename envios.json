@@ -190,5 +190,67 @@
         "vehiculo": "",
         "fecha_programada": null,
         "venta_id": 10
+    },
+    {
+        "id_envio": 11,
+        "productos": [
+            {
+                "producto_id": 23,
+                "cantidad": 1
+            },
+            {
+                "producto_id": 6,
+                "cantidad": 1
+            },
+            {
+                "producto_id": 22,
+                "cantidad": 1
+            }
+        ],
+        "destinatario": "Fernanda",
+        "direccion": "Arturo Perez canto 1358",
+        "observacion": "hola",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-10 16:53:44",
+        "ruta": "",
+        "vehiculo": "",
+        "fecha_programada": null,
+        "venta_id": 11
+    },
+    {
+        "id_envio": 12,
+        "productos": [
+            {
+                "producto_id": 2,
+                "cantidad": 1
+            }
+        ],
+        "destinatario": "Fernanda",
+        "direccion": "Arturo Perez canto 1358",
+        "observacion": "josos",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-10 18:11:55",
+        "ruta": "",
+        "vehiculo": "",
+        "fecha_programada": null,
+        "venta_id": 12
+    },
+    {
+        "id_envio": 13,
+        "productos": [
+            {
+                "producto_id": 8,
+                "cantidad": 1
+            }
+        ],
+        "destinatario": "Fernanda",
+        "direccion": "Arturo Perez canto 1358",
+        "observacion": "hola",
+        "estado": "Preparando",
+        "fecha_envio": "2026-07-10 18:30:42",
+        "ruta": "",
+        "vehiculo": "",
+        "fecha_programada": null,
+        "venta_id": 13
     }
 ]

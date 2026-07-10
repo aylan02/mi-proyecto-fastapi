@@ -45,3 +45,49 @@ function obtenerUsuario() {
     return sesionActual.user;
 
 }
+
+async function agregarProductoAlCarrito(productoId) {
+
+    try {
+
+        await cargarSesion();
+
+        const clienteId = obtenerClienteId();
+
+        const respuesta = await fetch("/carrito/", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                cliente_id: clienteId,
+                producto_id: productoId,
+                cantidad: 1
+
+            })
+
+        });
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok) {
+
+            alert(resultado.detail);
+            return;
+
+        }
+
+        alert("Producto agregado al carrito.");
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Error al agregar el producto.");
+
+    }
+
+}

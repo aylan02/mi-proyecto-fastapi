@@ -109,7 +109,7 @@ function renderProductos(carrito) {
             <div class="item-checkout">
 
                 <img
-                    src="${producto.imagen}"
+                    src="/static/img/productos/${producto.imagen}"
                     alt="${producto.nombre}"
                     class="item-imagen"
                 >

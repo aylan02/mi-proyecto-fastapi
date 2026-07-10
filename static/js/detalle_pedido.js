@@ -134,18 +134,17 @@ function renderDetalle(pedido) {
 
         <h3>Productos</h3>
     `;
-
     pedido.detalles.forEach(producto => {
 
         html += `
 
             <div class="producto-detalle">
 
-                <div class="producto-imagen">
-
-                    📦
-
-                </div>
+                <img
+                    src="/static/img/productos/${producto.imagen}"
+                    alt="${producto.nombre}"
+                    class="producto-imagen"
+                >
 
                 <div class="producto-info">
 
