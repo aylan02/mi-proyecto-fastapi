@@ -1,0 +1,153 @@
+/* ===========================
+    VARIABLES 
+=========================== */
+:root{
+
+    --color-primario:#1f6fd5;
+    --color-primario-hover:#1657aa;
+    --color-fondo:#f8f9fa;
+    --color-blanco:#ffffff;
+    --color-texto:#333333;
+    --color-secundario:#666666;
+    --radio:18px;
+    --radio-pequeno:10px;
+    --sombra-suave:0 8px 25px rgba(0,0,0,.08);
+    --sombra-hover:0 15px 35px rgba(0,0,0,.12);
+    --transicion:.3s;
+    --espaciado:20px;
+    --color-exito:#2ecc71;
+    --color-error:#e74c3c;
+    --color-advertencia:#f39c12;
+
+}
+
+.contenedor-historial{
+
+    max-width:1200px;
+    margin:40px auto;
+    padding:0 20px;
+
+}
+
+.contenedor-historial h1{
+
+    color:var(--color-primario);
+    margin-bottom:35px;
+
+}
+
+#lista-historial{
+
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+
+}
+
+.card-historial{
+
+    background:var(--color-blanco);
+
+    border-radius:var(--radio);
+
+    box-shadow:var(--sombra-suave);
+
+    padding:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:40px;
+
+    transition:var(--transicion);
+
+}
+
+.card-historial:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.info-historial{
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+}
+
+.info-historial h3{
+
+    color:var(--color-primario);
+
+}
+
+.info-historial p{
+
+    color:var(--color-texto);
+
+}
+
+.estado{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:50px;
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    width:max-content;
+
+}
+
+.estado.registrada{
+
+    background:#d8f5e3;
+
+    color:#228B22;
+
+}
+
+.estado.anulada{
+
+    background:#ffe3e3;
+
+    color:#d63031;
+
+}
+
+.btn-detalle{
+
+    background:var(--color-primario);
+
+    color:white;
+
+    border:none;
+
+    border-radius:var(--radio-pequeno);
+
+    padding:12px 24px;
+
+    min-width:150px;
+
+    cursor:pointer;
+
+    transition:var(--transicion);
+
+    flex-shrink:0;
+
+}
+
+.btn-detalle:hover{
+
+    background:var(--color-secundario);
+
+}

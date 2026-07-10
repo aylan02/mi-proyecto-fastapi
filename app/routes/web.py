@@ -47,6 +47,44 @@ def carrito(request: Request):
         context={}
     )
 
+@router.get("/cliente/checkout", response_class=HTMLResponse)
+def checkout(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/checkout.html",
+        context={}
+    )
+
+
+@router.get("/cliente/pago", response_class=HTMLResponse)
+def pago(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/pago.html",
+        context={}
+    )
+
+@router.get("/cliente/historial", response_class=HTMLResponse)
+def historial(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/historial.html",
+        context={}
+    )
+
+@router.get("/cliente/detalle-pedido/{venta_id}", response_class=HTMLResponse)
+def detalle_pedido(request: Request, venta_id: int):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/detalle_pedido.html",
+        context={
+            "venta_id": venta_id
+        }
+    )
 
 # ===========================
 # PANEL ADMINISTRATIVO

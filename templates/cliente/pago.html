@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pago | CosmeLogix</title>
+
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/css/pago.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="navbar">
+
+        <a href="/" class="logo">
+
+            <img
+                src="/static/img/logo-cosmelogix.jpg"
+                alt="CosmeLogix"
+            >
+
+            <span>CosmeLogix</span>
+
+        </a>
+
+        <nav>
+
+            <a href="/">Inicio</a>
+
+            <a href="/cliente/catalogo">
+                Catálogo
+            </a>
+
+            <a href="#">
+                Nosotros
+            </a>
+
+            <a href="#">
+                Contacto
+            </a>
+
+        </nav>
+
+        <div class="acciones">
+
+            <a
+                href="/cliente/login"
+                class="btn-login"
+            >
+                Iniciar sesión
+            </a>
+
+            <a
+                href="/cliente/carrito"
+                class="btn-carrito"
+            >
+                🛒
+            </a>
+
+        </div>
+
+    </header>
+   
+    <!-- PAGO -->
+
+    <main class="pago">
+
+        <div class="container pago-grid">
+
+            <!-- MÉTODO DE PAGO -->
+
+            <section class="metodos-pago">
+
+                <h2>Método de Pago</h2>
+
+                <p class="descripcion">
+
+                    Seleccione el método con el que desea realizar su compra.
+
+                </p>
+
+                <!-- CRÉDITO -->
+
+                <div class="tarjeta-pago">
+
+                    <input
+                        type="radio"
+                        id="credito"
+                        name="metodo"
+                        value="credito"
+                    >
+
+                    <label for="credito">
+
+                        <div>
+
+                            <h3>
+                                <i class="fa-regular fa-credit-card"></i>
+                                Tarjeta de Crédito
+                            </h3>
+
+                            <div class="logos">
+                                <i class="fa-brands fa-cc-visa"></i>
+                                <i class="fa-brands fa-cc-mastercard"></i>
+                                <i class="fa-brands fa-cc-amex"></i>
+                            </div>
+
+                        </div>
+
+                        <span class="seleccionar">
+                            Seleccionar →
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <!-- DÉBITO -->
+
+                <div class="tarjeta-pago">
+
+                    <input
+                        type="radio"
+                        id="debito"
+                        name="metodo"
+                        value="debito"
+                    >
+
+                    <label for="debito">
+
+                        <div>
+
+                            <h3>
+                                <i class="fa-solid fa-building-columns"></i>
+                                Tarjeta de Débito
+                            </h3>
+
+                            <div class="logos">
+                                <i class="fa-brands fa-cc-visa"></i>
+                                <i class="fa-brands fa-cc-mastercard"></i>
+                            </div>
+
+                        </div>
+
+                        <span class="seleccionar">
+                            Seleccionar →
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <!-- TRANSFERENCIA -->
+
+                <div class="tarjeta-pago">
+
+                    <input
+                        type="radio"
+                        id="transferencia"
+                        name="metodo"
+                        value="transferencia"
+                    >
+
+                    <label for="transferencia">
+
+                        <div>
+
+                            <h3>
+                                <i class="fa-solid fa-building-columns"></i>
+                                Transferencia Bancaria
+                            </h3>
+
+                            <p>
+                                Transferencia electrónica inmediata.
+                            </p>
+
+                        </div>
+
+                        <span class="seleccionar">
+                            Seleccionar →
+                        </span>
+
+                    </label>
+
+                </div>
+
+                <!-- FORMULARIO -->
+
+                <div id="formulario-tarjeta">
+
+                    <h2>Datos de la Tarjeta</h2>
+                   <div
+                        id="tarjeta-preview"
+                        class="tarjeta-visual"
+                    >
+                    <div class="tarjeta-inner">
+
+                        <!-- CARA FRONTAL -->
+
+                        <div class="cara tarjeta-frontal">
+
+                            <div class="chip">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+
+                            <div
+                                id="numero-preview"
+                                class="numero-preview"
+                            >
+                                0000 0000 0000 0000
+                            </div>
+
+                            <div class="footer-tarjeta">
+
+                                <div>
+
+                                    <span>Titular</span>
+
+                                    <p id="titular-preview">
+                                        NOMBRE APELLIDO
+                                    </p>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Vence</span>
+
+                                    <p id="fecha-preview">
+                                        MM/AA
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="logo-tarjeta">
+
+                                <i
+                                    id="logo-preview"
+                                    class="fa-brands fa-cc-visa"
+                                ></i>
+
+                            </div>
+
+                        </div>
+
+                        <!-- CARA TRASERA -->
+
+                        <div class="cara tarjeta-trasera">
+
+                            <div class="banda-magnetica"></div>
+
+                            <div class="zona-cvv">
+
+                                <span>CVV</span>
+
+                                <div id="cvv-preview">
+                                    ***
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                    <div class="grupo">
+
+                        <label>Nombre del Titular</label>
+
+                        <input
+                            type="text"
+                            id="titular"
+                            placeholder="Nombre como aparece en la tarjeta"
+                        >
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Número de Tarjeta</label>
+
+                        <input
+                            type="text"
+                            id="numero"
+                            maxlength="19"
+                            placeholder="0000 0000 0000 0000"
+                        >
+
+                    </div>
+
+                    <div class="fila-inputs">
+
+                        <div class="grupo">
+
+                            <label>Fecha</label>
+
+                            <input
+                                type="text"
+                                id="fecha"
+                                maxlength="5"
+                                placeholder="MM/AA"
+                            >
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>CVV</label>
+
+                            <input
+                                type="password"
+                                id="cvv"
+                                maxlength="4"
+                                placeholder="123"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- RESUMEN -->
+
+            <aside class="resumen-pago">
+
+                <h2>Resumen</h2>
+
+                <div id="lista-pago">
+
+                </div>
+
+                <hr>
+
+                <div class="fila">
+
+                    <span>Productos</span>
+
+                    <span id="cantidad-productos">0</span>
+
+                </div>
+
+                <div class="fila">
+
+                    <span>Subtotal</span>
+
+                    <span id="subtotal">$0</span>
+
+                </div>
+
+                <div class="fila">
+
+                    <span>Envío</span>
+
+                    <span>Gratis</span>
+
+                </div>
+
+                <div class="fila total">
+
+                    <span>Total</span>
+
+                    <span id="total">$0</span>
+
+                </div>
+
+                <button
+                    id="btn-confirmar"
+                    class="btn-confirmar"
+                >
+                    Confirmar Compra
+                </button>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <script src="/static/js/pago.js"></script>
+
+</body>
+
+</html>

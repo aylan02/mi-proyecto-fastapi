@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | CosmeLogix</title>
+
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/css/checkout.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+   <header class="navbar">
+
+        <a href="/" class="logo">
+
+            <img
+                src="/static/img/logo-cosmelogix.jpg"
+                alt="CosmeLogix"
+            >
+
+            <span>CosmeLogix</span>
+
+        </a>
+
+        <nav>
+
+            <a href="/">Inicio</a>
+
+            <a href="/cliente/catalogo">
+                Catálogo
+            </a>
+
+            <a href="#">
+                Nosotros
+            </a>
+
+            <a href="#">
+                Contacto
+            </a>
+
+        </nav>
+
+        <div class="acciones">
+
+            <a
+                href="/cliente/login"
+                class="btn-login"
+            >
+                Iniciar sesión
+            </a>
+
+            <a
+                href="/cliente/carrito"
+                class="btn-carrito"
+            >
+                🛒
+            </a>
+
+        </div>
+
+    </header>
+
+    <!-- CHECKOUT -->
+
+    <main class="checkout">
+
+        <div class="container checkout-grid">
+
+            <!-- DATOS DEL CLIENTE -->
+
+            <section class="checkout-info">
+
+                <h2>Información de envío</h2>
+
+                <form id="form-checkout">
+
+                    <div class="grupo">
+
+                        <label>Nombre completo</label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Ingrese su nombre"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Correo electrónico</label>
+
+                        <input
+                            type="email"
+                            id="correo"
+                            placeholder="correo@email.com"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Teléfono</label>
+
+                        <input
+                            type="text"
+                            id="telefono"
+                            placeholder="+56 9 ..."
+                            required
+                        >
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Dirección</label>
+
+                        <input
+                            type="text"
+                            id="direccion"
+                            placeholder="Ingrese su dirección"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Ciudad</label>
+
+                        <input
+                            type="text"
+                            id="ciudad"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Región</label>
+
+                        <input
+                            type="text"
+                            id="region"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Observaciones</label>
+
+                        <textarea
+                            id="observacion"
+                            placeholder="Ej: Entregar después de las 18:00"
+                            rows="4"
+                        ></textarea>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+            <!-- RESUMEN -->
+
+            <aside class="checkout-resumen">
+
+                <h2>Resumen del pedido</h2>
+
+                <div id="lista-checkout">
+
+                    <!-- Productos -->
+
+                </div>
+
+                <hr>
+
+                <div class="fila">
+
+                    <span>Productos</span>
+
+                    <span id="cantidad-productos">0</span>
+
+                </div>
+
+                <div class="fila">
+
+                    <span>Subtotal</span>
+
+                    <span id="subtotal">$0</span>
+
+                </div>
+
+                <div class="fila">
+
+                    <span>Envío</span>
+
+                    <span>Gratis</span>
+
+                </div>
+
+                <div class="fila total">
+
+                    <span>Total</span>
+
+                    <span id="total">$0</span>
+
+                </div>
+
+                <button
+                    id="btn-pagar"
+                    class="btn-checkout"
+                >
+                    Continuar al pago
+                </button>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <script src="/static/js/checkout.js"></script>
+
+</body>
+
+</html>

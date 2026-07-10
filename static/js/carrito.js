@@ -16,6 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    const btnCheckout = document.getElementById("btn-checkout");
+
+    if (btnCheckout) {
+
+        btnCheckout.addEventListener("click", () => {
+
+            window.location.href = "/cliente/checkout";
+
+        });
+
+    }
+
 });
 
 async function cargarCarrito() {

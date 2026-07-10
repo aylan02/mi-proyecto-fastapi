@@ -62,5 +62,43 @@
         "fecha": "2026-07-03 03:47:39",
         "total": 11980.0,
         "estado": "Registrada"
+    },
+    {
+        "id": 4,
+        "cliente_id": 1,
+        "cliente_nombre": "Fernanda Flores",
+        "detalles": [
+            {
+                "producto_id": 2,
+                "producto_nombre": "Base Líquida",
+                "precio_unitario": 10990.0,
+                "cantidad": 1,
+                "subtotal": 10990.0
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "",
+        "fecha": "2026-07-09 20:49:09",
+        "total": 10990.0,
+        "estado": "Registrada"
+    },
+    {
+        "id": 5,
+        "cliente_id": 1,
+        "cliente_nombre": "Fernanda Flores",
+        "detalles": [
+            {
+                "producto_id": 4,
+                "producto_nombre": "Corrector HD",
+                "precio_unitario": 6990.0,
+                "cantidad": 1,
+                "subtotal": 6990.0
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "en la puerta ",
+        "fecha": "2026-07-09 21:12:46",
+        "total": 6990.0,
+        "estado": "Registrada"
     }
 ]

@@ -15,8 +15,10 @@ from app.routes.roles import router as roles_router
 from app.routes.reportes import router as reportes_router
 from app.routes.pedidos import router as pedidos_router
 from app.routes.carritos import router as carrito_router
+from app.routes.historial import router as historial_router
+from app.routes.detalle_pedido import router as detalle_pedido_router
 from app.routes import rutas
-
+from app.routes import compras
 
 app = FastAPI(
     title="API de Envíos de Cosméticos",
@@ -41,5 +43,7 @@ app.include_router(roles_router)
 app.include_router(reportes_router)
 app.include_router(pedidos_router)
 app.include_router(carrito_router)
+app.include_router(historial_router)
+app.include_router(detalle_pedido_router)
 app.include_router(rutas.router)
-
+app.include_router(compras.router)
