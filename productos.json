@@ -1,5 +1,5 @@
 [
- {
+    {
         "id": 1,
         "codigo": "PROD001",
         "nombre": "Labial Mate",
@@ -21,7 +21,7 @@
         "marca": "L'Oréal",
         "categoria": "Maquillaje",
         "precio": 10990.0,
-        "stock": 6,
+        "stock": 5,
         "descripcion": "Base líquida de cobertura media con acabado natural.",
         "imagen": "base-liquida.jpg",
         "destacado": true,
@@ -51,7 +51,7 @@
         "marca": "Maybelline",
         "categoria": "Maquillaje",
         "precio": 6990.0,
-        "stock": 15,
+        "stock": 14,
         "descripcion": "Corrector líquido de alta cobertura para un acabado natural.",
         "imagen": "corrector-hd.jpg",
         "destacado": true,
@@ -180,7 +180,7 @@
         "estado": "Activo"
     },
     {
-         "id": 13,
+        "id": 13,
         "codigo": "PROD013",
         "nombre": "Protector Solar Facial FPS 50",
         "marca": "Eucerin",
@@ -195,7 +195,7 @@
         "estado": "Activo"
     },
     {
-       "id": 14,
+        "id": 14,
         "codigo": "PROD014",
         "nombre": "Agua Micelar",
         "marca": "Garnier",
@@ -479,6 +479,4 @@
         "oferta": false,
         "estado": "Activo"
     }
-
 ]
-

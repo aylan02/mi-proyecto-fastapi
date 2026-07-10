@@ -61,5 +61,23 @@
         "motivo": "Merma • tarde",
         "usuario": "Administrador General",
         "fecha": "2026-07-04T19:33:32.252182"
+    },
+    {
+        "id": 8,
+        "producto_id": 2,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Venta realizada",
+        "usuario": "Sistema",
+        "fecha": "2026-07-09T20:49:09.690745"
+    },
+    {
+        "id": 9,
+        "producto_id": 4,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Venta realizada",
+        "usuario": "Sistema",
+        "fecha": "2026-07-09T21:12:46.137848"
     }
 ]

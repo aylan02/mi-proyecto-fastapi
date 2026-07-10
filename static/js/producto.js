@@ -1,29 +1,91 @@
 const id = window.location.pathname.split("/").pop();
 
+const clienteId = 1;
+
 async function cargarProducto() {
 
-    const respuesta = await fetch(`/productos/${id}`);
+    try {
 
-    const producto = await respuesta.json();
+        const respuesta = await fetch(`/productos/${id}`);
 
-    document.getElementById("nombre-producto").textContent =
-        producto.nombre;
+        if (!respuesta.ok) {
+            throw new Error("No se pudo cargar el producto.");
+        }
 
-    document.getElementById("marca-producto").textContent =
-        producto.marca;
+        const producto = await respuesta.json();
 
-    document.getElementById("precio-producto").textContent =
-        "$" + producto.precio.toLocaleString("es-CL");
+        document.getElementById("nombre-producto").textContent =
+            producto.nombre;
 
-    document.getElementById("descripcion-producto").textContent =
-        producto.descripcion;
+        document.getElementById("marca-producto").textContent =
+            producto.marca;
 
-    document.getElementById("stock-producto").textContent =
-        "Stock disponible: " + producto.stock;
+        document.getElementById("precio-producto").textContent =
+            "$" + producto.precio.toLocaleString("es-CL");
 
-    document.querySelector(".categoria").textContent =
-        producto.categoria;
+        document.getElementById("descripcion-producto").textContent =
+            producto.descripcion;
+
+        document.getElementById("stock-producto").textContent =
+            "Stock disponible: " + producto.stock;
+
+        document.querySelector(".categoria").textContent =
+            producto.categoria;
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
+
+async function agregarAlCarrito() {
+    
+    try {
+
+        const respuesta = await fetch("/carrito/", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                cliente_id: clienteId,
+                producto_id: Number(id),
+                cantidad: 1
+
+            })
+
+        });
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok) {
+
+            alert(resultado.detail);
+
+            return;
+
+        }
+
+        alert("Producto agregado al carrito.");
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Error al agregar el producto.");
+
+    }
+
+}
+
+document
+    .getElementById("btn-agregar-carrito")
+    .addEventListener("click", agregarAlCarrito);
 
 cargarProducto();

@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "venta_id": 4,
+        "cliente_id": 1,
+        "direccion": "",
+        "estado": "Pendiente",
+        "fecha": "2026-07-09 20:49:09"
+    },
+    {
+        "id": 2,
+        "venta_id": 5,
+        "cliente_id": 1,
+        "direccion": "",
+        "estado": "Pendiente",
+        "fecha": "2026-07-09 21:12:46"
+    }
+]
