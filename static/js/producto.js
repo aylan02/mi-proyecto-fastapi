@@ -1,6 +1,5 @@
+let clienteId = null;
 const id = window.location.pathname.split("/").pop();
-
-const clienteId = 1;
 
 async function cargarProducto() {
 
@@ -41,8 +40,12 @@ async function cargarProducto() {
 }
 
 async function agregarAlCarrito() {
-    
+
     try {
+
+        await cargarSesion();
+
+        const clienteId = obtenerClienteId();
 
         const respuesta = await fetch("/carrito/", {
 
@@ -89,3 +92,5 @@ document
     .addEventListener("click", agregarAlCarrito);
 
 cargarProducto();
+
+verificarSesion();

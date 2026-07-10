@@ -2,7 +2,7 @@ import json
 import os
 
 ARCHIVO_PRODUCTOS = "productos.json"
-ARCHIVO_HISTORIAL = "historial.json"
+ARCHIVO_ENVIOS = "envios.json"
 ARCHIVO_MOVIMIENTOS = "movimientos_inventario.json"
 ARCHIVO_CARRITO = "carrito.json"
 
@@ -47,7 +47,10 @@ def guardar_datos(ruta, datos):
         json.dump(datos, archivo, indent=4, ensure_ascii=False)
 
 productos = cargar_datos(ARCHIVO_PRODUCTOS, productos_iniciales)
-historial_envios = cargar_datos(ARCHIVO_HISTORIAL, [])
+envios = cargar_datos(
+    ARCHIVO_ENVIOS,
+    []
+)
 movimientos_inventario = cargar_datos(
     ARCHIVO_MOVIMIENTOS,
     []

@@ -79,5 +79,50 @@
         "motivo": "Venta realizada",
         "usuario": "Sistema",
         "fecha": "2026-07-09T21:12:46.137848"
+    },
+    {
+        "id": 10,
+        "producto_id": 7,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Venta realizada",
+        "usuario": "Sistema",
+        "fecha": "2026-07-10T14:27:04.312683"
+    },
+    {
+        "id": 11,
+        "producto_id": 7,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Venta realizada",
+        "usuario": "Sistema",
+        "fecha": "2026-07-10T14:37:29.307005"
+    },
+    {
+        "id": 12,
+        "producto_id": 4,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Venta realizada",
+        "usuario": "Sistema",
+        "fecha": "2026-07-10T14:39:08.627553"
+    },
+    {
+        "id": 13,
+        "producto_id": 7,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Venta realizada",
+        "usuario": "Sistema",
+        "fecha": "2026-07-10T14:44:20.532184"
+    },
+    {
+        "id": 14,
+        "producto_id": 7,
+        "tipo": "Salida",
+        "cantidad": 1,
+        "motivo": "Venta realizada",
+        "usuario": "Sistema",
+        "fecha": "2026-07-10T14:48:10.634540"
     }
 ]

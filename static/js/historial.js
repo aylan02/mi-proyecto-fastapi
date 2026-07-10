@@ -1,26 +1,18 @@
-const clienteId = 1;
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    cargarHistorial();
-
-});
+verificarSesion();
 
 async function cargarHistorial() {
 
     try {
 
-        const respuesta = await fetch(
-            `/historial/${clienteId}`
-        );
+        const respuesta = await fetch("/compras");
 
         if (!respuesta.ok) {
-            throw new Error("No se pudo cargar el historial.");
+            throw new Error("No fue posible cargar el historial.");
         }
 
-        const historial = await respuesta.json();
+        const compras = await respuesta.json();
 
-        renderHistorial(historial);
+        renderHistorial(compras);
 
     } catch (error) {
 
@@ -30,14 +22,13 @@ async function cargarHistorial() {
 
 }
 
-function renderHistorial(historial) {
+function renderHistorial(compras) {
 
-    const contenedor =
-        document.getElementById("lista-historial");
+    const contenedor = document.getElementById("lista-historial");
 
     if (!contenedor) return;
 
-    if (historial.length === 0) {
+    if (compras.length === 0) {
 
         contenedor.innerHTML = `
             <p>No existen compras realizadas.</p>
@@ -49,49 +40,37 @@ function renderHistorial(historial) {
 
     let html = "";
 
-    historial.forEach(compra => {
+    compras.forEach(compra => {
 
         html += `
-        <div class="card-historial">
+            <div class="card-historial">
 
-            <div class="info-historial">
+                <div class="info-historial">
 
-                <h3>Pedido #${compra.id}</h3>
+                    <h3>Pedido #${compra.id}</h3>
 
-                <p>
-                    <strong>Fecha:</strong>
-                    ${compra.fecha}
-                </p>
+                    <p><strong>Fecha:</strong> ${compra.fecha}</p>
 
-                <p>
-                    <strong>Total:</strong>
-                    $${compra.total.toLocaleString()}
-                </p>
+                    <p><strong>Total:</strong> $${compra.total.toLocaleString()}</p>
 
-                <p>
-                    <strong>Método:</strong>
-                    ${compra.metodo_pago}
-                </p>
+                    <p><strong>Método:</strong> ${compra.metodo_pago}</p>
 
-                <span class="estado ${compra.estado.toLowerCase()}">
+                    <span class="estado ${compra.estado.toLowerCase()}">
+                        ${compra.estado}
+                    </span>
 
-                    ${compra.estado}
+                </div>
 
-                </span>
+                <button
+                    class="btn-detalle"
+                    data-id="${compra.id}"
+                >
+                    Ver detalle
+                </button>
 
             </div>
-
-            <button
-                class="btn-detalle"
-                data-id="${compra.id}"
-            >
-
-                Ver detalle
-
-            </button>
-
-        </div>
         `;
+
     });
 
     contenedor.innerHTML = html;
@@ -108,4 +87,7 @@ function renderHistorial(historial) {
         });
 
     });
+
 }
+
+cargarHistorial();

@@ -100,3 +100,5 @@ categoria.addEventListener("change", () => {
     );
 
 });
+
+verificarSesion();

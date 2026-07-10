@@ -1,31 +1,53 @@
-const clienteId = 1;
+document.addEventListener("DOMContentLoaded", async () => {
 
-document.addEventListener("DOMContentLoaded", () => {
+    try {
 
-    cargarCheckout();
-     const formulario = document.getElementById("form-checkout");
-     const btnPagar = document.getElementById("btn-pagar");
+        await cargarSesion();
 
-     btnPagar.addEventListener("click", (event) => {
+        cargarCheckout(obtenerClienteId());
 
-         event.preventDefault();
+    } catch (error) {
 
-         if (!formulario.checkValidity()) {
+        console.error(error);
 
-             formulario.reportValidity();
+        window.location.href = "/cliente/login";
 
-             return;
+        return;
 
-         }
+    }
 
-         const datosCheckout = {
+    const formulario = document.getElementById("form-checkout");
+
+    const btnPagar = document.getElementById("btn-pagar");
+
+    btnPagar.addEventListener("click", (event) => {
+
+        event.preventDefault();
+
+        if (!formulario.checkValidity()) {
+
+            formulario.reportValidity();
+
+            return;
+
+        }
+
+        const datosCheckout = {
+
             destinatario: document.getElementById("nombre").value,
+
             direccion: document.getElementById("direccion").value,
+
             correo: document.getElementById("correo").value,
+
             telefono: document.getElementById("telefono").value,
+
             ciudad: document.getElementById("ciudad").value,
+
             region: document.getElementById("region").value,
+
             observacion: document.getElementById("observacion").value
+
         };
 
         sessionStorage.setItem(
@@ -35,10 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.location.href = "/cliente/pago";
 
-     });
+    });
+
 });
 
-async function cargarCheckout() {
+async function cargarCheckout(clienteId) {
 
     try {
 
@@ -131,3 +154,4 @@ function actualizarResumen(carrito) {
 
 }
 
+verificarSesion();

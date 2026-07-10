@@ -1,0 +1,137 @@
+.perfil-container{
+
+    max-width:900px;
+
+    margin:60px auto;
+
+    padding:0 20px;
+
+}
+
+.perfil-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.perfil-card h1{
+
+    font-size:2rem;
+
+    margin-bottom:10px;
+
+}
+
+.perfil-subtitulo{
+
+    color:#666;
+
+    margin-bottom:35px;
+
+}
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:22px;
+
+}
+
+.campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.campo label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+.campo input{
+
+    padding:14px;
+
+    border:1px solid #d8d8d8;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+}
+
+.campo input:focus{
+
+    outline:none;
+
+    border-color:#2f6fde;
+
+}
+
+.acciones-perfil{
+
+    margin-top:35px;
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn-guardar{
+
+    background:#2f6fde;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.btn-danger{
+
+    background:#e74c3c;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+@media(max-width:768px){
+
+.grid{
+
+grid-template-columns:1fr;
+
+}
+
+}

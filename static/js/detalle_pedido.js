@@ -1,8 +1,20 @@
 const ventaId = window.location.pathname.split("/").pop();
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    cargarDetallePedido();
+    try {
+
+        await cargarSesion();
+
+        await cargarDetallePedido();
+
+    } catch (error) {
+
+        console.error(error);
+
+        window.location.href = "/cliente/login";
+
+    }
 
 });
 
@@ -207,3 +219,5 @@ function renderDetalle(pedido) {
         });
 
 }
+
+verificarSesion();

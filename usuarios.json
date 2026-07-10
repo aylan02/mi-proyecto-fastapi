@@ -2,7 +2,7 @@
     {
         "id": 1,
         "username": "admin",
-        "password": "1234",
+        "password": "$2b$12$Q1A1ZIoVbTlIoBYsWIradO8mWLZvVRMtILTtrm2jHib1TGi.edgxS",
         "nombre": "Administrador General",
         "correo": "admin@cosmelogix.cl",
         "rol": "Administrador",
@@ -11,7 +11,7 @@
     {
         "id": 2,
         "username": "ejecutivo",
-        "password": "1234",
+        "password": "$2b$12$ZS9UdSz0sYoEjtqYDrfkT.qWMgpmDy.cvZtj1f/YBjJ0YbymJbiby",
         "nombre": "Fernanda Flores",
         "correo": "ventas@cosmelogix.cl",
         "rol": "Ejecutivo Comercial",
@@ -20,7 +20,7 @@
     {
         "id": 3,
         "username": "inventario",
-        "password": "1234",
+        "password": "$2b$12$l.bDerEOmSlMswgUKDh6ze8gv2RFmU1yZh3/4aV38tPgYPnXcEcGC",
         "nombre": "Julio Moraga",
         "correo": "inventario@cosmelogix.cl",
         "rol": "Encargado de Inventario",
@@ -29,10 +29,64 @@
     {
         "id": 4,
         "username": "logistica",
-        "password": "1234",
+        "password": "$2b$12$n58qNlQ3KUyEfeD3I5Eyv.upFHhXltPWFx07NTbbv5PfQZuGHU7GO",
         "nombre": "Aylan Alvarez",
         "correo": "logistica@cosmelogix.cl",
         "rol": "Coordinador Logístico",
+        "estado": "Activo"
+    },
+    {
+        "id": 5,
+        "username": "fernanda",
+        "password": "$2b$12$xR8FR/2IldFQaJ72lFSo5upmO/SZAEUWTQVp/IawEu2Um9J0cOLe.",
+        "nombre": "Fernanda Flores",
+        "correo": "fernanda@gmail.com",
+        "rol": "Cliente",
+        "estado": "Activo"
+    },
+    {
+        "id": 6,
+        "username": "fernandaflores",
+        "password": "$2b$12$FHA4CWGme4JKLeDm.jCNNuXQJOM.5piCLa/hucIKOgvSvUyEK5i0G",
+        "nombre": "Fernanda Flores Ch",
+        "correo": "fernandaflores@gmail.com",
+        "rol": "Cliente",
+        "estado": "Activo"
+    },
+    {
+        "id": 7,
+        "username": "fernanda flores",
+        "password": "$2b$12$obaDs7/8w8PlQdMb7nTPwu0pWzFtDEWWP4l/yuhQK0a5b.P3U3K2K",
+        "nombre": "Fernanda",
+        "correo": "floreschoquerivefernanda@gmail.com",
+        "rol": "Cliente",
+        "estado": "Activo"
+    },
+    {
+        "id": 8,
+        "username": "fer2",
+        "password": "$2b$12$Ut4MFlvEbqmtGR846mqwcO54IVpVhBI6Oo89iR6K5mzYC0Eej9bUu",
+        "nombre": "Fernanda",
+        "correo": "ferfloresc@estudiantesunap.cl",
+        "rol": "Cliente",
+        "estado": "Activo"
+    },
+    {
+        "id": 9,
+        "username": "jose",
+        "password": "$2b$12$9uHFpmBXF0Pv0CXz.dRtuOlHr30VwJQQbqGewnCOA/VvbIcqLEubi",
+        "nombre": "Jose",
+        "correo": "joseorellana@gmail.com",
+        "rol": "Cliente",
+        "estado": "Activo"
+    },
+    {
+        "id": 10,
+        "username": "fer",
+        "password": "$2b$12$WHHArOJuNF5SYU2HHT5skudolzWg0LgOzVw4w9o/3823oLYw6KQL2",
+        "nombre": "Fernanda",
+        "correo": "ferfloresc@gmail.com",
+        "rol": "Cliente",
         "estado": "Activo"
     }
 ]

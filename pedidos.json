@@ -14,5 +14,45 @@
         "direccion": "",
         "estado": "Pendiente",
         "fecha": "2026-07-09 21:12:46"
+    },
+    {
+        "id": 3,
+        "venta_id": 6,
+        "cliente_id": 9,
+        "direccion": "",
+        "estado": "Pendiente",
+        "fecha": "2026-07-10 14:27:04"
+    },
+    {
+        "id": 4,
+        "venta_id": 7,
+        "cliente_id": 9,
+        "direccion": "Arturo Perez canto 1358",
+        "estado": "Pendiente",
+        "fecha": "2026-07-10 14:37:29"
+    },
+    {
+        "id": 5,
+        "venta_id": 8,
+        "cliente_id": 9,
+        "direccion": "Arturo Perez canto 1358",
+        "estado": "Pendiente",
+        "fecha": "2026-07-10 14:39:08"
+    },
+    {
+        "id": 6,
+        "venta_id": 9,
+        "cliente_id": 9,
+        "direccion": "Arturo Perez canto 1358",
+        "estado": "Pendiente",
+        "fecha": "2026-07-10 14:44:20"
+    },
+    {
+        "id": 7,
+        "venta_id": 10,
+        "cliente_id": 9,
+        "direccion": "Arturo Perez canto 1358",
+        "estado": "Pendiente",
+        "fecha": "2026-07-10 14:48:10"
     }
 ]

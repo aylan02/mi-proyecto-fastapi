@@ -1,4 +1,20 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+    try {
+
+        await cargarSesion();
+
+        await cargarResumenPago(obtenerClienteId());
+
+    } catch (error) {
+
+        console.error(error);
+
+        window.location.href = "/cliente/login";
+
+        return;
+
+    }
 
     const radios = document.querySelectorAll('input[name="metodo"]');
 
@@ -24,8 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     });
-
-});
 
 // ==========================
 // VISTA PREVIA DE LA TARJETA
@@ -244,16 +258,22 @@ inputNumero.addEventListener("focus", () => {
 });
 
 // ==========================
-// CONFIRMAR COMPRA
+// RESUMEN DEL PAGO
 // ==========================
-
-const clienteId = 1;
-
 const btnConfirmar = document.getElementById("btn-confirmar");
 
-btnConfirmar.addEventListener("click", confirmarCompra);
+if (btnConfirmar) {
 
-async function confirmarCompra() {
+    btnConfirmar.addEventListener(
+        "click",
+        confirmarCompra
+    );
+}
+});
+
+async function confirmarCompra(event) {
+
+    event.preventDefault();
 
     const metodoSeleccionado = document.querySelector(
         'input[name="metodo"]:checked'
@@ -281,7 +301,7 @@ async function confirmarCompra() {
 
     const datos = {
 
-        cliente_id: clienteId,
+        cliente_id: obtenerClienteId(),
         destinatario: datosCheckout.destinatario,
         direccion: datosCheckout.direccion,
         metodo_pago: metodoSeleccionado.value,
@@ -326,17 +346,7 @@ async function confirmarCompra() {
 
 }
 
-// ==========================
-// RESUMEN DEL PAGO
-// ==========================
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    cargarResumenPago();
-
-});
-
-async function cargarResumenPago() {
+async function cargarResumenPago(clienteId) {
 
     try {
 
@@ -400,3 +410,5 @@ function actualizarResumenPago(carrito) {
         `$${carrito.total.toLocaleString()}`;
 
 }
+
+verificarSesion();

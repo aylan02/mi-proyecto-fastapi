@@ -25,3 +25,10 @@ class ClienteActualizar(BaseModel):
 
 class Cliente(ClienteBase):
     id: int
+
+class ClientePerfilActualizar(BaseModel):
+    nombre: str
+    apellido: str
+    correo: str
+    telefono: str
+    direccion: str

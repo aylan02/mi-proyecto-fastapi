@@ -24,57 +24,7 @@
 
 <body>
 
-    <!-- HEADER -->
-    <header class="navbar">
-
-        <a href="/" class="logo">
-
-            <img
-                src="/static/img/logo-cosmelogix.jpg"
-                alt="CosmeLogix"
-            >
-
-            <span>CosmeLogix</span>
-
-        </a>
-
-        <nav>
-
-            <a href="/">Inicio</a>
-
-            <a href="/cliente/catalogo">
-                Catálogo
-            </a>
-
-            <a href="#">
-                Nosotros
-            </a>
-
-            <a href="#">
-                Contacto
-            </a>
-
-        </nav>
-
-        <div class="acciones">
-
-            <a
-                href="/cliente/login"
-                class="btn-login"
-            >
-                Iniciar sesión
-            </a>
-
-            <a
-                href="/cliente/carrito"
-                class="btn-carrito"
-            >
-                🛒
-            </a>
-
-        </div>
-
-    </header>
+    {% include "components/header_cliente.html" %}
    
     <!-- PAGO -->
 
@@ -396,7 +346,8 @@
         </div>
 
     </main>
-
+    <script src="/static/js/header_cliente.js"></script>
+    <script src="/static/js/auth.js"></script>
     <script src="/static/js/pago.js"></script>
 
 </body>

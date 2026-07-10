@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi Perfil | CosmeLogix</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/landing.css">
+
+    <link rel="stylesheet" href="/static/css/perfil.css">
+
+</head>
+
+<body>
+
+    {% include "components/header_cliente.html" %}
+
+    <main class="perfil-container">
+
+        <section class="perfil-card">
+
+            <h1>Mi Perfil</h1>
+
+            <p class="perfil-subtitulo">
+                Administra tu información personal.
+            </p>
+
+            <form id="perfil-form">
+
+                <div class="grid">
+
+                    <div class="campo">
+
+                        <label>Nombre</label>
+
+                        <input
+                            id="nombre"
+                            type="text">
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label>Apellido</label>
+
+                        <input
+                            id="apellido"
+                            type="text">
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label>Correo electrónico</label>
+
+                        <input
+                            id="correo"
+                            type="email">
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label>Usuario</label>
+
+                        <input
+                            id="username"
+                            type="text"
+                            readonly>
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label>Teléfono</label>
+
+                        <input
+                            id="telefono"
+                            type="text">
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label>Dirección</label>
+
+                        <input
+                            id="direccion"
+                            type="text">
+
+                    </div>
+
+                </div>
+
+                <div class="acciones-perfil">
+
+                    <button
+                        type="submit"
+                        class="btn-guardar">
+
+                        Guardar cambios
+
+                    </button>
+
+                    <a
+                        href="/cliente/historial"
+                        class="btn-secundario">
+
+                        Historial
+
+                    </a>
+
+                    <button
+                        type="button"
+                        id="btn-logout"
+                        class="btn-danger">
+
+                        Cerrar sesión
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="/static/js/header_cliente.js"></script>
+    <script src="/static/js/perfil.js"></script>
+
+</body>
+
+</html>

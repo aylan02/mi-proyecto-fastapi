@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
-
+from fastapi import Request
+from app.services.carrito_service import obtener_carrito
 from app.schemas.carrito import (
     AgregarProductoCarrito,
     ActualizarCantidadCarrito,
@@ -18,6 +19,29 @@ router = APIRouter(
     prefix="/carrito",
     tags=["Carrito"]
 )
+
+@router.get("")
+def ver_mi_carrito(request: Request):
+
+    cliente_id = request.session.get("cliente_id")
+
+    if not cliente_id:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Debe iniciar sesión."
+        )
+
+    carrito = obtener_carrito(cliente_id)
+
+    if carrito is None:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Cliente no encontrado."
+        )
+
+    return carrito
 
 
 @router.post(

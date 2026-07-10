@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CosmeLogix | Crear cuenta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/login.css">
+
+</head>
+
+<body>
+
+    <div class="login-card">
+
+        <img
+            src="/static/img/logo-cosmelogix.jpg"
+            class="logo"
+            alt="CosmeLogix"
+        >
+
+        <h1>CosmeLogix</h1>
+
+        <p class="subtitulo">
+            Plataforma de Gestión Empresarial
+        </p>
+
+        <h2>Crear cuenta</h2>
+
+        <p class="descripcion">
+            Crea tu cuenta para comenzar a comprar en CosmeLogix.
+        </p>
+
+        <form id="registro-form">
+
+            <div class="campo">
+                <label>Nombre</label>
+                <input
+                    id="nombre"
+                    type="text"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label>Apellido</label>
+                <input
+                    id="apellido"
+                    type="text"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label>Correo electrónico</label>
+                <input
+                    id="correo"
+                    type="email"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label>Usuario</label>
+                <input
+                    id="username"
+                    type="text"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label>Contraseña</label>
+                <input
+                    id="password"
+                    type="password"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label>Confirmar contraseña</label>
+                <input
+                    id="confirmar_password"
+                    type="password"
+                    required
+                >
+            </div>
+
+            <div id="error" class="error-message"></div>
+
+            <div class="login-actions">
+
+                <button
+                    type="submit"
+                    class="btn-login">
+                    Crear cuenta
+                </button>
+
+                <a
+                    href="/cliente/login"
+                    class="btn-register">
+                    Iniciar sesión
+                </a>
+
+            </div>
+
+        </form>
+
+        <footer>
+
+            © 2026 CosmeLogix
+
+        </footer>
+
+    </div>
+
+    <script src="/static/js/registro.js"></script>
+
+</body>
+
+</html>

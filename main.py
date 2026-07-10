@@ -10,6 +10,8 @@ from app.routes.ventas import router as ventas_router
 from app.routes.inventario import router as inventario_router
 from starlette.middleware.sessions import SessionMiddleware
 from app.routes.auth import router as auth_router
+from app.routes.cliente_perfil import router as cliente_perfil_router
+from app.routes.auth_cliente import router as auth_cliente_router
 from app.routes.usuarios import router as usuarios_router
 from app.routes.roles import router as roles_router
 from app.routes.reportes import router as reportes_router
@@ -19,6 +21,7 @@ from app.routes.historial import router as historial_router
 from app.routes.detalle_pedido import router as detalle_pedido_router
 from app.routes import rutas
 from app.routes import compras
+from app.routes import seguimiento
 
 app = FastAPI(
     title="API de Envíos de Cosméticos",
@@ -37,6 +40,8 @@ app.include_router(web_router)
 app.include_router(clientes_router)
 app.include_router(ventas_router)
 app.include_router(auth_router)
+app.include_router(auth_cliente_router)
+app.include_router(cliente_perfil_router)
 app.include_router(inventario_router)
 app.include_router(usuarios_router)
 app.include_router(roles_router)
@@ -47,3 +52,4 @@ app.include_router(historial_router)
 app.include_router(detalle_pedido_router)
 app.include_router(rutas.router)
 app.include_router(compras.router)
+app.include_router(seguimiento.router)

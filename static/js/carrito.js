@@ -1,8 +1,20 @@
-const clienteId = 1; 
+document.addEventListener("DOMContentLoaded", async () => {
 
-document.addEventListener("DOMContentLoaded", () => {
+    try {
 
-    cargarCarrito();
+        await cargarSesion();
+
+        cargarCarrito(obtenerClienteId());
+
+    } catch (error) {
+
+        console.error(error);
+
+        window.location.href = "/cliente/login";
+
+        return;
+
+    }
 
     const btnVaciar = document.getElementById("btn-vaciar");
 
@@ -30,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-async function cargarCarrito() {
+async function cargarCarrito(clienteId) {
 
     try {
 
@@ -204,6 +216,8 @@ function actualizarResumen(carrito) {
 
 async function actualizarCantidad(productoId, cantidad) {
 
+    const clienteId = obtenerClienteId();
+
     try {
 
         const respuesta = await fetch(`/carrito/${clienteId}/${productoId}`, {
@@ -224,7 +238,7 @@ async function actualizarCantidad(productoId, cantidad) {
             throw new Error("No se pudo actualizar la cantidad.");
         }
 
-        cargarCarrito();
+        cargarCarrito(clienteId);
 
     } catch (error) {
 
@@ -235,6 +249,8 @@ async function actualizarCantidad(productoId, cantidad) {
 }
 
 async function eliminarProducto(productoId) {
+
+    const clienteId = obtenerClienteId();
 
     try {
 
@@ -248,7 +264,7 @@ async function eliminarProducto(productoId) {
             throw new Error("No se pudo eliminar el producto.");
         }
 
-        cargarCarrito();
+        cargarCarrito(clienteId);
 
     } catch (error) {
 
@@ -259,6 +275,8 @@ async function eliminarProducto(productoId) {
 }
 
 async function vaciarCarrito() {
+
+    const clienteId = obtenerClienteId();
 
     try {
 
@@ -272,7 +290,7 @@ async function vaciarCarrito() {
             throw new Error("No se pudo vaciar el carrito.");
         }
 
-        cargarCarrito();
+        cargarCarrito(clienteId);
 
     } catch (error) {
 
@@ -281,4 +299,6 @@ async function vaciarCarrito() {
     }
 
 }
+
+verificarSesion();
 
