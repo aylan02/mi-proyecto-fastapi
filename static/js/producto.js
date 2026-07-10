@@ -25,6 +25,12 @@ async function cargarProducto() {
         document.getElementById("descripcion-producto").textContent =
             producto.descripcion;
 
+        document.getElementById("imagen-producto").src =
+            "/static/img/productos/" + producto.imagen;
+
+        document.getElementById("imagen-producto").alt =
+            producto.nombre;
+
         document.getElementById("stock-producto").textContent =
             "Stock disponible: " + producto.stock;
 

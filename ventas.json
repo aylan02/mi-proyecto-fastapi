@@ -195,5 +195,77 @@
         "fecha": "2026-07-10 14:48:10",
         "total": 5490.0,
         "estado": "Registrada"
+    },
+    {
+        "id": 11,
+        "cliente_id": 9,
+        "cliente_nombre": "Fernanda",
+        "detalles": [
+            {
+                "producto_id": 23,
+                "producto_nombre": "Mascarilla Capilar",
+                "precio_unitario": 10990.0,
+                "cantidad": 1,
+                "subtotal": 10990.0
+            },
+            {
+                "producto_id": 6,
+                "producto_nombre": "Shampoo Reparador",
+                "precio_unitario": 7990.0,
+                "cantidad": 1,
+                "subtotal": 7990.0
+            },
+            {
+                "producto_id": 22,
+                "producto_nombre": "Acondicionador Reparador",
+                "precio_unitario": 8490.0,
+                "cantidad": 1,
+                "subtotal": 8490.0
+            }
+        ],
+        "metodo_pago": "transferencia",
+        "observacion": "hola",
+        "fecha": "2026-07-10 16:53:44",
+        "total": 27470.0,
+        "estado": "Registrada"
+    },
+    {
+        "id": 12,
+        "cliente_id": 9,
+        "cliente_nombre": "Fernanda",
+        "detalles": [
+            {
+                "producto_id": 2,
+                "producto_nombre": "Base Líquida",
+                "precio_unitario": 10990.0,
+                "cantidad": 1,
+                "subtotal": 10990.0
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "josos",
+        "fecha": "2026-07-10 18:11:55",
+        "total": 10990.0,
+        "estado": "Registrada"
+    },
+    {
+        "id": 13,
+        "cliente_id": 9,
+        "cliente_nombre": "Fernanda",
+        "detalles": [
+            {
+                "producto_id": 8,
+                "producto_nombre": "Perfume Elegance",
+                "precio_unitario": 39990.0,
+                "cantidad": 1,
+                "subtotal": 39990.0,
+                "imagen": "perfume-elegance.jpg"
+            }
+        ],
+        "metodo_pago": "credito",
+        "observacion": "hola",
+        "fecha": "2026-07-10 18:30:42",
+        "total": 39990.0,
+        "estado": "Registrada"
     }
 ]

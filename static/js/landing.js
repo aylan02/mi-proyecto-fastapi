@@ -24,9 +24,12 @@ async function obtenerProductos() {
             ⭐ Destacado
         </span>
 
-        <div class="placeholder-img">
+        <div class="producto-imagen">
 
-            📦
+            <img
+                src="/static/img/productos/${producto.imagen}"
+                alt="${producto.nombre}"
+            >
 
         </div>
 
@@ -54,7 +57,9 @@ async function obtenerProductos() {
 
             </button>
 
-            <button class="btn-agregar-carrito">
+            <button
+                class="btn-agregar-carrito"
+                onclick="agregarProductoAlCarrito(${producto.id})">
 
                 Agregar
 

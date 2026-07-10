@@ -1,6 +1,9 @@
 const buscador = document.getElementById("buscar");
 
 const categoria = document.getElementById("categoria");
+const parametros = new URLSearchParams(window.location.search);
+
+const categoriaURL = parametros.get("categoria");
 
 async function cargarCatalogo(nombre = "", categoriaSeleccionada = "") {
 
@@ -24,9 +27,12 @@ async function cargarCatalogo(nombre = "", categoriaSeleccionada = "") {
 
                 <div class="producto-imagen">
 
-                    <div class="placeholder-img">
+                    <div class="producto-imagen">
 
-                        📦
+                        <img
+                            src="/static/img/productos/${producto.imagen}"
+                            alt="${producto.nombre}"
+                        >
 
                     </div>
 
@@ -58,7 +64,9 @@ async function cargarCatalogo(nombre = "", categoriaSeleccionada = "") {
 
                         </button>
 
-                        <button class="btn-agregar-carrito">
+                        <button
+                            class="btn-agregar-carrito"
+                            onclick="agregarProductoAlCarrito(${producto.id})">
 
                             Agregar
 
@@ -76,7 +84,18 @@ async function cargarCatalogo(nombre = "", categoriaSeleccionada = "") {
 
 }
 
-cargarCatalogo();
+if (categoriaURL) {
+
+    categoria.value = decodeURIComponent(categoriaURL);
+
+    cargarCatalogo("", categoriaURL);
+
+} else {
+
+    cargarCatalogo();
+
+}
+
 buscador.addEventListener("input", () => {
 
     cargarCatalogo(

@@ -539,3 +539,49 @@
     transform:rotateY(180deg);
 
 }
+
+.item-pago{
+
+    display:grid;
+
+    grid-template-columns:70px 1fr auto;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:15px;
+
+}
+
+.item-pago img{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
+
+    border-radius:10px;
+
+    background:#eef5ff;
+
+    padding:6px;
+
+}
+
+.info-pago h4{
+
+    margin-bottom:5px;
+
+    font-size:1rem;
+
+}
+
+.info-pago p{
+
+    color:#666;
+
+    font-size:.9rem;
+
+}

@@ -153,7 +153,8 @@ def crear_venta(data: dict):
             "producto_nombre": producto["nombre"],
             "precio_unitario": float(producto["precio"]),
             "cantidad": detalle["cantidad"],
-            "subtotal": subtotal
+            "subtotal": subtotal,
+            "imagen": producto["imagen"]
         })
 
         total_venta += subtotal

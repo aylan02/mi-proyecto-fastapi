@@ -93,7 +93,7 @@ function renderCarrito(carrito) {
             <div class="item-carrito">
 
                 <img
-                    src="${producto.imagen}"
+                    src="/static/img/productos/${producto.imagen}"
                     alt="${producto.nombre}"
                 >
 
@@ -103,7 +103,9 @@ function renderCarrito(carrito) {
 
                     <p>${producto.marca}</p>
 
-                    <p>$${producto.precio.toLocaleString()}</p>
+                    <p class="precio-producto">
+                        $${producto.precio.toLocaleString()}
+                    </p>
 
                     <div class="cantidad-producto">
 

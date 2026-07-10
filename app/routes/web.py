@@ -18,6 +18,25 @@ def landing(request: Request):
         context={}
     )
 
+@router.get("/cliente/nosotros", response_class=HTMLResponse)
+def nosotros(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/nosotros.html",
+        context={}
+    )
+
+
+@router.get("/cliente/contacto", response_class=HTMLResponse)
+def contacto(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cliente/contacto.html",
+        context={}
+    )
+
 @router.get("/cliente/producto/{producto_id}", response_class=HTMLResponse)
 def detalle_producto(request: Request, producto_id: int):
 
