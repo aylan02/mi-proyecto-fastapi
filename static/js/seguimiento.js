@@ -55,6 +55,17 @@ function renderSeguimiento(seguimiento){
                     </p>
 
                 </div>
+                <div>
+
+                    <span class="titulo">
+                        Producto
+                    </span>
+
+                    <p>
+                        ${seguimiento.producto}
+                    </p>
+
+                </div>
 
                 <div>
 

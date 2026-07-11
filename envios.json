@@ -13,10 +13,12 @@
         "productos": [
             {
                 "producto_id": 1,
+                "producto_nombre": "Labial Mate",
                 "cantidad": 2
             },
             {
                 "producto_id": 2,
+                "producto_nombre": "Base Líquida",
                 "cantidad": 1
             }
         ]
@@ -35,6 +37,7 @@
         "productos": [
             {
                 "producto_id": 3,
+                "producto_nombre": "Crema Facial",
                 "cantidad": 20
             }
         ]
@@ -53,6 +56,7 @@
         "productos": [
             {
                 "producto_id": 1,
+                "producto_nombre": "Labial Mate",
                 "cantidad": 2
             }
         ]
@@ -71,6 +75,7 @@
         "productos": [
             {
                 "producto_id": 2,
+                "producto_nombre": "Base Líquida",
                 "cantidad": 1
             }
         ]
@@ -81,7 +86,7 @@
         "destinatario": "Fernanda Flores",
         "direccion": "Iquique",
         "observacion": "Dejar en la puerta",
-        "estado": "Preparando",
+        "estado": "Cancelado",
         "fecha_envio": "2026-07-09 21:15:00",
         "ruta": "Ruta Sur",
         "vehiculo": "Camión 04",
@@ -89,168 +94,9 @@
         "productos": [
             {
                 "producto_id": 4,
+                "producto_nombre": "Shampoo Reparador",
                 "cantidad": 1
             }
         ]
-    },
-    {
-        "id_envio": 6,
-        "venta_id": 6,
-        "destinatario": "Fernanda Flores",
-        "direccion": "Iquique",
-        "observacion": "Entregar después de las 18:00",
-        "estado": "Preparando",
-        "fecha_envio": "2026-07-10 09:30:00",
-        "ruta": "Ruta Sur",
-        "vehiculo": "Furgón 05",
-        "fecha_programada": "2026-07-11",
-        "productos": [
-            {
-                "producto_id": 1,
-                "cantidad": 2
-            },
-            {
-                "producto_id": 2,
-                "cantidad": 1
-            },
-            {
-                "producto_id": 4,
-                "cantidad": 3
-            }
-        ]
-    },
-    {
-        "id_envio": 7,
-        "productos": [
-            {
-                "producto_id": 7,
-                "cantidad": 1
-            }
-        ],
-        "destinatario": "Fernanda",
-        "direccion": "Arturo Perez canto 1358",
-        "observacion": "en la puerta",
-        "estado": "Preparando",
-        "fecha_envio": "2026-07-10 14:37:29",
-        "ruta": "",
-        "vehiculo": "",
-        "fecha_programada": null,
-        "venta_id": 7
-    },
-    {
-        "id_envio": 8,
-        "productos": [
-            {
-                "producto_id": 4,
-                "cantidad": 1
-            }
-        ],
-        "destinatario": "Fernanda",
-        "direccion": "Arturo Perez canto 1358",
-        "observacion": "en la puerta ",
-        "estado": "Preparando",
-        "fecha_envio": "2026-07-10 14:39:08",
-        "ruta": "",
-        "vehiculo": "",
-        "fecha_programada": null,
-        "venta_id": 8
-    },
-    {
-        "id_envio": 9,
-        "productos": [
-            {
-                "producto_id": 7,
-                "cantidad": 1
-            }
-        ],
-        "destinatario": "Fernanda",
-        "direccion": "Arturo Perez canto 1358",
-        "observacion": "en la ",
-        "estado": "Preparando",
-        "fecha_envio": "2026-07-10 14:44:20",
-        "ruta": "",
-        "vehiculo": "",
-        "fecha_programada": null,
-        "venta_id": 9
-    },
-    {
-        "id_envio": 10,
-        "productos": [
-            {
-                "producto_id": 7,
-                "cantidad": 1
-            }
-        ],
-        "destinatario": "Fernanda",
-        "direccion": "Arturo Perez canto 1358",
-        "observacion": "en la puerta",
-        "estado": "Preparando",
-        "fecha_envio": "2026-07-10 14:48:10",
-        "ruta": "",
-        "vehiculo": "",
-        "fecha_programada": null,
-        "venta_id": 10
-    },
-    {
-        "id_envio": 11,
-        "productos": [
-            {
-                "producto_id": 23,
-                "cantidad": 1
-            },
-            {
-                "producto_id": 6,
-                "cantidad": 1
-            },
-            {
-                "producto_id": 22,
-                "cantidad": 1
-            }
-        ],
-        "destinatario": "Fernanda",
-        "direccion": "Arturo Perez canto 1358",
-        "observacion": "hola",
-        "estado": "Preparando",
-        "fecha_envio": "2026-07-10 16:53:44",
-        "ruta": "",
-        "vehiculo": "",
-        "fecha_programada": null,
-        "venta_id": 11
-    },
-    {
-        "id_envio": 12,
-        "productos": [
-            {
-                "producto_id": 2,
-                "cantidad": 1
-            }
-        ],
-        "destinatario": "Fernanda",
-        "direccion": "Arturo Perez canto 1358",
-        "observacion": "josos",
-        "estado": "Preparando",
-        "fecha_envio": "2026-07-10 18:11:55",
-        "ruta": "",
-        "vehiculo": "",
-        "fecha_programada": null,
-        "venta_id": 12
-    },
-    {
-        "id_envio": 13,
-        "productos": [
-            {
-                "producto_id": 8,
-                "cantidad": 1
-            }
-        ],
-        "destinatario": "Fernanda",
-        "direccion": "Arturo Perez canto 1358",
-        "observacion": "hola",
-        "estado": "Preparando",
-        "fecha_envio": "2026-07-10 18:30:42",
-        "ruta": "",
-        "vehiculo": "",
-        "fecha_programada": null,
-        "venta_id": 13
     }
 ]

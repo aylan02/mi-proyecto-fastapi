@@ -171,7 +171,15 @@ def login_page(request: Request):
 
 @router.get("/admin", response_class=HTMLResponse)
 def mostrar_web(request: Request):
-    if not request.session.get("user"):
+
+    usuario = request.session.get("user")
+
+    if not usuario:
+        return RedirectResponse(url="/admin/login", status_code=303)
+
+    # Bloquear clientes
+    if usuario.get("rol") == "Cliente":
+        request.session.clear()
         return RedirectResponse(url="/admin/login", status_code=303)
 
     return templates.TemplateResponse(

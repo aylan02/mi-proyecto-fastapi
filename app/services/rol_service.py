@@ -90,17 +90,18 @@ def actualizar_rol(rol_id: int, data: dict):
     return None
 
 
-def desactivar_rol(rol_id: int):
+def cambiar_estado_rol(rol_id: int):
+
     roles = leer_roles()
 
     for rol in roles:
 
         if rol["id"] == rol_id:
 
-            if rol.get("estado") == "Inactivo":
-                return "INACTIVO"
-
-            rol["estado"] = "Inactivo"
+            if rol["estado"] == "Activo":
+                rol["estado"] = "Inactivo"
+            else:
+                rol["estado"] = "Activo"
 
             guardar_roles(roles)
 

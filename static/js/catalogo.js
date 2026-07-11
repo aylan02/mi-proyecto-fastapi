@@ -8,9 +8,7 @@ const categoriaURL = parametros.get("categoria");
 async function cargarCatalogo(nombre = "", categoriaSeleccionada = "") {
 
     const respuesta = await fetch(
-
-        `/productos?limit=100&nombre=${nombre}&categoria=${categoriaSeleccionada}`
-
+        `/productos/activos?nombre=${nombre}&categoria=${categoriaSeleccionada}`
     );
 
     const datos = await respuesta.json();

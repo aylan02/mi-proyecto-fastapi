@@ -2,8 +2,8 @@
     {
         "id": 1,
         "username": "admin",
-        "password": "$2b$12$Q1A1ZIoVbTlIoBYsWIradO8mWLZvVRMtILTtrm2jHib1TGi.edgxS",
-        "nombre": "Administrador General",
+        "password": "$2b$12$42qtVtYwHMK1KqAUbsa0EeV/E5dhESHlqo8HGShEsv3MY26lTse3O",
+        "nombre": "Administracion",
         "correo": "admin@cosmelogix.cl",
         "rol": "Administrador",
         "estado": "Activo"
@@ -36,56 +36,11 @@
         "estado": "Activo"
     },
     {
-        "id": 5,
-        "username": "fernanda",
-        "password": "$2b$12$xR8FR/2IldFQaJ72lFSo5upmO/SZAEUWTQVp/IawEu2Um9J0cOLe.",
-        "nombre": "Fernanda Flores",
-        "correo": "fernanda@gmail.com",
-        "rol": "Cliente",
-        "estado": "Activo"
-    },
-    {
         "id": 6,
-        "username": "fernandaflores",
-        "password": "$2b$12$FHA4CWGme4JKLeDm.jCNNuXQJOM.5piCLa/hucIKOgvSvUyEK5i0G",
-        "nombre": "Fernanda Flores Ch",
-        "correo": "fernandaflores@gmail.com",
-        "rol": "Cliente",
-        "estado": "Activo"
-    },
-    {
-        "id": 7,
-        "username": "fernanda flores",
-        "password": "$2b$12$obaDs7/8w8PlQdMb7nTPwu0pWzFtDEWWP4l/yuhQK0a5b.P3U3K2K",
+        "username": "fer",
+        "password": "$2b$12$BoG48U20L/mAPClvQAJYH.QDQ4C2AymBPy1FVrcw1ZRTImerMO0Vu",
         "nombre": "Fernanda",
         "correo": "floreschoquerivefernanda@gmail.com",
-        "rol": "Cliente",
-        "estado": "Activo"
-    },
-    {
-        "id": 8,
-        "username": "fer2",
-        "password": "$2b$12$Ut4MFlvEbqmtGR846mqwcO54IVpVhBI6Oo89iR6K5mzYC0Eej9bUu",
-        "nombre": "Fernanda",
-        "correo": "ferfloresc@estudiantesunap.cl",
-        "rol": "Cliente",
-        "estado": "Activo"
-    },
-    {
-        "id": 9,
-        "username": "jose",
-        "password": "$2b$12$9uHFpmBXF0Pv0CXz.dRtuOlHr30VwJQQbqGewnCOA/VvbIcqLEubi",
-        "nombre": "Jose",
-        "correo": "joseorellana@gmail.com",
-        "rol": "Cliente",
-        "estado": "Activo"
-    },
-    {
-        "id": 10,
-        "username": "fer",
-        "password": "$2b$12$WHHArOJuNF5SYU2HHT5skudolzWg0LgOzVw4w9o/3823oLYw6KQL2",
-        "nombre": "Fernanda",
-        "correo": "ferfloresc@gmail.com",
         "rol": "Cliente",
         "estado": "Activo"
     }

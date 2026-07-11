@@ -106,3 +106,22 @@ def desactivar_usuario(usuario_id: int):
             return usuario
 
     return None
+
+def cambiar_estado_usuario(usuario_id: int):
+
+    usuarios = leer_usuarios()
+
+    for usuario in usuarios:
+
+        if usuario["id"] == usuario_id:
+
+            if usuario["estado"] == "Activo":
+                usuario["estado"] = "Inactivo"
+            else:
+                usuario["estado"] = "Activo"
+
+            guardar_usuarios(usuarios)
+
+            return usuario
+
+    return None

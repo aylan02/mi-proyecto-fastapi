@@ -395,11 +395,16 @@ function renderProductos() {
             <td>${p.categoria}</td>
             <td>${currency(p.precio)}</td>
             <td>${p.stock}</td>
-            <td>${badgeEstadoHTML(productStockLabel(p.stock))}</td>
+            <td>${badgeEstadoHTML(p.estado)}</td>
             <td>
                 <div class="actions">
-                    <button class="btn btn-light btn-sm" onclick="editProducto(${p.id})">Editar</button>
-                    <button class="btn btn-light btn-sm" onclick="softDeactivateProducto(${p.id})">Desactivar</button>
+                    <button class="btn btn-light btn-sm" onclick="editProducto(${p.id})">
+                        Editar
+                    </button>
+
+                    <button class="btn btn-light btn-sm" onclick="toggleProductoEstado(${p.id})">
+                        ${p.estado === "Activo" ? "Desactivar" : "Activar"}
+                    </button>
                 </div>
             </td>
         </tr>
@@ -422,13 +427,19 @@ async function submitProducto(event) {
     event.preventDefault();
 
     const editId = document.getElementById("producto-id-edit").value;
+
     const payload = {
+        codigo: document.getElementById("producto-codigo").value.trim(),
         nombre: document.getElementById("producto-nombre").value.trim(),
         marca: document.getElementById("producto-marca").value.trim(),
         categoria: document.getElementById("producto-categoria").value.trim(),
         precio: Number(document.getElementById("producto-precio").value),
         stock: Number(document.getElementById("producto-stock").value),
-        descripcion: document.getElementById("producto-descripcion").value.trim()
+        descripcion: document.getElementById("producto-descripcion").value.trim(),
+        imagen: "sin-imagen.jpg",
+        destacado: false,
+        nuevo: false,
+        oferta: false
     };
 
     try {
@@ -442,11 +453,13 @@ async function submitProducto(event) {
         });
 
         const data = await res.json();
-
+ 
         if (!res.ok) {
-            showAlert(data.detail || "No se pudo guardar el producto.", "error");
+            console.log(data);
+            showAlert(JSON.stringify(data), "error");
             return;
         }
+
 
         showAlert(editId ? "Producto actualizado correctamente." : "Producto registrado correctamente.");
         resetProductoForm();
@@ -486,10 +499,32 @@ async function editProducto(id) {
     }
 }
 
-function softDeactivateProducto(id) {
-    const producto = state.productos.find(p => p.id === id);
-    if (!producto) return;
-    showAlert(`La desactivación lógica del producto "${producto.nombre}" se implementará en backend después.`, "error");
+async function toggleProductoEstado(id) {
+
+    try {
+
+        const res = await fetch(`${API}/productos/${id}/estado`, {
+            method: "PATCH"
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            showAlert(data.detail || "No se pudo cambiar el estado.", "error");
+            return;
+        }
+
+        await loadProductos();
+        renderProductos();
+
+        showAlert("Estado del producto actualizado correctamente.");
+
+    } catch (error) {
+
+        showAlert("Error de conexión.", "error");
+
+    }
+
 }
 
 function resetProductoForm() {
@@ -524,8 +559,6 @@ async function submitIngresoInventario(event) {
         showAlert("Producto no encontrado.", "error");
         return;
     }
-
-    await updateProductStock(producto, producto.stock + cantidad);
 
     try {
     await registrarMovimiento({
@@ -567,8 +600,6 @@ async function submitSalidaInventario(event) {
         showAlert("La salida supera el stock disponible.", "error");
         return;
     }
-
-    await updateProductStock(producto, producto.stock - cantidad);
 
     try {
     await registrarMovimiento({
@@ -981,15 +1012,17 @@ async function submitEnvio(event) {
     }
 
     const payload = {
-        venta_id: venta.id,
-        producto_id: venta.producto_id,
-        cantidad: venta.cantidad,
+        productos: venta.detalles.map(detalle => ({
+            producto_id: detalle.producto_id,
+            cantidad: detalle.cantidad
+        })),
         destinatario: venta.cliente_nombre,
         direccion,
         observacion: `Venta #${venta.id} | ${observacion}`.trim(),
         ruta: ruta ? `${ruta.origen} → ${ruta.destino}` : "",
         vehiculo: vehiculo || "",
-        fecha_programada: fecha || ""
+        fecha_programada: fecha || "",
+        venta_id: venta.id
     };
 
     try {
@@ -1026,17 +1059,25 @@ async function submitEnvio(event) {
 }
 
 function renderEnvios() {
+
     renderEnvioVentaOptions();
     populateRutasSelect();
 
     document.getElementById("tbody-envios").innerHTML = state.envios.map(e => {
-        const statusSelect = e.id_envio ? `
-            <select id="estado-envio-${e.id_envio}">
-                ${["Pendiente", "En preparación", "Despachado", "En tránsito", "Entregado", "Cancelado"].map(estado => `
-                    <option value="${estado}" ${normalizeStatus(e.estado) === normalizeStatus(estado) ? "selected" : ""}>${estado}</option>
-                `).join("")}
-            </select>
-        ` : `<span class="mini-note">Sin ID</span>`;
+
+        const cancelado = normalizeStatus(e.estado) === normalizeStatus("Cancelado");
+
+        const statusSelect = cancelado
+            ? `<span class="mini-note">Sin acciones disponibles</span>`
+            : `
+                <select id="estado-envio-${e.id_envio}">
+                    ${["Pendiente", "En preparación", "Despachado", "En tránsito", "Entregado", "Cancelado"].map(estado => `
+                        <option value="${estado}" ${normalizeStatus(e.estado) === normalizeStatus(estado) ? "selected" : ""}>
+                            ${estado}
+                        </option>
+                    `).join("")}
+                </select>
+            `;
 
         return `
             <tr>
@@ -1047,18 +1088,34 @@ function renderEnvios() {
                 <td>${e.ruta || "-"}</td>
                 <td>${e.vehiculo || "-"}</td>
                 <td>
-                    <div class="mini-note">${badgeEstadoHTML(e.estado || "Pendiente")}</div>
+                    <div class="mini-note">
+                        ${badgeEstadoHTML(e.estado || "Pendiente")}
+                    </div>
                     ${statusSelect}
                 </td>
                 <td>${e.fecha_programada || e.fecha_envio || "-"}</td>
                 <td>
                     <div class="actions">
-                        ${e.id_envio ? `<button class="btn btn-light btn-sm" onclick="changeEnvioStatus(${e.id_envio})">Actualizar</button>` : ""}
-                        ${e.id_envio ? `<button class="btn btn-danger btn-sm" onclick="deleteEnvio(${e.id_envio})">Cancelar</button>` : ""}
+                        ${
+                            !cancelado
+                                ? `<button class="btn btn-light btn-sm" onclick="changeEnvioStatus(${e.id_envio})">
+                                        Actualizar
+                                   </button>`
+                                : ""
+                        }
+
+                        ${
+                            !cancelado
+                                ? `<button class="btn btn-danger btn-sm" onclick="deleteEnvio(${e.id_envio})">
+                                        Cancelar
+                                   </button>`
+                                : ""
+                        }
                     </div>
                 </td>
             </tr>
         `;
+
     }).join("") || `<tr><td colspan="9" class="mini-note">No hay envíos registrados.</td></tr>`;
 }
 
@@ -1095,26 +1152,43 @@ async function changeEnvioStatus(id) {
 }
 
 async function deleteEnvio(id) {
-    const confirmDelete = confirm(`¿Cancelar / eliminar envío #${id}?`);
+
+    const confirmDelete = confirm("¿Deseas cancelar este envío?");
+
     if (!confirmDelete) return;
 
     try {
-        const res = await fetch(`${API}/envios/${id}`, { method: "DELETE" });
+
+        const res = await fetch(`${API}/envios/${id}`, {
+            method: "DELETE"
+        });
+
         const data = await res.json();
 
         if (!res.ok) {
-            showAlert(data.detail || "No se pudo cancelar el envío.", "error");
+
+            showAlert(
+                data.detail || "No se pudo cancelar el envío.",
+                "error"
+            );
+
             return;
         }
 
         await loadEnvios();
+
         renderEnvios();
         renderDashboard();
         renderReportes();
+
         showAlert("Envío cancelado correctamente.");
+
     } catch (error) {
-        showAlert("Error al cancelar envío.", "error");
+
+        showAlert("Error al cancelar el envío.", "error");
+
     }
+
 }
 
 async function submitRuta(event) {
@@ -1212,8 +1286,8 @@ async function toggleRuta(id) {
 
     try {
 
-        const res = await fetch(`${API}/rutas/${id}`, {
-            method: "DELETE"
+        const res = await fetch(`${API}/rutas/${id}/estado`, {
+            method: "PATCH"
         });
 
         const data = await res.json();
@@ -1228,7 +1302,7 @@ async function toggleRuta(id) {
         renderRutas();
         renderEnvios();
 
-        showAlert("Ruta desactivada correctamente.");
+        showAlert("Estado de la ruta actualizado correctamente.");
 
     } catch (error) {
         showAlert("Error de conexión con la API.", "error");
@@ -1239,10 +1313,14 @@ async function toggleRuta(id) {
 function populateRutasSelect() {
     const select = document.getElementById("envio-ruta");
     const current = select.value;
-    select.innerHTML = `<option value="">Sin ruta</option>` + state.rutas
-        .filter(r => r.estado === "Activa")
-        .map(r => `<option value="${r.id}">${r.origen} → ${r.destino}</option>`)
-        .join("");
+
+    select.innerHTML =
+        `<option value="">Sin ruta</option>` +
+        state.rutas
+            .filter(r => (r.estado || "").toLowerCase().includes("act"))
+            .map(r => `<option value="${r.id}">${r.origen} → ${r.destino}</option>`)
+            .join("");
+
     if (current) select.value = current;
 }
 
@@ -1354,30 +1432,35 @@ async function editUsuario(id) {
 }
 
 async function toggleUsuario(id) {
-    const confirmar = confirm("¿Deseas desactivar este usuario?");
-
-    if (!confirmar) return;
 
     try {
-        const res = await fetch(`${API}/usuarios/${id}`, {
-            method: "DELETE"
+
+        const res = await fetch(`${API}/usuarios/${id}/estado`, {
+            method: "PATCH"
         });
 
         const data = await res.json();
 
         if (!res.ok) {
-            showAlert(data.detail || "No se pudo desactivar el usuario.", "error");
+            showAlert(
+                data.detail || "No se pudo cambiar el estado del usuario.",
+                "error"
+            );
             return;
         }
 
-        showAlert("Usuario desactivado correctamente.");
-
         await loadUsuarios();
+
         renderUsuarios();
 
+        showAlert("Estado del usuario actualizado correctamente.");
+
     } catch (error) {
+
         showAlert("Error de conexión con la API.", "error");
+
     }
+
 }
 
 async function submitRol(event) {
@@ -1447,20 +1530,46 @@ function renderRoles() {
 }
 
 function renderPermisos() {
-    const modules = ["productos", "inventario", "clientes", "ventas", "envios", "reportes", "usuarios"];
 
-    document.getElementById("tbody-permisos").innerHTML = state.roles.map(r => `
-        <tr>
-            <td><strong>${r.nombre}</strong></td>
-            ${modules.map(module => `
-                <td>
-                    <input type="checkbox"
-                        ${r.permisos.includes(module) ? "checked" : ""}
-                        onchange="togglePermiso(${r.id}, '${module}', this.checked)" />
-                </td>
-            `).join("")}
-        </tr>
-    `).join("") || `<tr><td colspan="8" class="mini-note">No hay roles configurados.</td></tr>`;
+    const modules = [
+        "productos",
+        "inventario",
+        "clientes",
+        "ventas",
+        "envios",
+        "reportes",
+        "usuarios"
+    ];
+
+    const rolesActivos = state.roles.filter(
+        r => r.estado === "Activo"
+    );
+
+    document.getElementById("tbody-permisos").innerHTML =
+        rolesActivos.map(r => `
+            <tr>
+                <td><strong>${r.nombre}</strong></td>
+
+                ${modules.map(module => `
+                    <td style="text-align:center;">
+                        <input
+                            type="checkbox"
+                            ${r.permisos.includes(module) ? "checked" : ""}
+                            onchange="togglePermiso(${r.id}, '${module}', this.checked)"
+                        >
+                    </td>
+                `).join("")}
+
+            </tr>
+        `).join("")
+
+        ||
+
+        `<tr>
+            <td colspan="8" class="mini-note">
+                No hay roles activos.
+            </td>
+        </tr>`;
 }
 
 async function togglePermiso(roleId, module, checked) {
@@ -1539,31 +1648,36 @@ async function editRol(id) {
 }
 
 async function toggleRol(id) {
-    const confirmar = confirm("¿Deseas desactivar este rol?");
-
-    if (!confirmar) return;
 
     try {
-        const res = await fetch(`${API}/roles/${id}`, {
-            method: "DELETE"
+
+        const res = await fetch(`${API}/roles/${id}/estado`, {
+            method: "PATCH"
         });
 
         const data = await res.json();
 
         if (!res.ok) {
-            showAlert(data.detail || "No se pudo desactivar el rol.", "error");
+            showAlert(
+                data.detail || "No se pudo cambiar el estado del rol.",
+                "error"
+            );
             return;
         }
 
-        showAlert("Rol desactivado correctamente.");
-
         await loadRoles();
+
         renderRoles();
         renderUsuarios();
 
+        showAlert("Estado del rol actualizado correctamente.");
+
     } catch (error) {
+
         showAlert("Error de conexión con la API.", "error");
+
     }
+
 }
 
 function renderReportes() {
@@ -1629,7 +1743,7 @@ async function submitTracking(event) {
     document.getElementById("tracking-result").innerHTML = `
         <p><strong>Envío #${envio.id_envio}</strong></p>
         <p><strong>Destinatario:</strong> ${envio.destinatario ?? "-"}</p>
-        <p><strong>Producto:</strong> ${envio.nombre_producto ?? "-"}</p>
+        <p><strong>Producto:</strong> ${envio.productos.map(p => p.producto_nombre).join(", ")}</p>
         <p><strong>Dirección:</strong> ${envio.direccion ?? "-"}</p>
         <p><strong>Ruta:</strong> ${envio.ruta || "-"}</p>
         <p><strong>Vehículo:</strong> ${envio.vehiculo || "-"}</p>
@@ -1642,6 +1756,7 @@ function activateSection(name) {
     showSection(name);
 }
 
+
 async function loadSessionUser() {
     try {
         const res = await fetch(`${API}/auth/me`);
@@ -1653,8 +1768,11 @@ async function loadSessionUser() {
         }
 
         currentUser = data.user;
+
+
         return true;
     } catch (error) {
+        console.error(error);
         window.location.href = "/admin/login";
         return false;
     }

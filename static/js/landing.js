@@ -2,7 +2,7 @@ async function obtenerProductos() {
 
     try {
 
-        const respuesta = await fetch("/productos?limit=100&offset=0");
+        const respuesta = await fetch("/productos/activos");
 
         const datos = await respuesta.json();
 

@@ -6,7 +6,7 @@ from app.services.ruta_service import (
     obtener_ruta,
     crear_ruta,
     actualizar_ruta,
-    desactivar_ruta
+    cambiar_estado_ruta
 )
 
 router = APIRouter(prefix="/rutas", tags=["Rutas"])
@@ -51,9 +51,10 @@ def put_ruta(ruta_id: int, ruta: RutaActualizar):
     )
 
 
-@router.delete("/{ruta_id}")
-def delete_ruta(ruta_id: int):
-    ruta = desactivar_ruta(ruta_id)
+@router.patch("/{ruta_id}/estado")
+def cambiar_estado(ruta_id: int):
+
+    ruta = cambiar_estado_ruta(ruta_id)
 
     if ruta is None:
         raise HTTPException(
@@ -61,10 +62,7 @@ def delete_ruta(ruta_id: int):
             detail="Ruta no encontrada"
         )
 
-    if ruta == "INACTIVA":
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="La ruta ya se encuentra inactiva"
-        )
-
-    return {"mensaje": "Ruta desactivada correctamente"}
+    return {
+        "mensaje": "Estado actualizado correctamente.",
+        "ruta": ruta
+    }

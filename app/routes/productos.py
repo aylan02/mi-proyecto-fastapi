@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException, Query, status
-
 from app.schemas.producto import (
     ProductoCrear,
     ProductoActualizar
@@ -10,8 +9,9 @@ from app.services.producto_service import (
     obtener_producto_por_id,
     crear_producto,
     actualizar_producto,
-    desactivar_producto,
-    obtener_productos_stock_bajo
+    cambiar_estado_producto,
+    obtener_productos_stock_bajo,
+    obtener_productos_activos
 )
 
 router = APIRouter(
@@ -53,6 +53,21 @@ def listar_stock_bajo():
 
     return obtener_productos_stock_bajo()
 
+@router.get(
+    "/activos",
+    summary="Consultar productos activos"
+)
+def listar_productos_activos(
+    nombre: str = Query(None),
+    categoria: str = Query(None),
+    marca: str = Query(None)
+):
+
+    return obtener_productos_activos(
+        nombre=nombre,
+        categoria=categoria,
+        marca=marca
+    )
 
 @router.get(
     "/{producto_id}",
@@ -122,21 +137,20 @@ def editar_producto(
 
 
 @router.patch(
-    "/{producto_id}/desactivar",
-    summary="Desactivar producto"
+    "/{producto_id}/estado",
+    summary="Cambiar estado del producto"
 )
-def desactivar(producto_id: int):
+def cambiar_estado(producto_id: int):
 
-    producto = desactivar_producto(producto_id)
+    producto = cambiar_estado_producto(producto_id)
 
     if producto is None:
-
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
+            status_code=404,
             detail="Producto no encontrado."
         )
 
     return {
-        "mensaje": "Producto desactivado correctamente.",
+        "mensaje": "Estado actualizado correctamente.",
         "producto": producto
     }
