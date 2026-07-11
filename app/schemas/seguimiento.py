@@ -8,9 +8,9 @@ class EstadoSeguimiento(BaseModel):
 
 
 class SeguimientoResponse(BaseModel):
-
     pedido_id: int
     cliente: str
+    producto: str
     metodo: str
     fecha: str
     estado_actual: str

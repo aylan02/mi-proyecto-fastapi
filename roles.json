@@ -6,7 +6,6 @@
         "estado": "Activo",
         "permisos": [
             "dashboard",
-            "productos",
             "inventario",
             "clientes",
             "ventas",
@@ -15,7 +14,8 @@
             "usuarios",
             "roles",
             "reportes",
-            "seguimiento"
+            "seguimiento",
+            "productos"
         ]
     },
     {
@@ -40,7 +40,8 @@
             "dashboard",
             "productos",
             "inventario",
-            "reportes"
+            "reportes",
+            "envios"
         ]
     },
     {
@@ -52,7 +53,8 @@
             "dashboard",
             "rutas",
             "seguimiento",
-            "reportes"
+            "reportes",
+            "envios"
         ]
     }
 ]

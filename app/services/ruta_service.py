@@ -96,3 +96,22 @@ def desactivar_ruta(ruta_id: int):
             return ruta
 
     return None
+
+def cambiar_estado_ruta(ruta_id: int):
+
+    rutas = leer_rutas()
+
+    for ruta in rutas:
+
+        if ruta["id"] == ruta_id:
+
+            if ruta["estado"] == "Activa":
+                ruta["estado"] = "Inactiva"
+            else:
+                ruta["estado"] = "Activa"
+
+            guardar_rutas(rutas)
+
+            return ruta
+
+    return None

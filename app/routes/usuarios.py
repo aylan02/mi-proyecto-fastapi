@@ -6,7 +6,7 @@ from app.services.usuario_service import (
     obtener_usuario,
     crear_usuario,
     actualizar_usuario,
-    desactivar_usuario,
+    cambiar_estado_usuario,
     buscar_usuario_por_username
 )
 
@@ -68,9 +68,10 @@ def put_usuario(usuario_id: int, usuario: UsuarioActualizar):
     return actualizar_usuario(usuario_id, data_actualizada)
 
 
-@router.delete("/{usuario_id}")
-def delete_usuario(usuario_id: int):
-    usuario = desactivar_usuario(usuario_id)
+@router.patch("/{usuario_id}/estado")
+def cambiar_estado(usuario_id: int):
+
+    usuario = cambiar_estado_usuario(usuario_id)
 
     if usuario is None:
         raise HTTPException(
@@ -78,10 +79,7 @@ def delete_usuario(usuario_id: int):
             detail="Usuario no encontrado"
         )
 
-    if usuario == "INACTIVO":
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="El usuario ya se encuentra desactivado"
-        )
-
-    return {"mensaje": "Usuario desactivado correctamente"}
+    return {
+        "mensaje": "Estado actualizado correctamente.",
+        "usuario": usuario
+    }

@@ -150,6 +150,12 @@ def obtener_seguimiento(venta_id: int):
 
         "pedido_id": venta["id"],
         "cliente": venta["cliente_nombre"],
+
+        "producto": ", ".join(
+            detalle["producto_nombre"]
+            for detalle in venta["detalles"]
+        ),
+
         "metodo": venta["metodo_pago"],
         "fecha": venta["fecha"],
         "estado_actual": estado_actual,

@@ -19,27 +19,19 @@ def login(data: LoginRequest, request: Request):
             detail="Usuario o contraseña incorrectos"
         )
 
-    request.session["user"] = usuario
-
-    # ============================
-    # SESIÓN DEL CLIENTE
-    # ============================
-
+    # No permitir clientes en el panel admin
     if usuario["rol"] == "Cliente":
-
-        cliente = obtener_cliente_por_usuario(
-            usuario["id"]
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Los clientes no pueden acceder al Panel Administrativo."
         )
 
-        if cliente:
-
-            request.session["cliente_id"] = cliente["id"]
+    request.session["user"] = usuario
 
     return {
         "mensaje": "Login correcto",
         "user": usuario
     }
-
 
 @router.get("/me")
 def me(request: Request):
@@ -48,7 +40,7 @@ def me(request: Request):
 
     if not usuario:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=401,
             detail="No autenticado"
         )
 
@@ -58,9 +50,12 @@ def me(request: Request):
 
     cliente_id = request.session.get("cliente_id")
 
-    if cliente_id:
+    print("SESSION CLIENTE_ID:", cliente_id)
 
+    if cliente_id:
         respuesta["cliente_id"] = cliente_id
+
+    print(respuesta)
 
     return respuesta
 

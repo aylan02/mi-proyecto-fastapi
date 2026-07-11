@@ -6,7 +6,7 @@ from app.services.rol_service import (
     obtener_rol,
     crear_rol,
     actualizar_rol,
-    desactivar_rol,
+    cambiar_estado_rol,
     buscar_rol_por_nombre
 )
 
@@ -68,20 +68,19 @@ def put_rol(rol_id: int, rol: RolActualizar):
     return actualizar_rol(rol_id, data_actualizada)
 
 
-@router.delete("/{rol_id}")
-def delete_rol(rol_id: int):
-    rol = desactivar_rol(rol_id)
+@router.patch("/{rol_id}/estado")
+def cambiar_estado(rol_id: int):
+
+    rol = cambiar_estado_rol(rol_id)
 
     if rol is None:
+
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Rol no encontrado"
         )
 
-    if rol == "INACTIVO":
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="El rol ya se encuentra desactivado"
-        )
-
-    return {"mensaje": "Rol desactivado correctamente"}
+    return {
+        "mensaje": "Estado actualizado correctamente.",
+        "rol": rol
+    }

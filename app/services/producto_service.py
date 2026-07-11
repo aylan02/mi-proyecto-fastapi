@@ -24,10 +24,7 @@ def obtener_productos(
     limit=10,
     offset=0
 ):
-    resultado = [
-        p for p in productos
-        if p.get("estado", "Activo") == "Activo"
-    ]
+    resultado = list(productos)
 
     if nombre:
         resultado = [
@@ -139,16 +136,19 @@ def actualizar_producto(producto_id, datos):
     return producto
 
 
-def desactivar_producto(producto_id):
+def cambiar_estado_producto(producto_id):
 
     producto = obtener_producto_por_id(producto_id)
 
     if not producto:
         return None
 
-    producto["estado"] = "Inactivo"
+    if producto["estado"] == "Activo":
+        producto["estado"] = "Inactivo"
+    else:
+        producto["estado"] = "Activo"
 
-    guardar()
+    guardar_datos(ARCHIVO_PRODUCTOS, productos)
 
     return producto
 
@@ -161,3 +161,39 @@ def obtener_productos_stock_bajo():
         if p["stock"] <= 5
         and p.get("estado", "Activo") == "Activo"
     ]
+
+def obtener_productos_activos(
+    nombre=None,
+    categoria=None,
+    marca=None
+):
+
+    resultado = [
+        p for p in productos
+        if p.get("estado", "Activo") == "Activo"
+    ]
+
+    if nombre:
+        resultado = [
+            p for p in resultado
+            if nombre.lower() in p["nombre"].lower()
+        ]
+
+    if categoria:
+        resultado = [
+            p for p in resultado
+            if p["categoria"].lower() == categoria.lower()
+        ]
+
+    if marca:
+        resultado = [
+            p for p in resultado
+            if p["marca"].lower() == marca.lower()
+        ]
+
+    return {
+        "total": len(resultado),
+        "limit": len(resultado),
+        "offset": 0,
+        "resultados": resultado
+    }
