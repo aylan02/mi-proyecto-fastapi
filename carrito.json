@@ -1,1 +1,11 @@
-[]
+[
+    {
+        "cliente_id": 4,
+        "items": [
+            {
+                "producto_id": 2,
+                "cantidad": 1
+            }
+        ]
+    }
+]

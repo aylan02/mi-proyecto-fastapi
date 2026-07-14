@@ -39,9 +39,12 @@ def obtener_cliente(cliente_id: int):
 
 def buscar_cliente_por_rut(rut: str):
     clientes = leer_clientes()
+
     for cliente in clientes:
-        if cliente["rut"].strip().lower() == rut.strip().lower():
+
+        if cliente.get("rut", "").strip().lower() == rut.strip().lower():
             return cliente
+
     return None
 
 
