@@ -25,5 +25,23 @@
         "correo": "pamelarojas@unap.cl",
         "telefono": "912345678",
         "estado": "Activo"
+    },
+    {
+        "id": 4,
+        "rut": "18.765.432-0",
+        "nombre": "Fernanda Flores",
+        "direccion": "Av.Arturo Prat 1450",
+        "correo": "fernandas@cosmelogix.cl",
+        "telefono": "+56987654328",
+        "estado": "Activo"
+    },
+    {
+        "id": 5,
+        "rut": "11.334.555-5",
+        "nombre": "Ferna",
+        "direccion": "Arturo 222",
+        "correo": "corre@gmail.com",
+        "telefono": "+56976959886",
+        "estado": "Activo"
     }
 ]

@@ -43,5 +43,14 @@
         "correo": "floreschoquerivefernanda@gmail.com",
         "rol": "Cliente",
         "estado": "Activo"
+    },
+    {
+        "id": 7,
+        "username": "ferna",
+        "password": "$2b$12$a5TQVpnnEC4IW2Nm5kTb5u/CAZeO6/0pnFmhtBx..7DRSTobok4Am",
+        "nombre": "Fernanda",
+        "correo": "flor@gamil.com",
+        "rol": "Cliente",
+        "estado": "Activo"
     }
 ]
